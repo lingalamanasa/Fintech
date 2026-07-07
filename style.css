@@ -1043,6 +1043,10 @@ tbody tr:hover td { background:var(--bg-glass); color:var(--text-primary); }
   .grid-2,.grid-3,.grid-4,.grid-5 { grid-template-columns:1fr; }
   .footer-grid { grid-template-columns:1fr; gap:36px; }
   .footer-bottom { flex-direction:column; text-align:center; }
+  
+  .dashboard-topbar { flex-wrap: wrap; justify-content: center; text-align: center; height: auto; padding: 15px; }
+  .logout-btn { display: inline-flex !important; margin: 5px; }
+  .hide-mobile-topbar { display: none !important; }
   .stats-bar { grid-template-columns:1fr 1fr; padding:28px 22px; gap:22px; }
   .cta-section { padding:64px 28px; }
   .metric-grid { grid-template-columns:1fr 1fr; }
