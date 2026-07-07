@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Analyst Dashboard || Stackly FinTech</title>
+  <link rel="icon" href="assets/images/stackly-logo.webp" type="image/webp">
   <link rel="stylesheet" href="style.css" />
   <style>
     .market-ticker { display:flex; gap:0; overflow:hidden; border-radius:var(--r-md); border:1px solid var(--border-glass); margin-bottom:24px; }
@@ -24,6 +25,12 @@
     .portfolio-bar div { transition:var(--transition); }
     @media(max-width:768px){ .market-ticker{flex-wrap:wrap;} .ticker-item{min-width:50%;} }
   </style>
+
+    <style>
+      @media(max-width:900px) {
+        .dashboard-mobile-logo { display:flex !important; }
+      }
+    </style>
 </head>
 <body>
 <div class="dashboard-wrapper">
@@ -32,7 +39,7 @@
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <a href="index.html" class="nav-logo" style="font-size:1.2rem;"><div class="logo-icon" style="width:32px;height:32px;font-size:0.9rem;">💹</div><span>Stackly</span></a>
+      <a href="index.html" class="nav-logo" style="font-size:1.2rem;"><img src="assets/images/stackly-logo.webp" alt="Stackly" style="width:32px;height:32px;border-radius:8px;"><span>Stackly</span></a>
     </div>
     <nav class="sidebar-nav">
       <div class="sidebar-section-label">Analytics</div>
@@ -62,6 +69,11 @@
 
   <!-- MAIN -->
   <main class="dashboard-main">
+    <!-- Mobile Topbar Logo (visible only on mobile when sidebar is hidden) -->
+    <div class="dashboard-mobile-logo" style="display:none;padding:12px 18px;background:var(--bg-surface);border-bottom:1px solid var(--border-glass);align-items:center;gap:10px;">
+      <img src="assets/images/stackly-logo.webp" alt="Stackly" style="width:28px;height:28px;border-radius:6px;">
+      <span style="font-family:var(--font-heading,sans-serif);font-weight:800;font-size:1.1rem;">STACKLY</span>
+    </div>
     <div class="dashboard-topbar">
       <div style="display:flex; align-items:center; gap:16px;">
         <button class="btn btn-ghost btn-icon" id="sidebarToggleBtn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">☰</button>

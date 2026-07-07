@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register || Stackly FinTech</title>
   <meta name="description" content="Create your Stackly FinTech account. Join 2 million+ users managing their finances smarter." />
+  <link rel="icon" href="assets/images/stackly-logo.webp" type="image/webp">
   <link rel="stylesheet" href="style.css" />
   <style>
     body { min-height: 100vh; display:flex; align-items:center; background:var(--bg-base); }
@@ -27,15 +28,19 @@
     .role-option .ro-label { font-size:0.82rem; font-weight:700; }
     .feature-check { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
     .feature-check .chk { width:24px; height:24px; border-radius:50%; background:rgba(6,182,212,0.15); border:1px solid var(--border-accent); display:flex; align-items:center; justify-content:center; font-size:0.7rem; color:var(--accent); flex-shrink:0; }
-    @media(max-width:768px){ .auth-wrapper{grid-template-columns:1fr;} .auth-right{display:none;} .form-row{grid-template-columns:1fr;} body{display:block;} .auth-left{min-height:100vh;} }
+    .mobile-logo-bar { display:none; padding:20px; text-align:center; background:var(--bg-surface); border-bottom:1px solid var(--border-glass); }
+    .mobile-logo-bar img { width:40px; height:40px; border-radius:10px; vertical-align:middle; margin-right:10px; }
+    .mobile-logo-bar span { font-family:var(--font-heading); font-size:1.4rem; font-weight:800; vertical-align:middle; }
+    @media(max-width:768px){ .auth-wrapper{grid-template-columns:1fr;} .auth-right{display:none;} .form-row{grid-template-columns:1fr;} body{display:block;} .auth-left{min-height:100vh;} .mobile-logo-bar{display:block;} }
   </style>
 </head>
 <body>
+<div class="mobile-logo-bar"><a href="index.html" style="text-decoration:none;color:var(--text-primary);"><img src="assets/images/stackly-logo.webp" alt="Stackly"><span>STACKLY</span></a></div>
 <div class="auth-wrapper">
   <!-- Left: Form -->
   <div class="auth-left">
     <div class="auth-box">
-      <a href="index.html" class="nav-logo" style="margin-bottom:32px; display:inline-flex;"><div class="logo-icon">💹</div><span>Stackly</span></a>
+      <a href="index.html" class="nav-logo" style="margin-bottom:32px; display:inline-flex;"><img src="assets/images/stackly-logo.webp" alt="Stackly" style="width:32px;height:32px;border-radius:8px;"><span>Stackly</span></a>
       <div class="step-indicator">
         <div class="step-dot active" id="step1dot"></div>
         <div class="step-dot" id="step2dot"></div>

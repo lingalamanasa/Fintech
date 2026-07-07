@@ -3,89 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stackly Digital Banking</title>
-  <meta name="description" content="Stackly Elite Digital Banking - Future of Wealth Management">
+  <title>Stackly — Elite Digital Banking</title>
+  <meta name="description" content="Stackly: Institutional-grade digital banking with algorithmic yield, quantum security, and precision analytics.">
+  <link rel="icon" href="assets/images/stackly-logo.webp" type="image/webp">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Splash Screen Styles */
+    /* Splash */
     #splash-screen {
-      position: fixed;
-      inset: 0;
-      background: var(--bg-base);
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.6s var(--ease-out), visibility 0.6s;
+      position:fixed; inset:0; background:var(--bg-base); z-index:9999;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      transition: opacity 0.6s ease, visibility 0.6s;
     }
-    .splash-logo {
-      font-size: 4rem;
-      font-weight: 900;
-      font-family: var(--font-heading);
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: splash-pulse 1.2s ease-in-out infinite alternate;
-    }
-    @keyframes splash-pulse {
-      from { filter: drop-shadow(0 0 10px rgba(99,102,241,0.5)); transform: scale(1); }
-      to { filter: drop-shadow(0 0 30px rgba(99,102,241,1)); transform: scale(1.08); }
-    }
-    
-    /* Layout Overrides for specific sections */
-    .split-layout {
-      display: flex;
-      align-items: center;
-      gap: 60px;
-    }
-    .split-layout.reverse {
-      flex-direction: row-reverse;
-    }
-    .split-text { flex: 1; }
-    .split-image { flex: 1; display: flex; justify-content: center; }
-    .split-image img { max-width: 100%; height: auto; animation: float-slow 6s ease-in-out infinite; }
-    
-    /* Hero Background Animation */
-    .hero {
-      background-image: linear-gradient(rgba(3, 7, 18, 0.75), rgba(3, 7, 18, 0.95)), url('assets/images/hero_emerald_bg.png');
-      background-size: cover;
-      background-position: center;
-      animation: heroBgPan 25s linear infinite alternate;
-    }
-    @keyframes heroBgPan {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
-    }
-    
-    /* Custom Slider overrides for Loan Calc */
-    input[type=range] {
-      width: 100%; -webkit-appearance: none; background: rgba(255,255,255,0.1);
-      height: 6px; border-radius: 3px; outline: none; margin-top: 10px;
-    }
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
-      background: var(--accent); border: 2px solid #fff; cursor: pointer;
-      box-shadow: 0 0 10px var(--accent-glow);
-    }
-    
-    @media (max-width: 768px) {
-      .split-layout, .split-layout.reverse { flex-direction: column; text-align: center; }
-      .grid-3 { grid-template-columns: 1fr; }
-      .stats-bar { grid-template-columns: 1fr 1fr; gap: 20px; padding: 30px; }
-      .stats-bar::before { display: none; }
-      .stat-item+.stat-item::before { display: none; }
-      .hero-title { font-size: 3rem; }
+    .splash-logo-img { width:64px; height:64px; border-radius:16px; margin-bottom:16px; animation: splash-pulse 1.2s ease-in-out infinite alternate; }
+    .splash-brand { font-size:2.5rem; font-weight:900; font-family:var(--font-heading); background:linear-gradient(135deg,var(--primary),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    @keyframes splash-pulse { from{transform:scale(1);filter:drop-shadow(0 0 10px var(--primary-glow))} to{transform:scale(1.08);filter:drop-shadow(0 0 30px var(--primary))} }
+
+    /* Split layout */
+    .split-layout { display:flex; align-items:center; gap:60px; }
+    .split-layout.reverse { flex-direction:row-reverse; }
+    .split-text { flex:1; }
+    .split-image { flex:1; display:flex; justify-content:center; }
+    .split-image img { max-width:100%; height:auto; border-radius:var(--r-xl); }
+
+    /* Range inputs */
+    input[type=range] { width:100%; -webkit-appearance:none; background:rgba(255,255,255,0.1); height:6px; border-radius:3px; outline:none; margin-top:10px; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:20px; height:20px; border-radius:50%; background:var(--accent); border:2px solid #fff; cursor:pointer; box-shadow:0 0 10px var(--accent-glow); }
+
+    @media(max-width:768px){
+      .split-layout,.split-layout.reverse{flex-direction:column;text-align:center}
+      .hero-title{font-size:2.4rem !important}
+      .stats-bar{grid-template-columns:1fr 1fr;gap:20px;padding:30px}
+      .stats-bar::before,.stat-item+.stat-item::before{display:none}
     }
   </style>
 </head>
 <body>
 
-  <!-- Section 1: Splash Screen -->
+  <!-- Splash Screen -->
   <div id="splash-screen">
-    <div class="splash-logo">💸 STACKLY</div>
-    <div style="margin-top:20px; color:var(--text-muted); font-family:var(--font-mono); font-size:0.8rem;">INITIALIZING DIGITAL INFRASTRUCTURE...</div>
+    <img src="assets/images/stackly-logo.webp" alt="Stackly" class="splash-logo-img">
+    <div class="splash-brand">STACKLY</div>
+    <div style="margin-top:16px;color:var(--text-muted);font-family:var(--font-mono);font-size:0.75rem;letter-spacing:2px;">INITIALIZING SECURE SESSION...</div>
   </div>
 
   <div id="scroll-progress"></div>
@@ -94,32 +52,30 @@
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="index.html" class="nav-logo">
-        <div class="logo-icon">💸</div>
+        <img src="assets/images/stackly-logo.webp" alt="Stackly" style="width:32px;height:32px;border-radius:8px;">
         <span class="logo-text">STACKLY</span>
       </a>
-      <div class="nav-links hide-mobile" id="desktop-menu">
+      <div class="nav-links hide-mobile">
         <a href="index.html" class="nav-link active">Home</a>
         <a href="services.html" class="nav-link">Services</a>
         <a href="about.html" class="nav-link">About</a>
+        <a href="blog.html" class="nav-link">Blog</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </div>
       <div class="nav-actions hide-mobile">
         <a href="login.html" class="btn btn-ghost btn-sm">Login</a>
         <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
       </div>
-      
-      <!-- Mobile Hamburger -->
-      <button class="hamburger" id="hamburgerBtn">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
     </div>
   </nav>
-  
+
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" class="nav-link active">Home</a>
     <a href="services.html" class="nav-link">Services</a>
     <a href="about.html" class="nav-link">About</a>
+    <a href="blog.html" class="nav-link">Blog</a>
     <a href="contact.html" class="nav-link">Contact</a>
     <div class="nav-actions">
       <a href="login.html" class="btn btn-ghost btn-sm">Login</a>
@@ -127,115 +83,96 @@
     </div>
   </div>
 
-  <!-- Section 2: Immersive Hero -->
+  <!-- Section 1: Hero -->
   <section class="hero">
     <div class="hero-bg-mesh"></div>
     <div class="hero-grid"></div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
-    
-    <div class="container relative z-10 text-center" style="position:relative; z-index:10; width:100%;">
-      <div class="section-tag reveal" style="margin: 0 auto 30px;">◆ Elite Digital Banking</div>
-      <h1 class="hero-title reveal delay-1" style="max-width: 900px; margin: 0 auto 24px;">
+    <div class="container" style="position:relative;z-index:10;text-align:center;">
+      <div class="section-tag reveal" style="margin:0 auto 30px;">◆ Elite Digital Banking</div>
+      <h1 class="hero-title reveal delay-1" style="max-width:900px;margin:0 auto 24px;">
         Architecting the <span class="text-gradient">Future</span> of Global Wealth.
       </h1>
-      <p class="hero-desc reveal delay-2" style="max-width: 600px; margin: 0 auto 40px; font-size:1.15rem; color:var(--text-secondary);">
-        Experience institutional-grade algorithms, precision insights, and military-grade encryption wrapped in an exquisite UI.
+      <p class="hero-desc reveal delay-2" style="max-width:600px;margin:0 auto 40px;font-size:1.15rem;color:var(--text-secondary);">
+        Institutional-grade algorithms, precision insights, and military-grade encryption — wrapped in an exquisite interface.
       </p>
-      <div class="hero-actions flex-center reveal delay-3" style="gap:16px;">
-        <a href="register.html" class="btn btn-glow btn-lg">Deploy Capital →</a>
-        <a href="services.html" class="btn btn-ghost btn-lg">View Infrastructure</a>
+      <div class="flex-center reveal delay-3" style="gap:16px;justify-content:center;">
+        <a href="register.html" class="btn btn-glow btn-lg">Open Account →</a>
+        <a href="services.html" class="btn btn-ghost btn-lg">Explore Services</a>
       </div>
     </div>
   </section>
 
-  <!-- Section 3: Live Market Ticker -->
-  <div class="ticker-wrap reveal delay-4">
+  <!-- Section 2: Live Ticker -->
+  <div class="ticker-wrap">
     <div class="ticker-inner">
-      <div class="ticker-item">BTC <span class="ticker-price">$64,230.50</span> <span class="ticker-up">▲ 2.4%</span></div>
-      <div class="ticker-item">ETH <span class="ticker-price">$3,450.12</span> <span class="ticker-up">▲ 1.8%</span></div>
-      <div class="ticker-item">S&P 500 <span class="ticker-price">5,142.30</span> <span class="ticker-up">▲ 0.9%</span></div>
+      <div class="ticker-item">BTC <span class="ticker-price">$64,230</span> <span class="ticker-up">▲ 2.4%</span></div>
+      <div class="ticker-item">ETH <span class="ticker-price">$3,450</span> <span class="ticker-up">▲ 1.8%</span></div>
+      <div class="ticker-item">S&P 500 <span class="ticker-price">5,142</span> <span class="ticker-up">▲ 0.9%</span></div>
       <div class="ticker-item">SOL <span class="ticker-price">$142.80</span> <span class="ticker-down">▼ 1.2%</span></div>
-      <div class="ticker-item">NASDAQ <span class="ticker-price">16,400.15</span> <span class="ticker-up">▲ 1.1%</span></div>
-      <div class="ticker-item">XRP <span class="ticker-price">$0.58</span> <span class="ticker-down">▼ 0.5%</span></div>
-      <!-- Duplicate for infinite scroll -->
-      <div class="ticker-item">BTC <span class="ticker-price">$64,230.50</span> <span class="ticker-up">▲ 2.4%</span></div>
-      <div class="ticker-item">ETH <span class="ticker-price">$3,450.12</span> <span class="ticker-up">▲ 1.8%</span></div>
-      <div class="ticker-item">S&P 500 <span class="ticker-price">5,142.30</span> <span class="ticker-up">▲ 0.9%</span></div>
+      <div class="ticker-item">NASDAQ <span class="ticker-price">16,400</span> <span class="ticker-up">▲ 1.1%</span></div>
+      <div class="ticker-item">GOLD <span class="ticker-price">$2,381</span> <span class="ticker-up">▲ 0.6%</span></div>
+      <div class="ticker-item">BTC <span class="ticker-price">$64,230</span> <span class="ticker-up">▲ 2.4%</span></div>
+      <div class="ticker-item">ETH <span class="ticker-price">$3,450</span> <span class="ticker-up">▲ 1.8%</span></div>
+      <div class="ticker-item">S&P 500 <span class="ticker-price">5,142</span> <span class="ticker-up">▲ 0.9%</span></div>
       <div class="ticker-item">SOL <span class="ticker-price">$142.80</span> <span class="ticker-down">▼ 1.2%</span></div>
     </div>
   </div>
 
-  <!-- Section 4: Platform Statistics -->
+  <!-- Section 3: Stats Bar -->
   <section class="section-xs container">
     <div class="stats-bar reveal">
-      <div class="stat-item">
-        <span class="stat-value">$12B+</span>
-        <div class="stat-label">Assets Managed</div>
-        <div class="stat-sub">Across 40 global markets</div>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value">2.4M</span>
-        <div class="stat-label">Active Investors</div>
-        <div class="stat-sub">Growing 15% MoM</div>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value">99.9%</span>
-        <div class="stat-label">System Uptime</div>
-        <div class="stat-sub">Enterprise SLA backed</div>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value">0ms</span>
-        <div class="stat-label">Execution Latency</div>
-        <div class="stat-sub">Direct market access</div>
-      </div>
+      <div class="stat-item"><span class="stat-value">$12B+</span><div class="stat-label">Assets Managed</div><div class="stat-sub">Across 40 global markets</div></div>
+      <div class="stat-item"><span class="stat-value">2.4M</span><div class="stat-label">Active Investors</div><div class="stat-sub">Growing 15% MoM</div></div>
+      <div class="stat-item"><span class="stat-value">99.9%</span><div class="stat-label">System Uptime</div><div class="stat-sub">Enterprise SLA</div></div>
+      <div class="stat-item"><span class="stat-value">0ms</span><div class="stat-label">Execution Latency</div><div class="stat-sub">Direct market access</div></div>
     </div>
   </section>
 
-  <!-- Section 5: Digital Bank Features Grid -->
+  <!-- Section 4: Features Grid -->
   <section class="section container">
     <div class="section-header centered reveal">
       <div class="section-tag cyan">Core Infrastructure</div>
       <h2>Engineered for Performance</h2>
       <p>A comprehensive suite of tools designed to optimize your financial operations.</p>
     </div>
-    
     <div class="grid-3">
       <div class="card card-shimmer reveal delay-1">
         <div class="feature-icon primary">⚡</div>
         <h3 style="margin-bottom:10px;">Algorithmic Yield</h3>
-        <p style="font-size:0.9rem;">Deploy capital into our automated smart contracts generating 12.5% APY consistently.</p>
+        <p style="font-size:0.9rem;">Deploy capital into automated smart contracts generating 12.5% APY consistently across diversified pools.</p>
       </div>
       <div class="card card-shimmer reveal delay-2">
         <div class="feature-icon cyan">🔒</div>
         <h3 style="margin-bottom:10px;">Quantum Security</h3>
-        <p style="font-size:0.9rem;">Assets are secured in cold storage protected by AES-256 and biometric multisig.</p>
+        <p style="font-size:0.9rem;">Assets secured in cold storage protected by AES-256 encryption and biometric multi-signature protocols.</p>
       </div>
       <div class="card card-shimmer reveal delay-3">
         <div class="feature-icon violet">💳</div>
         <h3 style="margin-bottom:10px;">Titanium Cards</h3>
-        <p style="font-size:0.9rem;">Zero forex markup, 5% global cashback, and exclusive airport lounge access globally.</p>
+        <p style="font-size:0.9rem;">Zero forex markup, 5% global cashback, and exclusive airport lounge access in 150+ countries.</p>
       </div>
     </div>
   </section>
 
-  <!-- Section 6: How It Works Timeline -->
-  <section class="section container" style="background: var(--bg-surface); border-radius: var(--r-2xl); border: 1px solid var(--border-glass); padding: 80px 40px;">
+  <!-- Section 5: How It Works -->
+  <section class="section container" style="background:var(--bg-surface);border-radius:var(--r-2xl);border:1px solid var(--border-glass);padding:80px 40px;">
     <div class="section-header centered reveal">
       <div class="section-tag violet">Onboarding</div>
-      <h2>Seamless Integration</h2>
+      <h2>Get Started in Minutes</h2>
     </div>
     <div class="grid-3 steps-connector">
       <div class="text-center reveal delay-1">
         <div class="step-num">1</div>
         <h4 style="margin-bottom:8px;">Initialize</h4>
-        <p style="font-size:0.85rem;">Create your profile in 60 seconds with our AI KYC verification.</p>
+        <p style="font-size:0.85rem;">Create your profile in 60 seconds with AI-powered KYC verification.</p>
       </div>
       <div class="text-center reveal delay-2">
         <div class="step-num">2</div>
         <h4 style="margin-bottom:8px;">Capitalize</h4>
-        <p style="font-size:0.85rem;">Fund your account instantly via wire transfer, ACH, or crypto rail.</p>
+        <p style="font-size:0.85rem;">Fund your account instantly via wire, UPI, ACH, or crypto rails.</p>
       </div>
       <div class="text-center reveal delay-3">
         <div class="step-num">3</div>
@@ -245,175 +182,100 @@
     </div>
   </section>
 
-  <!-- Section 7: Enterprise Security (Split) -->
-  <section class="section container">
-    <div class="split-layout reveal">
-      <div class="split-image">
-        <img src="assets/images/security_shield.png" alt="3D Security Shield" style="max-width: 450px;">
-      </div>
-      <div class="split-text">
-        <div class="section-tag amber">Security</div>
-        <h2 style="font-size:3rem; margin-bottom:20px;">Fortified <span class="text-gradient-gold">Protection</span></h2>
-        <p style="margin-bottom: 30px; font-size: 1.1rem; color: var(--text-secondary);">
-          Your digital wealth is protected by military-grade AES-256 encryption, multi-layered biometric authentication, and strict PCI-DSS L1 compliance protocols. We don't just store your assets; we fortify them against all vectors.
-        </p>
-        <ul style="margin-bottom: 30px; list-style: none;">
-          <li style="margin-bottom: 10px; display:flex; gap:10px;"><span style="color:var(--amber);">✓</span> 100% Cold Storage Insurance</li>
-          <li style="margin-bottom: 10px; display:flex; gap:10px;"><span style="color:var(--amber);">✓</span> Real-time Fraud AI Detection</li>
-          <li style="margin-bottom: 10px; display:flex; gap:10px;"><span style="color:var(--amber);">✓</span> Biometric Transaction Signing</li>
-        </ul>
-        <a href="about.html" class="btn btn-gold">Audit Report →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 8: AI-Driven Insights (Split) -->
-  <section class="section container">
-    <div class="split-layout reverse reveal">
-      <div class="split-image">
-        <img src="assets/images/analytics_dashboard.png" alt="3D Analytics Dashboard" style="max-width: 500px;">
-      </div>
-      <div class="split-text">
-        <div class="section-tag green">Intelligence</div>
-        <h2 style="font-size:3rem; margin-bottom:20px;">AI-Driven <span style="color:var(--emerald);">Insights</span></h2>
-        <p style="margin-bottom: 30px; font-size: 1.1rem; color: var(--text-secondary);">
-          Harness the power of our proprietary algorithmic engine. Track spending anomalies, predict yield curves, and receive real-time execution alerts so your capital is always optimized.
-        </p>
-        <a href="register.html" class="btn" style="background:var(--emerald); color:#fff; box-shadow:0 4px 20px var(--emerald-glow);">Deploy Analytics →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 9: Interactive Loan Calculator -->
+  <!-- Section 6: Loan/EMI Calculator -->
   <section class="section container">
     <div class="card-pro reveal">
-      <div class="card-pro-inner" style="display:flex; gap:40px; align-items:center; flex-wrap:wrap;">
-        <div style="flex:1; min-width:300px;">
+      <div class="card-pro-inner" style="display:flex;gap:40px;align-items:center;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
           <div class="section-tag">Capital Projection</div>
-          <h2 style="font-size:2.4rem; margin-bottom:10px;">EMI Calculator</h2>
-          <p style="margin-bottom:30px;">Dynamically project your liabilities with precision.</p>
-          
+          <h2 style="font-size:2.2rem;margin-bottom:10px;">EMI Calculator</h2>
+          <p style="margin-bottom:30px;color:var(--text-secondary);">Project your liabilities with precision.</p>
           <div style="margin-bottom:20px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:5px; font-size:0.85rem; font-weight:600;">
-              <span>Principal Amount</span> <span id="val-amt" style="color:var(--primary-light);">₹1,500,000</span>
-            </div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;font-size:0.85rem;font-weight:600;"><span>Principal</span><span id="val-amt" style="color:var(--primary-light);">₹1,500,000</span></div>
             <input type="range" id="slider-amt" min="100000" max="10000000" step="50000" value="1500000" oninput="updateCalc()">
           </div>
-          
           <div style="margin-bottom:20px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:5px; font-size:0.85rem; font-weight:600;">
-              <span>Duration (Years)</span> <span id="val-term" style="color:var(--primary-light);">15 Years</span>
-            </div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;font-size:0.85rem;font-weight:600;"><span>Duration</span><span id="val-term" style="color:var(--primary-light);">15 Years</span></div>
             <input type="range" id="slider-term" min="1" max="30" step="1" value="15" oninput="updateCalc()">
           </div>
-          
           <div style="margin-bottom:20px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:5px; font-size:0.85rem; font-weight:600;">
-              <span>Interest Rate (APR)</span> <span id="val-rate" style="color:var(--primary-light);">7.5%</span>
-            </div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;font-size:0.85rem;font-weight:600;"><span>Interest (APR)</span><span id="val-rate" style="color:var(--primary-light);">7.5%</span></div>
             <input type="range" id="slider-rate" min="4" max="18" step="0.1" value="7.5" oninput="updateCalc()">
           </div>
         </div>
-        
-        <div style="flex:1; background:var(--bg-elevated); padding:40px; border-radius:var(--r-lg); border:1px solid var(--border-glass); text-align:center;">
-          <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; font-weight:700; letter-spacing:1px; margin-bottom:10px;">Monthly Repayment</div>
-          <div id="emi-result" style="font-family:var(--font-heading); font-size:3.5rem; font-weight:900; color:var(--primary-light); line-height:1; margin-bottom:30px;">₹13,905</div>
-          <a href="register.html" class="btn btn-outline" style="width:100%;">Initialize Loan</a>
-          <div style="margin-top:20px; font-size:0.85rem; color:var(--text-muted); display:flex; justify-content:space-between;">
-            <span>Total Interest: <strong id="tot-int" style="color:#fff;">₹1,002,912</strong></span>
-            <span>Total Obligation: <strong id="tot-pay" style="color:#fff;">₹2,502,912</strong></span>
+        <div style="flex:1;min-width:280px;background:var(--bg-elevated);padding:40px;border-radius:var(--r-lg);border:1px solid var(--border-glass);text-align:center;">
+          <div style="font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px;">Monthly Repayment</div>
+          <div id="emi-result" style="font-family:var(--font-heading);font-size:3.5rem;font-weight:900;color:var(--primary-light);line-height:1;margin-bottom:30px;">₹13,905</div>
+          <a href="register.html" class="btn btn-outline" style="width:100%;">Apply Now</a>
+          <div style="margin-top:20px;font-size:0.85rem;color:var(--text-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span>Interest: <strong id="tot-int" style="color:#fff;">₹1,002,912</strong></span>
+            <span>Total: <strong id="tot-pay" style="color:#fff;">₹2,502,912</strong></span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 10: Client Testimonials -->
+  <!-- Section 7: Testimonials -->
   <section class="section container">
     <div class="section-header centered reveal">
       <div class="section-tag violet">Testimonials</div>
-      <h2>Trusted Globally</h2>
+      <h2>Trusted by Thousands</h2>
     </div>
     <div class="grid-3">
       <div class="testimonial-card reveal delay-1">
         <div class="stars">★★★★★</div>
         <p>"Stackly's algorithmic yield has completely transformed my treasury management. The UI is flawless and execution is instant."</p>
-        <div class="author-info">
-          <div class="author-avatar">SC</div>
-          <div>
-            <div class="author-name">Sarah Chen</div>
-            <div class="author-role">Fund Manager</div>
-          </div>
-        </div>
+        <div class="author-info"><div class="author-avatar">SC</div><div><div class="author-name">Sarah Chen</div><div class="author-role">Fund Manager</div></div></div>
       </div>
       <div class="testimonial-card reveal delay-2">
         <div class="stars">★★★★★</div>
-        <p>"The metal card with zero forex markup is a game changer for international business travel. Highly recommended platform."</p>
-        <div class="author-info">
-          <div class="author-avatar" style="background:linear-gradient(135deg,var(--accent),var(--primary));">MR</div>
-          <div>
-            <div class="author-name">Marcus Reed</div>
-            <div class="author-role">CEO, TechVentures</div>
-          </div>
-        </div>
+        <p>"The titanium card with zero forex markup is a game changer for international business travel. Outstanding platform."</p>
+        <div class="author-info"><div class="author-avatar" style="background:linear-gradient(135deg,var(--accent),var(--primary));">MR</div><div><div class="author-name">Marcus Reed</div><div class="author-role">CEO, TechVentures</div></div></div>
       </div>
       <div class="testimonial-card reveal delay-3">
         <div class="stars">★★★★★</div>
-        <p>"Enterprise grade security that doesn't sacrifice usability. The biometric multisig gives me absolute peace of mind."</p>
-        <div class="author-info">
-          <div class="author-avatar" style="background:linear-gradient(135deg,var(--violet),var(--primary));">EL</div>
-          <div>
-            <div class="author-name">Elena Lopez</div>
-            <div class="author-role">Crypto Analyst</div>
-          </div>
-        </div>
+        <p>"Enterprise-grade security without sacrificing usability. The biometric multisig gives me absolute peace of mind."</p>
+        <div class="author-info"><div class="author-avatar" style="background:linear-gradient(135deg,var(--violet),var(--primary));">EL</div><div><div class="author-name">Elena Lopez</div><div class="author-role">Crypto Analyst</div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- Section 11: Mobile App Download CTA -->
+  <!-- Section 8: CTA -->
   <section class="section container">
-    <div class="cta-section reveal" style="display:flex; align-items:center; gap:40px; text-align:left; flex-wrap:wrap; background: var(--bg-surface);">
-      <div style="flex:1; min-width:300px;">
-        <h2 style="font-size:3rem; margin-bottom:20px;">Your wealth,<br>in your pocket.</h2>
-        <p style="font-size:1.1rem; color:var(--text-secondary); margin-bottom:30px;">Download the Stackly mobile app to manage assets, execute trades, and freeze cards from anywhere in the world.</p>
-        <div style="display:flex; gap:16px;">
-          <a href="index.html" class="btn btn-primary" style="background: #000; border: 1px solid rgba(255,255,255,0.2); box-shadow:none;">
-            🍏 App Store
-          </a>
-          <a href="index.html" class="btn btn-primary" style="background: #000; border: 1px solid rgba(255,255,255,0.2); box-shadow:none;">
-            ▶️ Google Play
-          </a>
-        </div>
-      </div>
-      <div style="flex:1; display:flex; justify-content:center;">
-        <img src="assets/images/mobile_app_mockup.png" alt="Mobile App" style="max-width:350px; animation: float 6s ease-in-out infinite;">
+    <div class="cta-section reveal">
+      <h2 style="font-size:2.6rem;margin-bottom:16px;">Ready to build <span class="text-gradient">real wealth</span>?</h2>
+      <p style="color:var(--text-secondary);max-width:500px;margin:0 auto 32px;">Join 2.4 million investors who trust Stackly to grow, protect, and manage their capital.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="register.html" class="btn btn-glow btn-lg">Create Free Account →</a>
+        <a href="contact.html" class="btn btn-ghost btn-lg">Talk to Sales</a>
       </div>
     </div>
   </section>
 
-  <!-- Section 12: Global Footer -->
+  <!-- Footer -->
   <footer>
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="index.html" class="nav-logo" style="font-size:1.8rem;">
-            <div class="logo-icon">💸</div> <span class="logo-text">STACKLY</span>
+          <a href="index.html" class="nav-logo" style="font-size:1.4rem;">
+            <img src="assets/images/stackly-logo.webp" alt="Stackly" style="width:28px;height:28px;border-radius:6px;">
+            <span class="logo-text">STACKLY</span>
           </a>
-          <p>Building the robust digital infrastructure for the next generation of global wealth and asset management.</p>
-          <div class="social-links" style="margin-top:24px;">
-            <a href="index.html" class="social-link">𝕏</a>
-            <a href="index.html" class="social-link">in</a>
-            <a href="index.html" class="social-link">IG</a>
+          <p>Building the digital infrastructure for next-generation wealth management.</p>
+          <div class="social-links" style="margin-top:20px;">
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="social-link">𝕏</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-link">in</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link">IG</a>
           </div>
         </div>
         <div class="footer-col">
-          <h4>Institution</h4>
+          <h4>Company</h4>
           <ul>
             <li><a href="about.html">About Stackly</a></li>
-            <li><a href="index.html">Leadership</a></li>
-            <li><a href="blog.html">Press & Media</a></li>
-            <li><a href="contact.html">Global Offices</a></li>
+            <li><a href="blog.html">Blog & Insights</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="login.html">Careers</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -421,30 +283,26 @@
           <ul>
             <li><a href="services.html">Wealth Management</a></li>
             <li><a href="services.html">Corporate Treasury</a></li>
-            <li><a href="services.html">Institutional Credit</a></li>
             <li><a href="services.html">Digital Assets</a></li>
+            <li><a href="services.html">Lending</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Compliance</h4>
+          <h4>Legal</h4>
           <ul>
-            <li><a href="index.html">Security Protocols</a></li>
-            <li><a href="index.html">Terms of Use</a></li>
-            <li><a href="index.html">Privacy Framework</a></li>
-            <li><a href="index.html">Regulatory Info</a></li>
+            <li><a href="about.html">Privacy Policy</a></li>
+            <li><a href="about.html">Terms of Service</a></li>
+            <li><a href="about.html">Compliance</a></li>
+            <li><a href="about.html">Security</a></li>
           </ul>
         </div>
       </div>
-      
       <div class="footer-bottom">
         <div>© 2026 Stackly FinTech Pvt. Ltd. All rights reserved.</div>
-        <div style="display:flex; gap: 20px; align-items:center; flex-wrap:wrap;">
-          <!-- Verified GitHub Link -->
-          <a href="https://github.com/lingalamanasa/Fintech.git" target="_blank" rel="noopener" class="github-link">
-            🌐 GitHub Repository
-          </a>
+        <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+          <a href="https://github.com/lingalamanasa/Fintech.git" target="_blank" rel="noopener" class="github-link">🌐 GitHub Repository</a>
           <span style="color:rgba(255,255,255,0.1);">|</span>
-          <span>🇮🇳 RBI Licensed PA</span>
+          <span>🇮🇳 RBI Licensed</span>
           <span style="color:rgba(255,255,255,0.1);">|</span>
           <span>🔐 PCI-DSS L1</span>
         </div>
@@ -452,88 +310,21 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script>
-    // 1. Splash Screen Logic
-    window.addEventListener('load', () => {
-      const splash = document.getElementById('splash-screen');
-      setTimeout(() => {
-        splash.style.opacity = '0';
-        setTimeout(() => {
-          splash.style.visibility = 'hidden';
-          splash.style.display = 'none';
-        }, 600);
-      }, 2000); // Fades out after 2 seconds
-    });
-
-    // 2. Navbar Scroll Effect & Progress Bar
-    const navbar = document.getElementById('navbar');
-    const progressBar = document.getElementById('scroll-progress');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) navbar.classList.add('scrolled');
-      else navbar.classList.remove('scrolled');
-      
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      progressBar.style.width = scrolled + "%";
-    });
-
-    // 3. Mobile Hamburger Menu Toggle Fix
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    hamburgerBtn.addEventListener('click', () => {
-      hamburgerBtn.classList.toggle('active');
-      mobileMenu.classList.toggle('open');
-    });
-
-    // 4. Scroll Reveal Animations (Intersection Observer)
-    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-    
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
-      observer.observe(el);
-    });
-
-    // 5. Loan Calculator Logic
-    function formatMoney(num) {
-      return "₹" + num.toLocaleString('en-IN', { maximumFractionDigits: 0 });
-    }
-
-    function updateCalc() {
-      const p = parseFloat(document.getElementById('slider-amt').value);
-      const y = parseFloat(document.getElementById('slider-term').value);
-      const r = parseFloat(document.getElementById('slider-rate').value);
-      
-      document.getElementById('val-amt').innerText = formatMoney(p);
-      document.getElementById('val-term').innerText = y + " Years";
-      document.getElementById('val-rate').innerText = r.toFixed(1) + "%";
-      
-      const n = y * 12; 
-      const i = r / 12 / 100; 
-      
-      let emi = p * i * Math.pow(1 + i, n) / (Math.pow(1 + i, n) - 1);
-      if(isNaN(emi) || emi === Infinity || p === 0) emi = 0;
-      
-      const totalPayment = emi * n;
-      const totalInterest = totalPayment - p;
-      
-      document.getElementById('emi-result').innerText = formatMoney(emi);
-      document.getElementById('tot-int').innerText = formatMoney(totalInterest);
-      document.getElementById('tot-pay').innerText = formatMoney(totalPayment);
-    }
-    
-    // Initialize calculator on load
-    document.addEventListener("DOMContentLoaded", function() {
-      updateCalc(); 
-    });
+    // Splash
+    window.addEventListener('load',()=>{const s=document.getElementById('splash-screen');setTimeout(()=>{s.style.opacity='0';setTimeout(()=>{s.style.display='none'},600)},2000)});
+    // Navbar scroll
+    const nb=document.getElementById('navbar'),pb=document.getElementById('scroll-progress');
+    window.addEventListener('scroll',()=>{nb.classList.toggle('scrolled',scrollY>50);const h=document.documentElement.scrollHeight-innerHeight;pb.style.width=(scrollY/h*100)+'%'});
+    // Hamburger
+    document.getElementById('hamburgerBtn').addEventListener('click',function(){this.classList.toggle('active');document.getElementById('mobileMenu').classList.toggle('open')});
+    // Scroll reveal
+    const obs=new IntersectionObserver((e,o)=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');o.unobserve(en.target)}})},{threshold:0.15});
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
+    // Calculator
+    function fmt(n){return'₹'+n.toLocaleString('en-IN',{maximumFractionDigits:0})}
+    function updateCalc(){const p=+document.getElementById('slider-amt').value,y=+document.getElementById('slider-term').value,r=+document.getElementById('slider-rate').value;document.getElementById('val-amt').innerText=fmt(p);document.getElementById('val-term').innerText=y+' Years';document.getElementById('val-rate').innerText=r.toFixed(1)+'%';const n=y*12,i=r/12/100;let e=p*i*Math.pow(1+i,n)/(Math.pow(1+i,n)-1);if(isNaN(e)||!isFinite(e))e=0;const t=e*n;document.getElementById('emi-result').innerText=fmt(e);document.getElementById('tot-int').innerText=fmt(t-p);document.getElementById('tot-pay').innerText=fmt(t)}
+    updateCalc();
   </script>
 </body>
 </html>

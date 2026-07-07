@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login || Stackly FinTech</title>
   <meta name="description" content="Log in to your Stackly FinTech account. Admin, Analyst, or Client — access your personalized financial dashboard." />
+  <link rel="icon" href="assets/images/stackly-logo.webp" type="image/webp">
   <link rel="stylesheet" href="style.css" />
   <style>
     body { min-height: 100vh; display:flex; align-items:center; justify-content:center; background:var(--bg-base); overflow-x:hidden; }
@@ -49,20 +50,25 @@
       border-radius:var(--r-md); padding:16px 20px; display:flex; align-items:center; gap:12px;
       margin-bottom:16px;
     }
+    .mobile-logo-bar { display:none; padding:20px; text-align:center; background:var(--bg-surface); border-bottom:1px solid var(--border-glass); }
+    .mobile-logo-bar img { width:40px; height:40px; border-radius:10px; vertical-align:middle; margin-right:10px; }
+    .mobile-logo-bar span { font-family:var(--font-heading); font-size:1.4rem; font-weight:800; vertical-align:middle; }
     @media(max-width:768px){
       .auth-wrapper { grid-template-columns:1fr; }
       .auth-left { display:none; }
       body { display:block; }
       .auth-right { min-height:100vh; }
+      .mobile-logo-bar { display:block; }
     }
   </style>
 </head>
 <body>
+<div class="mobile-logo-bar"><a href="index.html" style="text-decoration:none;color:var(--text-primary);"><img src="assets/images/stackly-logo.webp" alt="Stackly"><span>STACKLY</span></a></div>
 <div class="auth-wrapper">
   <!-- Left Panel -->
   <div class="auth-left">
     <div class="auth-left-content">
-      <a href="index.html" class="nav-logo"><div class="logo-icon">💹</div><span>Stackly</span></a>
+      <a href="index.html" class="nav-logo"><img src="assets/images/stackly-logo.webp" alt="Stackly" style="width:32px;height:32px;border-radius:8px;"><span>Stackly</span></a>
       <h2>Your Financial Dashboard <span class="gradient-text">Awaits</span></h2>
       <p>Select your role and access your personalized Stackly experience — real-time data, intelligent insights, and full control at your fingertips.</p>
     </div>
