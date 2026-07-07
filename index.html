@@ -4,22 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Stackly Digital Banking</title>
-  <meta name="description" content="Stackly Digital Banking - Real-time payments, smart savings, and digital lending." />
+  <meta name="description" content="Stackly Digital Banking - Wealth management and secure digital lending." />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Reset & Base overrides for the specific target layout */
+    /* Reset & Base overrides for Emerald/Mint layout */
     :root {
-      --brand-red: #D32F2F;
-      --brand-red-dark: #b71c1c;
-      --brand-black: #111111;
-      --brand-blue: #0A192F;
+      --brand-emerald: #064e3b;
+      --brand-emerald-light: #047857;
+      --brand-mint: #34d399;
+      --brand-dark: #0f172a;
+      --brand-slate: #1e293b;
       --text-light: #ffffff;
     }
     body {
       margin: 0;
       padding: 0;
       font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
-      background-color: #f4f5f7;
+      background-color: #f1f5f9;
     }
     
     /* Dual-tone Header */
@@ -36,14 +37,14 @@
       gap: 12px;
       font-size: 1.5rem;
       font-weight: 800;
-      color: var(--brand-blue);
+      color: var(--brand-dark);
       text-decoration: none;
     }
     .top-header .logo-icon {
       font-size: 1.8rem;
     }
     .main-nav {
-      background: var(--brand-red);
+      background: var(--brand-emerald);
       padding: 0 40px;
       display: flex;
       justify-content: space-between;
@@ -59,28 +60,29 @@
       text-decoration: none;
       font-size: 1rem;
       font-weight: 500;
-      transition: opacity 0.2s;
+      transition: color 0.2s;
     }
     .nav-links a:hover {
-      opacity: 0.8;
+      color: var(--brand-mint);
     }
     .login-btn {
-      background: var(--brand-black);
-      color: #ffffff;
+      background: var(--brand-mint);
+      color: var(--brand-emerald);
       text-decoration: none;
       padding: 10px 24px;
-      border-radius: 4px;
-      font-weight: 600;
-      transition: background 0.2s;
+      border-radius: 6px;
+      font-weight: 700;
+      transition: all 0.2s;
     }
     .login-btn:hover {
-      background: #333;
+      background: #ffffff;
+      transform: translateY(-2px);
     }
 
     /* Hero Section */
     .hero-section {
       position: relative;
-      background-image: linear-gradient(to right, rgba(2,6,23,0.95) 0%, rgba(2,6,23,0.6) 100%), url('assets/images/hero_finance_bg.png');
+      background-image: linear-gradient(to right, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.7) 100%), url('assets/images/hero_emerald_bg.png');
       background-size: cover;
       background-position: center;
       min-height: 85vh;
@@ -90,67 +92,73 @@
       color: white;
     }
     .hero-content {
-      max-width: 600px;
+      max-width: 700px;
+      animation: slideUpFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateY(40px);
     }
+    @keyframes slideUpFade {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
     .hero-title {
-      font-size: 4.5rem;
+      font-size: 5rem;
       font-weight: 900;
       line-height: 1.1;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
     }
-    .typewriter-text {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--text-light);
-      margin-bottom: 24px;
-      border-right: 3px solid var(--brand-red);
-      white-space: nowrap;
-      overflow: hidden;
-      animation: typing 4s steps(40, end) infinite, blink-caret .75s step-end infinite;
-    }
-    @keyframes typing {
-      0%, 100% { width: 0 }
-      50%, 80% { width: 100% }
-    }
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: var(--brand-red) }
+    .hero-title span {
+      color: var(--brand-mint);
     }
     .hero-desc {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       line-height: 1.6;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.85);
       margin-bottom: 40px;
+      max-width: 600px;
     }
     .hero-actions {
       display: flex;
       gap: 16px;
     }
-    .btn-red {
-      background: var(--brand-red);
-      color: white;
-      padding: 16px 32px;
+    .btn-mint {
+      background: var(--brand-mint);
+      color: var(--brand-emerald);
+      padding: 16px 36px;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: 700;
-      transition: transform 0.2s, background 0.2s;
+      font-weight: 800;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+      box-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
     }
-    .btn-red:hover {
-      background: var(--brand-red-dark);
+    .btn-mint:hover {
+      background: #ffffff;
       transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(52, 211, 153, 0.6);
     }
-    .btn-outline {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
+    .btn-outline-mint {
+      background: rgba(52, 211, 153, 0.1);
+      color: var(--brand-mint);
+      border: 2px solid var(--brand-mint);
       padding: 14px 32px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 700;
-      transition: background 0.2s;
+      font-size: 1.1rem;
+      transition: all 0.2s;
     }
-    .btn-outline:hover {
-      background: rgba(255,255,255,0.1);
+    .btn-outline-mint:hover {
+      background: var(--brand-mint);
+      color: var(--brand-emerald);
     }
 
     /* Floating Bot */
@@ -158,42 +166,44 @@
       position: fixed;
       bottom: 40px;
       right: 40px;
-      width: 60px;
-      height: 60px;
-      background: var(--brand-red);
+      width: 65px;
+      height: 65px;
+      background: var(--brand-mint);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      box-shadow: 0 10px 25px rgba(211,47,47,0.4);
+      font-size: 2rem;
+      box-shadow: 0 10px 25px rgba(52, 211, 153, 0.4);
       cursor: pointer;
       z-index: 100;
+      animation: pulse-glow 2s infinite;
       transition: transform 0.3s;
-      animation: float-bot 3s ease-in-out infinite;
     }
     .floating-bot:hover {
-      transform: scale(1.1);
+      transform: scale(1.1) rotate(10deg);
     }
-    @keyframes float-bot {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(52, 211, 153, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
     }
 
     /* Digital Bank Section */
     .bank-header {
-      background: var(--brand-black);
-      color: white;
+      background: var(--brand-dark);
+      color: var(--brand-mint);
       text-align: center;
       padding: 24px 0;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
     }
     .tabs-nav {
       display: flex;
-      background: #757575;
-      color: white;
+      background: var(--brand-slate);
+      color: rgba(255,255,255,0.7);
     }
     .tab-item {
       flex: 1;
@@ -201,17 +211,20 @@
       padding: 20px 0;
       font-weight: 600;
       cursor: pointer;
-      border-right: 1px solid rgba(255,255,255,0.1);
-      transition: background 0.2s;
+      border-right: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.2s;
     }
     .tab-item:last-child {
       border-right: none;
     }
     .tab-item.active {
-      background: var(--brand-red);
+      background: var(--brand-emerald);
+      color: white;
+      border-bottom: 3px solid var(--brand-mint);
     }
     .tab-item:hover:not(.active) {
-      background: #616161;
+      background: rgba(255,255,255,0.1);
+      color: white;
     }
     
     .cards-container {
@@ -224,35 +237,36 @@
     }
     .bank-card {
       border-radius: 16px;
-      padding: 32px 24px;
+      padding: 36px 28px;
       color: white;
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      background: var(--brand-slate);
+      border: 1px solid rgba(255,255,255,0.05);
     }
     .bank-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(52, 211, 153, 0.2);
+      border-color: rgba(52, 211, 153, 0.3);
     }
-    .bank-card::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0) 100%);
-      pointer-events: none;
-    }
-    .c-red { background: linear-gradient(135deg, #b71c1c, #880e4f); }
-    .c-blue { background: linear-gradient(135deg, #0277bd, #006064); }
-    .c-green { background: linear-gradient(135deg, #2e7d32, #004d40); }
-    .c-purple { background: linear-gradient(135deg, #651fff, #311b92); }
-    .c-orange { background: linear-gradient(135deg, #ef6c00, #bf360c); }
-    .c-dark { background: linear-gradient(135deg, #263238, #111111); }
+    
+    /* Cool toned cohesive gradients for cards */
+    .c-green { background: linear-gradient(135deg, #064e3b, #022c22); }
+    .c-teal { background: linear-gradient(135deg, #0f766e, #042f2e); }
+    .c-blue { background: linear-gradient(135deg, #1e3a8a, #172554); }
+    .c-indigo { background: linear-gradient(135deg, #3730a3, #1e1b4b); }
+    .c-slate { background: linear-gradient(135deg, #334155, #0f172a); }
+    .c-dark { background: linear-gradient(135deg, #0f172a, #000000); }
     
     .card-label {
       font-size: 0.9rem;
-      opacity: 0.9;
-      margin-bottom: 8px;
+      color: var(--brand-mint);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
     }
     .card-title {
       font-size: 1.6rem;
@@ -268,40 +282,40 @@
     }
     .card-btn {
       background: white;
-      color: var(--brand-black);
+      color: var(--brand-dark);
       padding: 8px 24px;
       border-radius: 24px;
       text-decoration: none;
       font-weight: 700;
       font-size: 0.9rem;
+      transition: background 0.2s;
     }
-    .c-red .card-btn { color: #b71c1c; }
-    .c-blue .card-btn { color: #0277bd; }
-    .c-green .card-btn { color: #2e7d32; }
-    .c-purple .card-btn { color: #651fff; }
-    .c-orange .card-btn { color: #ef6c00; }
-    .c-dark .card-btn { color: #263238; }
+    .bank-card:hover .card-btn {
+      background: var(--brand-mint);
+      color: var(--brand-emerald);
+    }
     
     .card-link {
-      color: white;
+      color: rgba(255,255,255,0.7);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 500;
+      transition: color 0.2s;
     }
     .card-link:hover {
-      text-decoration: underline;
+      color: var(--brand-mint);
     }
 
     /* Loan Calculator Section */
     .loan-section {
-      background: #f8fafc;
+      background: #e2e8f0;
       padding-bottom: 80px;
       position: relative;
     }
     .loan-tabs {
       display: flex;
       justify-content: center;
-      background: #b71c1c;
+      background: var(--brand-emerald-light);
       color: white;
     }
     .loan-tab {
@@ -311,14 +325,16 @@
       transition: background 0.2s;
     }
     .loan-tab.active {
-      background: #880e4f;
+      background: var(--brand-emerald);
+      border-bottom: 3px solid var(--brand-mint);
     }
     .loan-tab:hover:not(.active) {
-      background: #d32f2f;
+      background: var(--brand-emerald);
     }
+    
     .loan-content {
       max-width: 1200px;
-      margin: 60px auto 0;
+      margin: 80px auto 0;
       display: grid;
       grid-template-columns: 1fr 1.2fr;
       gap: 60px;
@@ -327,31 +343,34 @@
     }
     .loan-visual {
       position: relative;
+      display: flex;
+      justify-content: center;
     }
     .loan-visual img {
       width: 100%;
-      max-width: 500px;
-      animation: float-cards 6s ease-in-out infinite;
-      filter: drop-shadow(0 30px 40px rgba(0,0,0,0.3));
+      max-width: 480px;
+      animation: slow-hover 8s ease-in-out infinite;
+      filter: drop-shadow(0 40px 50px rgba(6, 78, 59, 0.4));
     }
-    @keyframes float-cards {
-      0%, 100% { transform: translateY(0) rotate(-2deg); }
-      50% { transform: translateY(-20px) rotate(2deg); }
+    @keyframes slow-hover {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-25px) rotate(1deg) scale(1.02); }
     }
     
     .calc-box {
       background: transparent;
     }
     .calc-header {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       font-weight: 900;
-      color: var(--brand-black);
+      color: var(--brand-dark);
       margin-bottom: 16px;
+      line-height: 1.1;
     }
     .calc-desc {
-      color: #555;
+      color: #475569;
       margin-bottom: 40px;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
     }
     .slider-group {
       margin-bottom: 32px;
@@ -361,92 +380,107 @@
       justify-content: space-between;
       margin-bottom: 16px;
       font-weight: 700;
-      color: var(--brand-black);
+      color: var(--brand-dark);
     }
     .slider-val {
-      color: var(--brand-red);
+      color: var(--brand-emerald-light);
+      font-size: 1.1rem;
     }
     input[type=range] {
       width: 100%;
       -webkit-appearance: none;
-      background: #ddd;
-      height: 6px;
-      border-radius: 3px;
+      background: #cbd5e1;
+      height: 8px;
+      border-radius: 4px;
       outline: none;
     }
     input[type=range]::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
-      background: var(--brand-red);
+      background: var(--brand-mint);
+      border: 3px solid var(--brand-emerald);
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(211,47,47,0.4);
+      box-shadow: 0 2px 8px rgba(6, 78, 59, 0.3);
+      transition: transform 0.1s;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
     }
     
     .emi-card {
       background: white;
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 40px;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
       margin-left: 20px;
+      border-top: 6px solid var(--brand-mint);
     }
     .emi-label {
       font-size: 1.1rem;
-      color: #666;
+      color: #64748b;
       margin-bottom: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     .emi-value {
-      font-size: 3.5rem;
+      font-size: 3.8rem;
       font-weight: 900;
-      color: var(--brand-red);
+      color: var(--brand-emerald);
       margin-bottom: 32px;
     }
     .btn-apply-outline {
       display: inline-block;
-      border: 2px solid var(--brand-red);
-      color: var(--brand-red);
-      padding: 12px 32px;
+      background: rgba(6, 78, 59, 0.05);
+      border: 2px solid var(--brand-emerald);
+      color: var(--brand-emerald);
+      padding: 14px 36px;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 1.1rem;
       transition: all 0.2s;
       margin-bottom: 32px;
+      width: 100%;
+      box-sizing: border-box;
     }
     .btn-apply-outline:hover {
-      background: var(--brand-red);
-      color: white;
+      background: var(--brand-emerald);
+      color: var(--brand-mint);
+      box-shadow: 0 10px 20px rgba(6, 78, 59, 0.2);
     }
     .emi-details {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
       text-align: left;
-      font-size: 0.95rem;
-      color: #444;
+      font-size: 1rem;
+      color: #334155;
     }
     .emi-details strong {
-      color: var(--brand-black);
+      color: var(--brand-dark);
     }
 
     /* Footer */
     .site-footer {
-      background: var(--brand-blue);
+      background: var(--brand-dark);
       color: white;
-      padding: 60px 40px 20px;
+      padding: 80px 40px 30px;
     }
     .footer-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 40px;
       max-width: 1200px;
-      margin: 0 auto 40px;
+      margin: 0 auto 60px;
     }
     .footer-col h4 {
       font-size: 1.2rem;
       margin-bottom: 24px;
+      color: var(--brand-mint);
     }
     .footer-col ul {
       list-style: none;
@@ -457,7 +491,7 @@
       margin-bottom: 12px;
     }
     .footer-col ul a {
-      color: #aaa;
+      color: #94a3b8;
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -466,25 +500,26 @@
     }
     .footer-bottom {
       border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 20px;
+      padding-top: 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       max-width: 1200px;
       margin: 0 auto;
-      font-size: 0.9rem;
-      color: #888;
+      font-size: 0.95rem;
+      color: #64748b;
     }
     .github-link {
-      color: white;
+      color: var(--brand-mint);
       text-decoration: none;
       font-weight: bold;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      transition: color 0.2s;
     }
     .github-link:hover {
-      text-decoration: underline;
+      color: white;
     }
   </style>
 </head>
@@ -499,26 +534,25 @@
     </div>
     <div class="main-nav">
       <nav class="nav-links">
-        <a href="index.html">Home</a>
+        <a href="index.html" style="color:var(--brand-mint);">Home</a>
         <a href="services.html">Services</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </nav>
-      <a href="login.html" class="login-btn">Login</a>
+      <a href="login.html" class="login-btn">Secure Login</a>
     </div>
   </header>
 
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-content">
-      <h1 class="hero-title">Stackly Banking Services</h1>
-      <div class="typewriter-text" id="typewriter"></div>
+      <h1 class="hero-title">Welcome to the <span>Future of Wealth</span></h1>
       <p class="hero-desc">
-        Secure digital banking with instant transfers, smart savings accounts, credit cards and 24/7 AI customer assistance.
+        Experience institutional-grade digital banking. Precision investments, algorithmic savings, and robust blockchain security engineered for tomorrow.
       </p>
       <div class="hero-actions">
-        <a href="register.html" class="btn-red">→ Open Account</a>
-        <a href="services.html" class="btn-outline">→ Explore Services</a>
+        <a href="register.html" class="btn-mint">→ Get Started</a>
+        <a href="services.html" class="btn-outline-mint">View Solutions</a>
       </div>
     </div>
   </section>
@@ -531,68 +565,68 @@
   <!-- Digital Bank Section -->
   <section>
     <div class="bank-header">
-      STACKLY DIGITAL BANK
+      STACKLY DIGITAL INFRASTRUCTURE
     </div>
     <div class="tabs-nav">
-      <div class="tab-item active">Popular</div>
-      <div class="tab-item">Accounts</div>
-      <div class="tab-item">Deposits</div>
-      <div class="tab-item">Credit Cards</div>
-      <div class="tab-item">Loans</div>
+      <div class="tab-item active">Featured</div>
+      <div class="tab-item">Treasury</div>
+      <div class="tab-item">Yield</div>
+      <div class="tab-item">Cards</div>
+      <div class="tab-item">Lending</div>
     </div>
     
     <div class="cards-container">
-      <div class="bank-card c-red">
-        <div class="card-label">Savings</div>
-        <h3 class="card-title">Zero balance savings account</h3>
+      <div class="bank-card c-green">
+        <div class="card-label">Yield</div>
+        <h3 class="card-title">High-yield algorithmic savings</h3>
         <div class="card-actions">
-          <a href="register.html" class="card-btn">Apply</a>
-          <a href="services.html" class="card-link">Know more →</a>
+          <a href="register.html" class="card-btn">Open Account</a>
+          <a href="services.html" class="card-link">Learn more →</a>
+        </div>
+      </div>
+      
+      <div class="bank-card c-teal">
+        <div class="card-label">Credit</div>
+        <h3 class="card-title">Instant liquidity up to ₹50L</h3>
+        <div class="card-actions">
+          <a href="register.html" class="card-btn">Apply Now</a>
+          <a href="services.html" class="card-link">Learn more →</a>
         </div>
       </div>
       
       <div class="bank-card c-blue">
-        <div class="card-label">Instant Loan</div>
-        <h3 class="card-title">Loan up to ₹10 Lakhs</h3>
+        <div class="card-label">Treasury</div>
+        <h3 class="card-title">12.5% fixed duration bonds</h3>
         <div class="card-actions">
-          <a href="register.html" class="card-btn">Apply</a>
-          <a href="services.html" class="card-link">Know more →</a>
+          <a href="register.html" class="card-btn">Invest</a>
+          <a href="services.html" class="card-link">Learn more →</a>
         </div>
       </div>
       
-      <div class="bank-card c-green">
-        <div class="card-label">Fixed Deposit</div>
-        <h3 class="card-title">7.5% yearly returns</h3>
+      <div class="bank-card c-indigo">
+        <div class="card-label">Payments</div>
+        <h3 class="card-title">Global wire transfers in seconds</h3>
         <div class="card-actions">
-          <a href="register.html" class="card-btn">Open</a>
-          <a href="services.html" class="card-link">Know more →</a>
+          <a href="register.html" class="card-btn">Setup</a>
+          <a href="services.html" class="card-link">Learn more →</a>
         </div>
       </div>
       
-      <div class="bank-card c-purple">
-        <div class="card-label">UPI</div>
-        <h3 class="card-title">Instant money transfer</h3>
+      <div class="bank-card c-slate">
+        <div class="card-label">Metal Card</div>
+        <h3 class="card-title">Zero forex markup anywhere</h3>
         <div class="card-actions">
-          <a href="register.html" class="card-btn">Activate</a>
-          <a href="services.html" class="card-link">Know more →</a>
-        </div>
-      </div>
-      
-      <div class="bank-card c-orange">
-        <div class="card-label">Debit Card</div>
-        <h3 class="card-title">Contactless payments</h3>
-        <div class="card-actions">
-          <a href="register.html" class="card-btn">Apply</a>
-          <a href="services.html" class="card-link">Know more →</a>
+          <a href="register.html" class="card-btn">Order</a>
+          <a href="services.html" class="card-link">Learn more →</a>
         </div>
       </div>
       
       <div class="bank-card c-dark">
-        <div class="card-label">Insurance</div>
-        <h3 class="card-title">Secure your future</h3>
+        <div class="card-label">Security</div>
+        <h3 class="card-title">Military-grade asset protection</h3>
         <div class="card-actions">
-          <a href="register.html" class="card-btn">View</a>
-          <a href="services.html" class="card-link">Know more →</a>
+          <a href="register.html" class="card-btn">Audit Report</a>
+          <a href="services.html" class="card-link">Learn more →</a>
         </div>
       </div>
     </div>
@@ -601,56 +635,55 @@
   <!-- Loan Calculator Section -->
   <section class="loan-section">
     <div class="loan-tabs">
-      <div class="loan-tab active">Home Loan</div>
-      <div class="loan-tab">Vehicle Loan</div>
-      <div class="loan-tab">Personal Loan</div>
-      <div class="loan-tab">Education Loan</div>
-      <div class="loan-tab">Mortgage Loan</div>
+      <div class="loan-tab active">Mortgage</div>
+      <div class="loan-tab">Auto Finance</div>
+      <div class="loan-tab">Personal Credit</div>
+      <div class="loan-tab">Business Capital</div>
     </div>
     
     <div class="loan-content">
       <div class="loan-visual">
-        <img src="assets/images/floating_cards.png" alt="Floating Credit Cards" />
+        <img src="assets/images/futuristic_vault.png" alt="Futuristic Digital Vault" />
       </div>
       
       <div class="calc-wrapper" style="display: flex;">
         <div class="calc-box" style="flex: 1;">
-          <h4 style="color: #b71c1c; font-weight: 700; letter-spacing: 1px; margin-bottom: 12px;">LOAN CALCULATOR</h4>
-          <h2 class="calc-header">Stackly Home Loan Calculator</h2>
-          <p class="calc-desc">Estimate your monthly EMI quickly & easily with our smart calculator.</p>
+          <h4 style="color: var(--brand-emerald-light); font-weight: 800; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;">Smart Projection</h4>
+          <h2 class="calc-header">Stackly Capital Calculator</h2>
+          <p class="calc-desc">Dynamically project your liabilities with our precision interest calculator.</p>
           
           <div class="slider-group">
             <div class="slider-header">
-              <span>Loan Amount</span>
-              <span class="slider-val" id="val-amt">₹500,000</span>
+              <span>Principal Amount</span>
+              <span class="slider-val" id="val-amt">₹1,500,000</span>
             </div>
-            <input type="range" id="slider-amt" min="100000" max="5000000" step="10000" value="500000" oninput="updateCalc()">
+            <input type="range" id="slider-amt" min="100000" max="10000000" step="50000" value="1500000" oninput="updateCalc()">
           </div>
           
           <div class="slider-group">
             <div class="slider-header">
-              <span>Loan Term (Years)</span>
-              <span class="slider-val" id="val-term">10 Years</span>
+              <span>Duration (Years)</span>
+              <span class="slider-val" id="val-term">15 Years</span>
             </div>
-            <input type="range" id="slider-term" min="1" max="30" step="1" value="10" oninput="updateCalc()">
+            <input type="range" id="slider-term" min="1" max="30" step="1" value="15" oninput="updateCalc()">
           </div>
           
           <div class="slider-group">
             <div class="slider-header">
-              <span>Interest Rate</span>
-              <span class="slider-val" id="val-rate">8%</span>
+              <span>Annual Percentage Rate (APR)</span>
+              <span class="slider-val" id="val-rate">7.5%</span>
             </div>
-            <input type="range" id="slider-rate" min="5" max="15" step="0.1" value="8" oninput="updateCalc()">
+            <input type="range" id="slider-rate" min="4" max="18" step="0.1" value="7.5" oninput="updateCalc()">
           </div>
         </div>
         
         <div class="emi-card">
-          <div class="emi-label">Monthly EMI</div>
-          <div class="emi-value" id="emi-result">₹6,066</div>
-          <a href="register.html" class="btn-apply-outline">Apply Online</a>
+          <div class="emi-label">Monthly Repayment</div>
+          <div class="emi-value" id="emi-result">₹13,905</div>
+          <a href="register.html" class="btn-apply-outline">Initialize Loan</a>
           <div class="emi-details">
-            <div><strong>Interest Amount:</strong> <span id="tot-int">₹227,966</span></div>
-            <div><strong>Total Payment:</strong> <span id="tot-pay">₹727,966</span></div>
+            <div><strong>Cumulative Interest:</strong> <span id="tot-int">₹1,002,912</span></div>
+            <div><strong>Total Obligation:</strong> <span id="tot-pay">₹2,502,912</span></div>
           </div>
         </div>
       </div>
@@ -661,34 +694,34 @@
   <footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-col">
-        <h4>Stackly</h4>
-        <p style="color: #aaa; line-height: 1.6;">The future of digital finance. Real-time payments, smart savings, and AI-driven growth for everyone.</p>
+        <h4 style="font-size: 1.5rem; font-weight: 800; color: white;">💸 STACKLY</h4>
+        <p style="line-height: 1.6;">Building the robust digital infrastructure for the next generation of global wealth.</p>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4>Institution</h4>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="blog.html">Newsroom</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html">About Stackly</a></li>
+          <li><a href="#">Leadership</a></li>
+          <li><a href="blog.html">Press & Media</a></li>
+          <li><a href="contact.html">Global Offices</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Products</h4>
+        <h4>Solutions</h4>
         <ul>
-          <li><a href="services.html">Global Payments</a></li>
-          <li><a href="services.html">Digital Banking</a></li>
-          <li><a href="services.html">Card Issuing</a></li>
-          <li><a href="services.html">Crypto Custody</a></li>
+          <li><a href="services.html">Wealth Management</a></li>
+          <li><a href="services.html">Corporate Treasury</a></li>
+          <li><a href="services.html">Institutional Credit</a></li>
+          <li><a href="services.html">Digital Assets</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h4>Compliance</h4>
         <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Cookie Policy</a></li>
-          <li><a href="#">Compliance</a></li>
+          <li><a href="#">Security Protocols</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Privacy Framework</a></li>
+          <li><a href="#">Regulatory Info</a></li>
         </ul>
       </div>
     </div>
@@ -696,56 +729,20 @@
       <div>© 2026 Stackly FinTech Pvt. Ltd. All rights reserved.</div>
       <div style="display:flex; gap: 20px; align-items:center;">
         <a href="https://github.com/lingalamanasa/Fintech.git" target="_blank" rel="noopener" class="github-link">🌐 GitHub Repository</a>
-        <span style="color:rgba(255,255,255,0.2);">|</span>
+        <span style="color:rgba(255,255,255,0.1);">|</span>
         <span>🇮🇳 RBI Licensed PA</span>
-        <span style="color:rgba(255,255,255,0.2);">|</span>
+        <span style="color:rgba(255,255,255,0.1);">|</span>
         <span>🔐 PCI-DSS L1</span>
       </div>
     </div>
   </footer>
 
   <script>
-    // Typewriter effect
-    const phrases = ["Secure digital banking...", "Instant money transfers...", "Smart saving accounts...", "24/7 AI Customer Support..."];
-    let phraseIndex = 0;
-    let letterIndex = 0;
-    let currentText = "";
-    let isDeleting = false;
-    const typeElement = document.getElementById('typewriter');
-
-    function type() {
-      const fullText = phrases[phraseIndex];
-      
-      if (isDeleting) {
-        currentText = fullText.substring(0, letterIndex - 1);
-        letterIndex--;
-      } else {
-        currentText = fullText.substring(0, letterIndex + 1);
-        letterIndex++;
-      }
-      
-      typeElement.innerHTML = currentText;
-      
-      let typeSpeed = isDeleting ? 50 : 100;
-      
-      if (!isDeleting && currentText === fullText) {
-        typeSpeed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && currentText === "") {
-        isDeleting = false;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-        typeSpeed = 500;
-      }
-      
-      setTimeout(type, typeSpeed);
-    }
-    
     document.addEventListener("DOMContentLoaded", function() {
-      setTimeout(type, 1000);
-      updateCalc(); // initialize calc
+      updateCalc(); 
     });
 
-    // Loan Calculator
+    // Precision Loan Calculator
     function formatMoney(num) {
       return "₹" + num.toLocaleString('en-IN', { maximumFractionDigits: 0 });
     }
@@ -759,11 +756,11 @@
       document.getElementById('val-term').innerText = y + " Years";
       document.getElementById('val-rate').innerText = r.toFixed(1) + "%";
       
-      const n = y * 12; // months
-      const i = r / 12 / 100; // monthly interest
+      const n = y * 12; // total months
+      const i = r / 12 / 100; // monthly interest rate
       
       let emi = p * i * Math.pow(1 + i, n) / (Math.pow(1 + i, n) - 1);
-      if(isNaN(emi) || emi === Infinity) emi = 0;
+      if(isNaN(emi) || emi === Infinity || p === 0) emi = 0;
       
       const totalPayment = emi * n;
       const totalInterest = totalPayment - p;
