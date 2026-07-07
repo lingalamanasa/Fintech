@@ -464,6 +464,70 @@
       color: var(--brand-dark);
     }
 
+    /* Split Sections */
+    .split-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      padding: 100px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .split-section.reverse {
+      flex-direction: row-reverse;
+    }
+    .split-content {
+      flex: 1;
+    }
+    .split-content h2 {
+      font-size: 3.2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .split-content p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .split-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+    .split-image img {
+      width: 100%;
+      max-width: 500px;
+      animation: slow-levitate 6s ease-in-out infinite;
+      filter: drop-shadow(0 30px 40px rgba(0,0,0,0.4));
+    }
+    .split-image.fade-slide img {
+      animation: slideInRight 1.5s ease-out forwards;
+      filter: drop-shadow(0 20px 30px rgba(6,78,59,0.2));
+    }
+    @keyframes slow-levitate {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    /* Section Background Wrappers */
+    .bg-slate-dark {
+      background: var(--brand-dark);
+      color: white;
+    }
+    .bg-slate-dark .split-content p { color: rgba(255,255,255,0.8); }
+    .bg-light-gray {
+      background: #f8fafc;
+      color: var(--brand-dark);
+    }
+    .bg-light-gray .split-content p { color: #475569; }
+
     /* Footer */
     .site-footer {
       background: var(--brand-dark);
@@ -628,6 +692,34 @@
           <a href="register.html" class="card-btn">Audit Report</a>
           <a href="services.html" class="card-link">Learn more →</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enterprise Security Section -->
+  <section class="bg-slate-dark">
+    <div class="split-section">
+      <div class="split-image">
+        <img src="assets/images/security_shield.png" alt="Enterprise Security Shield" />
+      </div>
+      <div class="split-content">
+        <h2>Bank-Grade <span style="color: var(--brand-mint);">Security</span></h2>
+        <p>Your digital wealth is protected by military-grade AES-256 encryption, multi-layered biometric authentication, and strict PCI-DSS L1 compliance protocols. We don't just store your assets; we fortify them.</p>
+        <a href="register.html" class="btn-mint">Get Started Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI-Driven Insights Section -->
+  <section class="bg-light-gray">
+    <div class="split-section reverse">
+      <div class="split-image fade-slide">
+        <img src="assets/images/analytics_dashboard.png" alt="AI Analytics Dashboard" />
+      </div>
+      <div class="split-content">
+        <h2>AI-Driven <span style="color: var(--brand-emerald);">Insights</span></h2>
+        <p>Harness the power of our proprietary algorithmic engine. Track spending anomalies, predict yield curves, and receive real-time alerts so your money is always working harder for you.</p>
+        <a href="register.html" class="btn-mint" style="background: var(--brand-emerald); color: white; box-shadow: 0 0 15px rgba(6,78,59,0.3);">Get Started Today</a>
       </div>
     </div>
   </section>
