@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackly — The Future of Finance is Digital</title>
+  <meta name="description" content="Stackly is the next-generation FinTech platform — real-time global payments, AI analytics, blockchain security, digital lending and more. Join 2M+ users worldwide." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ══ Hero Layout ══ */
+    .hero-split{display:grid;grid-template-columns:1.15fr 0.85fr;gap:72px;align-items:center;min-height:calc(100vh - var(--nav-height));padding:72px 0 96px;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(99,102,241,0.1);border:1px solid var(--border-primary);border-radius:var(--r-full);padding:8px 24px;font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--primary-light);margin-bottom:28px;animation:fadeInUp 0.65s var(--ease-out) 0.1s both;box-shadow:var(--shadow-primary);}
+    .hero-live-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse-badge 1.6s infinite;}
+    .hero-title{margin-bottom:24px;animation:fadeInUp 0.65s var(--ease-out) 0.2s both;}
+    .hero-title .line{display:block;line-height:1.15;}
+    .hero-desc{font-size:1.1rem;max-width:540px;margin-bottom:48px;animation:fadeInUp 0.65s var(--ease-out) 0.3s both;line-height:1.8;}
+    .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:56px;animation:fadeInUp 0.65s var(--ease-out) 0.4s both;}
+    .hero-trust{display:flex;align-items:center;gap:18px;animation:fadeInUp 0.65s var(--ease-out) 0.5s both;flex-wrap:wrap;background:var(--bg-glass);padding:16px 24px;border-radius:var(--r-full);border:1px solid var(--border-subtle);backdrop-filter:blur(12px);}
+    .trust-avatars{display:flex;}
+    .trust-av{width:36px;height:36px;border-radius:50%;border:2px solid var(--bg-surface);font-size:0.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin-left:-12px;box-shadow:var(--shadow-sm);}
+    .trust-av:first-child{margin-left:0;}
+    .trust-text{font-size:0.83rem;color:var(--text-secondary);}
+    .trust-text strong{color:var(--text-primary);}
+    .hero-visual{position:relative;display:flex;align-items:center;justify-content:center;animation:fadeInUp 0.75s var(--ease-out) 0.25s both;}
+    .hero-img-frame{position:relative;width:100%;border-radius:var(--r-2xl);overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,0.8),0 0 0 1px var(--border-subtle);animation:float 7s ease-in-out infinite;transform-origin:center;}
+    .hero-img-frame::after{content:'';position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05);pointer-events:none;border-radius:var(--r-2xl);}
+    .hero-img-frame img{width:100%;display:block;border-radius:var(--r-2xl);}
+
+    /* Hero floating badges */
+    .floating-badge{position:absolute;background:rgba(6,11,24,0.85);backdrop-filter:blur(24px);border:1px solid var(--border-subtle);border-radius:var(--r-xl);padding:14px 20px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow-lg);font-size:0.85rem;}
+    .floating-badge.tl{top:-20px;left:-30px;animation:float 4.5s ease-in-out infinite 0.4s;}
+    .floating-badge.br{bottom:-30px;right:-30px;animation:float 4.5s ease-in-out infinite 1s;}
+    .floating-badge.tr{top:25%;right:-35px;animation:float-slow 5.5s ease-in-out infinite 0.2s;flex-direction:column;gap:8px;text-align:center;}
+    .fb-icon{width:36px;height:36px;border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+
+    /* ══ Ticker ══ */
+    .ticker-section{padding:0;}
+
+    /* ══ Partners ══ */
+    .partners-row{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:48px;}
+    .partner-chip{background:var(--bg-glass);border:1px solid var(--border-subtle);border-radius:var(--r-xl);padding:14px 32px;font-weight:700;font-family:var(--font-heading);font-size:1rem;color:var(--text-secondary);transition:var(--t-bounce);white-space:nowrap;backdrop-filter:blur(12px);}
+    .partner-chip:hover{border-color:var(--border-primary);color:var(--text-primary);transform:translateY(-6px);box-shadow:var(--shadow-primary);background:var(--bg-glass-active);}
+
+    /* ══ Features ══ */
+    .features-bg{background:linear-gradient(180deg,var(--bg-surface) 0%,var(--bg-base) 100%);border-top:1px solid var(--border-glass);}
+    .features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+    .feature-card{background:var(--bg-elevated);border:1px solid var(--border-glass);border-radius:var(--r-2xl);padding:36px 32px;transition:var(--t-normal);position:relative;overflow:hidden;backdrop-filter:blur(24px);z-index:1;}
+    .feature-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--primary-glow),rgba(6,182,212,0.05));opacity:0;transition:var(--t-normal);z-index:-1;}
+    .feature-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform 0.5s var(--ease-out);}
+    .feature-card:hover::before{opacity:1;}
+    .feature-card:hover::after{transform:scaleX(1);}
+    .feature-card:hover{border-color:var(--border-primary);transform:translateY(-12px);box-shadow:var(--shadow-primary);}
+
+    /* ══ Showcase ══ */
+    .showcase-split{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;}
+    .showcase-feature-item{display:flex;gap:18px;padding:20px;border-radius:var(--r-xl);transition:var(--t-normal);cursor:default;border:1px solid transparent;background:var(--bg-glass);}
+    .showcase-feature-item:hover{background:var(--bg-glass-hover);border-color:var(--border-subtle);transform:translateY(-4px);}
+    .sf-icon{width:48px;height:48px;border-radius:var(--r-lg);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:var(--bg-elevated);box-shadow:var(--shadow-sm);}
+    .showcase-visual{position:relative;border-radius:var(--r-3xl);overflow:visible;}
+    .showcase-img{border-radius:var(--r-3xl);box-shadow:var(--shadow-xl);width:100%;object-fit:cover;}
+    .showcase-chip{position:absolute;background:rgba(6,11,24,0.95);backdrop-filter:blur(24px);border:1px solid var(--border-subtle);border-radius:var(--r-xl);padding:12px 20px;font-size:0.85rem;animation:float-slow 5.5s ease-in-out infinite;box-shadow:var(--shadow-md);}
+    .s-chip-tr{top:20px;right:-24px;}
+    .s-chip-bl{bottom:20px;left:-24px;display:flex;align-items:center;gap:10px;}
+
+    /* ══ AI Section ══ */
+    .ai-section{background:radial-gradient(ellipse at center,var(--bg-surface) 0%,var(--bg-base) 100%);border-top:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);position:relative;}
+    .ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;}
+    .ai-stat{padding:24px;background:var(--bg-elevated);border:1px solid var(--border-glass);border-radius:var(--r-xl);text-align:center;transition:var(--t-bounce);backdrop-filter:blur(16px);}
+    .ai-stat:hover{border-color:var(--border-accent);transform:scale(1.05) translateY(-5px);box-shadow:var(--shadow-accent);}
+    .ai-visual{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+    .ai-card{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--r-2xl);padding:32px 24px;text-align:center;transition:var(--t-normal);backdrop-filter:blur(20px);}
+    .ai-card:hover{border-color:var(--border-accent);transform:translateY(-8px);box-shadow:var(--shadow-accent);background:var(--bg-glass-hover);}
+    .ai-card-icon{font-size:2.5rem;margin-bottom:16px;}
+    .ai-card-val{font-family:var(--font-heading);font-size:1.8rem;font-weight:800;color:var(--accent-light);}
+    .ai-card-label{font-size:0.8rem;color:var(--text-secondary);margin-top:6px;text-transform:uppercase;letter-spacing:0.05em;}
+
+    /* ══ How it works ══ */
+    .how-bg{background:var(--bg-base);position:relative;}
+    .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative;}
+
+    /* ══ Testimonials ══ */
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+
+    /* ══ Mobile App ══ */
+    .app-section{background:var(--bg-elevated);border-top:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);position:relative;}
+    .app-split{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;}
+    .app-badge{display:inline-flex;align-items:center;gap:12px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--r-xl);padding:16px 24px;transition:var(--t-bounce);backdrop-filter:blur(16px);}
+    .app-badge:hover{border-color:var(--border-primary);transform:translateY(-4px);box-shadow:var(--shadow-primary);background:var(--bg-glass-active);}
+    .app-mockup{border-radius:var(--r-3xl);box-shadow:0 40px 100px rgba(0,0,0,0.8);width:100%;max-width:380px;margin:0 auto;display:block;animation:float 6s ease-in-out infinite;border:4px solid var(--bg-surface);}
+    .app-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px;}
+    .app-stat{text-align:center;padding:20px;background:var(--bg-glass);border:1px solid var(--border-subtle);border-radius:var(--r-xl);backdrop-filter:blur(16px);transition:var(--t-normal);}
+    .app-stat:hover{border-color:var(--border-primary);transform:translateY(-4px);box-shadow:var(--shadow-primary);}
+    .app-stat-val{font-family:var(--font-heading);font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,var(--primary-light),var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+    /* ══ Pricing ══ */
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start;}
+
+    /* ══ Security ══ */
+    .security-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+    .security-card{text-align:center;padding:36px 24px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--r-2xl);transition:var(--t-normal);backdrop-filter:blur(20px);}
+    .security-card:hover{border-color:var(--border-accent);transform:translateY(-8px);box-shadow:var(--shadow-accent);background:var(--bg-glass-hover);}
+    .security-icon{font-size:2.5rem;margin-bottom:18px;display:inline-block;padding:16px;background:rgba(255,255,255,0.03);border-radius:var(--r-full);}
+
+    /* ══ Responsive ══ */
+    @media(max-width:1024px){
+      .features-grid{grid-template-columns:repeat(2,1fr);}
+      .security-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    @media(max-width:768px){
+      .hero-split{grid-template-columns:1fr;gap:48px;padding:48px 0 72px;}
+      .hero-visual{display:flex;transform:scale(0.95);margin-top:12px;}
+      .floating-badge.tl{top:-10px;left:-15px;}
+      .floating-badge.br{bottom:-10px;right:-15px;}
+      .floating-badge.tr{display:none;}
+      .hero-desc{max-width:100%;}
+      .showcase-split,.ai-grid,.app-split{grid-template-columns:1fr;}
+      .showcase-visual{display:block;transform:scale(0.95);margin-top:24px;}
+      .testi-grid{grid-template-columns:1fr;}
+      .features-grid,.pricing-grid,.steps-grid,.security-grid{grid-template-columns:1fr;}
+      .ai-visual{grid-template-columns:1fr 1fr;}
+      .app-mockup{max-width:260px;}
+    }
+  </style>
+</head>
+<body>
+<!-- Scroll progress -->
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><div class="logo-icon">💹</div><span class="logo-text">Stackly</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-sm">Sign In</a>
+      <a href="register.html" class="btn btn-primary btn-sm">Get Started Free →</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="nav-link active">Home</a>
+  <a href="about.html" class="nav-link">About</a>
+  <a href="services.html" class="nav-link">Services</a>
+  <a href="blog.html" class="nav-link">Blog</a>
+  <a href="contact.html" class="nav-link">Contact</a>
+  <div class="nav-actions">
+    <a href="login.html" class="btn btn-ghost">Sign In</a>
+    <a href="register.html" class="btn btn-primary">Get Started Free →</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 1: HERO
+══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg-mesh"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div id="particles"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="hero-split">
+      <div>
+        <div class="hero-eyebrow"><span class="hero-live-dot"></span>Next-Generation FinTech Platform</div>
+        <h1 class="hero-title">
+          <span class="line">The Future of</span>
+          <span class="line gradient-text">Finance is</span>
+          <span class="line">Digital.</span>
+        </h1>
+        <p class="hero-desc">Stackly empowers businesses and individuals with cutting-edge financial infrastructure — real-time global payments, AI-powered analytics, blockchain security, and instant compliance in one unified platform.</p>
+        <div class="hero-actions">
+          <a href="register.html" class="btn btn-primary btn-lg animate-pulse-glow">Start for Free — No Card Needed →</a>
+          <a href="services.html" class="btn btn-outline btn-lg">Explore Platform</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-avatars">
+            <div class="trust-av" style="background:linear-gradient(135deg,#6C63FF,#00D4AA);">AK</div>
+            <div class="trust-av" style="background:linear-gradient(135deg,#00D4AA,#0099FF);">MJ</div>
+            <div class="trust-av" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">SR</div>
+            <div class="trust-av" style="background:linear-gradient(135deg,#10B981,#6C63FF);">PL</div>
+            <div class="trust-av" style="background:linear-gradient(135deg,#8B5CF6,#EC4899);">+</div>
+          </div>
+          <div class="trust-text">Trusted by <strong>2M+ users</strong> across 150+ countries</div>
+          <div style="display:flex;align-items:center;gap:6px;margin-left:16px;padding-left:16px;border-left:1px solid var(--border-glass);">
+            <span style="color:var(--gold);font-size:0.85rem;">★★★★★</span>
+            <span style="font-size:0.82rem;color:var(--text-muted);">4.9/5 on App Store</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div style="position:relative;width:100%;">
+          <div class="hero-img-frame"><img src="assets/images/fintech_hero.webp" alt="Stackly Platform Dashboard" /></div>
+          <div class="floating-badge tl">
+            <div class="fb-icon" style="background:rgba(6,182,212,0.15);">💳</div>
+            <div><div style="font-weight:800;font-size:0.95rem;">₹1.2M</div><div style="font-size:0.7rem;color:var(--text-muted);">Processed Today</div></div>
+          </div>
+          <div class="floating-badge br">
+            <div class="fb-icon" style="background:rgba(16,185,129,0.15);">📈</div>
+            <div><div style="font-weight:800;font-size:0.95rem;color:var(--success);">+24.7%</div><div style="font-size:0.7rem;color:var(--text-muted);">Portfolio Growth</div></div>
+          </div>
+          <div class="floating-badge tr">
+            <div class="fb-icon" style="background:rgba(99,102,241,0.15);">🔒</div>
+            <div><div style="font-weight:700;font-size:0.82rem;">Bank-Grade</div><div style="font-size:0.7rem;color:var(--text-muted);">Security Active</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 2: LIVE MARKET TICKER
+══════════════════════════════════════ -->
+<div class="ticker-section">
+  <div class="ticker-wrap">
+    <div class="ticker-inner" id="tickerInner">
+      <span class="ticker-item"><span>₿ BTC</span><span class="ticker-price">$67,421</span><span class="ticker-up">▲ +2.84%</span></span>
+      <span class="ticker-item"><span>⟠ ETH</span><span class="ticker-price">$3,512</span><span class="ticker-down">▼ -0.91%</span></span>
+      <span class="ticker-item"><span>💱 USD/INR</span><span class="ticker-price">83.47</span><span class="ticker-down">▼ -0.12%</span></span>
+      <span class="ticker-item"><span>📊 SENSEX</span><span class="ticker-price">78,542</span><span class="ticker-up">▲ +1.14%</span></span>
+      <span class="ticker-item"><span>🥇 GOLD</span><span class="ticker-price">$2,381</span><span class="ticker-up">▲ +0.67%</span></span>
+      <span class="ticker-item"><span>🏦 NIFTY 50</span><span class="ticker-price">24,204</span><span class="ticker-up">▲ +0.86%</span></span>
+      <span class="ticker-item"><span>💵 EUR/USD</span><span class="ticker-price">1.0842</span><span class="ticker-up">▲ +0.21%</span></span>
+      <span class="ticker-item"><span>🔷 BNB</span><span class="ticker-price">$608</span><span class="ticker-up">▲ +1.42%</span></span>
+      <span class="ticker-item"><span>🌐 DOW JONES</span><span class="ticker-price">39,872</span><span class="ticker-up">▲ +0.34%</span></span>
+      <span class="ticker-item"><span>💱 GBP/USD</span><span class="ticker-price">1.2741</span><span class="ticker-down">▼ -0.08%</span></span>
+      <!-- Duplicate for seamless loop -->
+      <span class="ticker-item"><span>₿ BTC</span><span class="ticker-price">$67,421</span><span class="ticker-up">▲ +2.84%</span></span>
+      <span class="ticker-item"><span>⟠ ETH</span><span class="ticker-price">$3,512</span><span class="ticker-down">▼ -0.91%</span></span>
+      <span class="ticker-item"><span>💱 USD/INR</span><span class="ticker-price">83.47</span><span class="ticker-down">▼ -0.12%</span></span>
+      <span class="ticker-item"><span>📊 SENSEX</span><span class="ticker-price">78,542</span><span class="ticker-up">▲ +1.14%</span></span>
+      <span class="ticker-item"><span>🥇 GOLD</span><span class="ticker-price">$2,381</span><span class="ticker-up">▲ +0.67%</span></span>
+      <span class="ticker-item"><span>🏦 NIFTY 50</span><span class="ticker-price">24,204</span><span class="ticker-up">▲ +0.86%</span></span>
+      <span class="ticker-item"><span>💵 EUR/USD</span><span class="ticker-price">1.0842</span><span class="ticker-up">▲ +0.21%</span></span>
+      <span class="ticker-item"><span>🔷 BNB</span><span class="ticker-price">$608</span><span class="ticker-up">▲ +1.42%</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 3: ANIMATED STATS
+══════════════════════════════════════ -->
+<section class="section-sm">
+  <div class="container">
+    <div class="stats-bar reveal">
+      <div class="stat-item">
+        <span class="stat-value counter" data-target="50">0</span><span class="stat-value" style="display:inline;">B+</span>
+        <span class="stat-label">Total Volume Processed</span>
+        <div class="stat-sub">↑ +34% YoY</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value counter" data-target="2000000" data-format="2M+">2M+</span>
+        <span class="stat-label">Active Users Worldwide</span>
+        <div class="stat-sub">↑ +1,240 this week</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" style="font-size:2.2rem;">99.99%</span>
+        <span class="stat-label">Platform Uptime SLA</span>
+        <div class="stat-sub">Zero downtime</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value counter" data-target="150">0</span><span class="stat-value" style="display:inline;">+</span>
+        <span class="stat-label">Countries Supported</span>
+        <div class="stat-sub">6 continents</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 4: CORE FEATURES (8 cards)
+══════════════════════════════════════ -->
+<section class="section features-bg">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Core Features</div>
+      <h2>Everything You Need to <span class="gradient-text">Scale Financially</span></h2>
+      <p>From startups to Fortune 500s — Stackly provides the complete financial infrastructure to move faster, smarter, and safer.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card card-glow reveal delay-1">
+        <div class="feature-icon primary">💸</div>
+        <h3>Real-Time Payments</h3>
+        <p>Send and receive money globally in seconds. 80+ currencies, zero downtime, T+0 settlement across 150+ countries.</p>
+        <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="badge badge-primary">SWIFT</span>
+          <span class="badge badge-accent">SEPA</span>
+          <span class="badge badge-gold">UPI</span>
+        </div>
+        <a href="error.html" class="btn btn-ghost btn-sm" style="margin-top:20px;width:100%;justify-content:center;">Learn More →</a>
+      </div>
+      <div class="feature-card card-glow reveal delay-2">
+        <div class="feature-icon accent">🤖</div>
+        <h3>AI-Powered Analytics</h3>
+        <p>Predict cash flow, detect fraud in real-time, and get personalized insights with ML models processing 2,000+ signals.</p>
+        <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="badge badge-accent">ML</span>
+          <span class="badge badge-primary">NLP</span>
+          <span class="badge badge-gold">Forecasting</span>
+        </div>
+        <a href="error.html" class="btn btn-ghost btn-sm" style="margin-top:20px;width:100%;justify-content:center;">Learn More →</a>
+      </div>
+      <div class="feature-card card-glow reveal delay-3">
+        <div class="feature-icon gold">🔗</div>
+        <h3>Blockchain Security</h3>
+        <p>Immutable transaction ledgers, multi-sig wallets, and DeFi protocol integrations with institutional-grade custody.</p>
+        <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="badge badge-gold">ETH</span>
+          <span class="badge badge-primary">BTC</span>
+          <span class="badge badge-accent">DeFi</span>
+        </div>
+        <a href="error.html" class="btn btn-ghost btn-sm" style="margin-top:20px;width:100%;justify-content:center;">Learn More →</a>
+      </div>
+      <div class="feature-card card-glow reveal delay-4">
+        <div class="feature-icon danger">🆔</div>
+        <h3>Instant KYC/AML</h3>
+        <p>Verify identities in under 60 seconds with AI-powered document analysis. Fully compliant with global regulations.</p>
+        <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="badge badge-success">GDPR</span>
+          <span class="badge badge-primary">PCI-DSS</span>
+          <span class="badge badge-accent">RBI</span>
+        </div>
+        <a href="error.html" class="btn btn-ghost btn-sm" style="margin-top:20px;width:100%;justify-content:center;">Learn More →</a>
+      </div>
+      <div class="feature-card card-glow reveal delay-2">
+        <div class="feature-icon info">📊</div>
+        <h3>Investment Platform</h3>
+        <p>Access 10,000+ financial instruments — stocks, ETFs, mutual funds, bonds, and crypto — from a single unified account.</p>
+        <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="badge badge-info">Stocks</span>
+          <span class="badge badge-gold">ETFs</span>
+          <span class="badge badge-primary">Crypto</span>
+        </div>
+        <a href="error.html" class="btn btn-ghost btn-sm" style="margin-top:20px;width:100%;justify-content:center;">Learn More →</a>
+      </div>
+      <div class="feature-card card-glow reveal delay-3">
+        <div class="feature-icon primary">🏦</div>
+        <h3>Digital Lending</h3>
+        <p>60-second AI credit decisions for personal loans, business credit lines, and invoice financing. No collateral needed.</p>
+        <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="badge badge-success">Instant</span>
+          <span class="badge badge-primary">AI UW</span>
+          <span class="badge badge-accent">BNPL</span>
+        </div>
+        <a href="error.html" class="btn btn-ghost btn-sm" style="margin-top:20px;width:100%;justify-content:center;">Learn More →</a>
+      </div>
+      <div class="feature-card card-glow reveal delay-4">
+        <div class="feature-icon accent">🌐</div>
+        <h3>Open Banking API</h3>
+        <p>RESTful APIs and SDKs for Python, Node, Java, and Go. 5M+ API calls daily with 99.99% uptime and full sandbox.</p>
+        <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="badge badge-accent">REST</span>
+          <span class="badge badge-gold">Webhooks</span>
+          <span class="badge badge-primary">OAuth2</span>
+        </div>
+        <a href="error.html" class="btn btn-ghost btn-sm" style="margin-top:20px;width:100%;justify-content:center;">Learn More →</a>
+      </div>
+      <div class="feature-card card-glow reveal delay-5">
+        <div class="feature-icon gold">🔄</div>
+        <h3>FX & Treasury</h3>
+        <p>Real-time FX rates, automated hedging, virtual accounts in 30+ currencies, and treasury management tools for enterprises.</p>
+        <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="badge badge-gold">FX</span>
+          <span class="badge badge-accent">Hedging</span>
+          <span class="badge badge-primary">Treasury</span>
+        </div>
+        <a href="error.html" class="btn btn-ghost btn-sm" style="margin-top:20px;width:100%;justify-content:center;">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 5: PLATFORM SHOWCASE
+══════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="showcase-split">
+      <div class="reveal-left">
+        <div class="section-tag">Platform</div>
+        <h2>One Platform, <span class="gradient-text">Infinite Possibilities</span></h2>
+        <p style="margin-bottom:36px;">Stackly's unified financial OS connects your entire money stack — banking APIs, investments, lending, and treasury — all in one powerful interface.</p>
+        <div>
+          <div class="showcase-feature-item">
+            <div class="sf-icon primary" style="background:rgba(99,102,241,0.12);border:1px solid var(--border-primary);">⚡</div>
+            <div><h4>Instant T+0 Settlement</h4><p style="font-size:0.88rem;margin-top:4px;">Eliminate float risk and improve liquidity with same-day settlement across all transaction types globally.</p></div>
+          </div>
+          <div class="showcase-feature-item">
+            <div class="sf-icon accent" style="background:rgba(6,182,212,0.12);border:1px solid var(--border-accent);">🌐</div>
+            <div><h4>50+ Global Banking Rails</h4><p style="font-size:0.88rem;margin-top:4px;">Connected to SWIFT, SEPA, ACH, UPI, FedNow, and 50+ local payment networks across 150 countries.</p></div>
+          </div>
+          <div class="showcase-feature-item">
+            <div class="sf-icon gold" style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);">📱</div>
+            <div><h4>Mobile-First Architecture</h4><p style="font-size:0.88rem;margin-top:4px;">Native iOS & Android apps with biometric auth, offline mode, and sub-2s transaction confirmation.</p></div>
+          </div>
+          <div class="showcase-feature-item">
+            <div class="sf-icon info" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.3);">🔐</div>
+            <div><h4>Zero-Trust Security</h4><p style="font-size:0.88rem;margin-top:4px;">Every request verified. AES-256 encryption at rest, TLS 1.3 in transit, with continuous threat monitoring.</p></div>
+          </div>
+        </div>
+        <a href="services.html" class="btn btn-primary" style="margin-top:24px;">Explore All Features →</a>
+      </div>
+      <div class="reveal-right">
+        <div class="showcase-visual">
+          <img src="assets/images/fintech_services.webp" alt="Stackly Platform" class="showcase-img" />
+          <div class="showcase-chip s-chip-tr">
+            <span style="color:var(--accent);font-weight:700;">●</span> <span style="font-size:0.82rem;">Live Processing</span>
+          </div>
+          <div class="showcase-chip s-chip-bl">
+            <span style="font-size:1rem;">🔒</span>
+            <span style="font-size:0.82rem; font-weight:600;">Bank-Grade Encryption</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 6: AI CAPABILITIES
+══════════════════════════════════════ -->
+<section class="section ai-section">
+  <div class="container">
+    <div class="ai-grid">
+      <div class="reveal-left">
+        <div class="section-tag accent">Stackly AI</div>
+        <h2>Financial Intelligence <span class="gradient-text">Powered by AI</span></h2>
+        <p style="margin-bottom:32px;">Our proprietary AI engine processes millions of data points per second to protect your money, predict your financial future, and optimise every transaction.</p>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px;">
+          <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--bg-glass);border-radius:var(--r-md);">
+            <span style="font-size:1.4rem;flex-shrink:0;">🛡️</span>
+            <div><h4 style="margin-bottom:4px;">Fraud Prevention</h4><p style="font-size:0.86rem;">AI models analysing 200+ real-time signals catch 99.7% of fraud before it occurs — saving clients ₹92L+ per month.</p></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--bg-glass);border-radius:var(--r-md);">
+            <span style="font-size:1.4rem;flex-shrink:0;">📉</span>
+            <div><h4 style="margin-bottom:4px;">Predictive Cash Flow</h4><p style="font-size:0.86rem;">ML-powered forecasting with 94% accuracy. Know your cash position 90 days in advance to make smarter decisions.</p></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--bg-glass);border-radius:var(--r-md);">
+            <span style="font-size:1.4rem;flex-shrink:0;">🎯</span>
+            <div><h4 style="margin-bottom:4px;">Smart Routing</h4><p style="font-size:0.86rem;">Automatically selects the fastest and cheapest payment rail for every transaction, saving 30-40% on fees.</p></div>
+          </div>
+        </div>
+        <a href="services.html" class="btn btn-accent">Explore AI Features →</a>
+      </div>
+      <div class="reveal-right">
+        <div class="ai-visual">
+          <div class="ai-card">
+            <div class="ai-card-icon">🔍</div>
+            <div class="ai-card-val">99.7%</div>
+            <div class="ai-card-label">Fraud Detection Accuracy</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-card-icon">⚡</div>
+            <div class="ai-card-val">&lt;50ms</div>
+            <div class="ai-card-label">AI Decision Latency</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-card-icon">📊</div>
+            <div class="ai-card-val">94%</div>
+            <div class="ai-card-label">Forecast Accuracy</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-card-icon">🤖</div>
+            <div class="ai-card-val">2,000+</div>
+            <div class="ai-card-label">Signals Per Transaction</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-card-icon">💡</div>
+            <div class="ai-card-val">40%</div>
+            <div class="ai-card-label">Fee Reduction via Smart Routing</div>
+          </div>
+          <div class="ai-card">
+            <div class="ai-card-icon">🌐</div>
+            <div class="ai-card-val">5M+</div>
+            <div class="ai-card-label">AI API Calls Daily</div>
+          </div>
+        </div>
+        <div style="margin-top:20px;padding:20px;background:rgba(6,182,212,0.06);border:1px solid var(--border-accent);border-radius:var(--r-md);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <span class="badge badge-live">● LIVE</span>
+            <span style="font-size:0.82rem;font-weight:600;color:var(--text-muted);">AI monitoring active across all transactions</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;color:var(--text-muted);">
+            <span>Transactions checked today:</span>
+            <span style="font-weight:700;color:var(--accent);">38,291</span>
+          </div>
+          <div class="progress" style="margin-top:8px;"><div class="progress-fill" style="width:82%;"></div></div>
+          <div style="font-size:0.72rem;color:var(--text-muted);margin-top:6px;">82% of daily capacity used</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 7: HOW IT WORKS
+══════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">How It Works</div>
+      <h2>From Sign-Up to <span class="gradient-text">First Transaction in 5 Minutes</span></h2>
+      <p>No paperwork. No bank visits. No waiting. Stackly's digital-first onboarding gets you live in minutes.</p>
+    </div>
+    <div class="steps-grid steps-connector">
+      <div class="card text-center reveal">
+        <div class="step-num">1</div>
+        <div class="feature-icon primary" style="margin:0 auto 20px;">📝</div>
+        <h3>Create Account</h3>
+        <p style="margin-bottom:16px;">Sign up with just your email in under 2 minutes. Our AI-powered KYC verifies your identity instantly — no documents to print or scan.</p>
+        <ul style="text-align:left;display:flex;flex-direction:column;gap:8px;">
+          <li style="font-size:0.84rem;color:var(--text-secondary);display:flex;gap:8px;"><span style="color:var(--success);">✓</span>Email verification</li>
+          <li style="font-size:0.84rem;color:var(--text-secondary);display:flex;gap:8px;"><span style="color:var(--success);">✓</span>AI KYC in 60 seconds</li>
+          <li style="font-size:0.84rem;color:var(--text-secondary);display:flex;gap:8px;"><span style="color:var(--success);">✓</span>Zero paperwork</li>
+        </ul>
+        <span class="badge badge-accent" style="margin-top:20px;">2 minutes</span>
+      </div>
+      <div class="card text-center reveal delay-2">
+        <div class="step-num">2</div>
+        <div class="feature-icon accent" style="margin:0 auto 20px;">🔗</div>
+        <h3>Connect & Fund</h3>
+        <p style="margin-bottom:16px;">Link your existing bank accounts, cards, or crypto wallets. Fund your Stackly account via 30+ deposit methods in 80+ currencies.</p>
+        <ul style="text-align:left;display:flex;flex-direction:column;gap:8px;">
+          <li style="font-size:0.84rem;color:var(--text-secondary);display:flex;gap:8px;"><span style="color:var(--success);">✓</span>Bank account linking</li>
+          <li style="font-size:0.84rem;color:var(--text-secondary);display:flex;gap:8px;"><span style="color:var(--success);">✓</span>Debit/credit cards</li>
+          <li style="font-size:0.84rem;color:var(--text-secondary);display:flex;gap:8px;"><span style="color:var(--success);">✓</span>Crypto deposits</li>
+        </ul>
+        <span class="badge badge-primary" style="margin-top:20px;">30+ methods</span>
+      </div>
+      <div class="card text-center reveal delay-4">
+        <div class="step-num">3</div>
+        <div class="feature-icon gold" style="margin:0 auto 20px;">🚀</div>
+        <h3>Transact Globally</h3>
+        <p style="margin-bottom:16px;">Send payments, invest, trade, borrow, and grow your wealth with our full suite of intelligent financial tools — anywhere, anytime.</p>
+        <ul style="text-align:left;display:flex;flex-direction:column;gap:8px;">
+          <li style="font-size:0.84rem;color:var(--text-secondary);display:flex;gap:8px;"><span style="color:var(--success);">✓</span>Instant global transfers</li>
+          <li style="font-size:0.84rem;color:var(--text-secondary);display:flex;gap:8px;"><span style="color:var(--success);">✓</span>AI investment advice</li>
+          <li style="font-size:0.84rem;color:var(--text-secondary);display:flex;gap:8px;"><span style="color:var(--success);">✓</span>Real-time analytics</li>
+        </ul>
+        <span class="badge badge-gold" style="margin-top:20px;">150+ countries</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 8: TESTIMONIALS
+══════════════════════════════════════ -->
+<section class="section" style="background:var(--bg-surface);border-top:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Testimonials</div>
+      <h2>Loved by <span class="gradient-text">2 Million+ Users</span></h2>
+      <p>From solo entrepreneurs to Fortune 500 CFOs — see what our global community says about Stackly.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p style="font-size:0.95rem;line-height:1.9;">"Stackly transformed our cross-border payment operations overnight. We went from 3-day SWIFT settlements to instant transfers. The ROI was visible in week one — we saved ₹8L in month one alone."</p>
+        <div class="author-info">
+          <div class="author-avatar">AK</div>
+          <div><div class="author-name">Arjun Kapoor</div><div class="author-role">CFO, TechVenture India Pvt. Ltd.</div></div>
+          <span class="badge badge-success" style="margin-left:auto;">Verified</span>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-2">
+        <div class="stars">★★★★★</div>
+        <p style="font-size:0.95rem;line-height:1.9;">"The AI fraud detection alone saved us $400K in Q2. Stackly's compliance features make audits a breeze — our compliance team went from 40 hours/week of manual review to just 4 hours."</p>
+        <div class="author-info">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#00D4AA,#0099FF);">MJ</div>
+          <div><div class="author-name">Maria Johnson</div><div class="author-role">Head of Risk, NovaPay Global</div></div>
+          <span class="badge badge-success" style="margin-left:auto;">Verified</span>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-4">
+        <div class="stars">★★★★★</div>
+        <p style="font-size:0.95rem;line-height:1.9;">"As a freelancer managing 12 international clients across 8 currencies, Stackly is my financial backbone. Multi-currency accounts, best-in-class FX rates, instant payouts — it's perfect."</p>
+        <div class="author-info">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">SR</div>
+          <div><div class="author-name">Sofia Rivera</div><div class="author-role">Independent Financial Consultant</div></div>
+          <span class="badge badge-success" style="margin-left:auto;">Verified</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust indicators -->
+    <div style="margin-top:48px;padding:32px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--r-xl);display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;" class="reveal">
+      <div><div style="font-size:1.8rem;margin-bottom:8px;">⭐</div><div style="font-family:var(--font-heading);font-size:1.4rem;font-weight:800;color:var(--gold);">4.9/5</div><div style="font-size:0.78rem;color:var(--text-muted);">App Store Rating</div></div>
+      <div style="border-left:1px solid var(--border-glass);"><div style="font-size:1.8rem;margin-bottom:8px;">💬</div><div style="font-family:var(--font-heading);font-size:1.4rem;font-weight:800;color:var(--accent);">84,000+</div><div style="font-size:0.78rem;color:var(--text-muted);">5-Star Reviews</div></div>
+      <div style="border-left:1px solid var(--border-glass);"><div style="font-size:1.8rem;margin-bottom:8px;">🏆</div><div style="font-family:var(--font-heading);font-size:1.4rem;font-weight:800;color:var(--primary-light);">12 Awards</div><div style="font-size:0.78rem;color:var(--text-muted);">Industry Recognition</div></div>
+      <div style="border-left:1px solid var(--border-glass);"><div style="font-size:1.8rem;margin-bottom:8px;">🔄</div><div style="font-family:var(--font-heading);font-size:1.4rem;font-weight:800;color:var(--success);">96%</div><div style="font-size:0.78rem;color:var(--text-muted);">Customer Retention</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 9: MOBILE APP
+══════════════════════════════════════ -->
+<section class="section app-section">
+  <div class="container">
+    <div class="app-split">
+      <div class="reveal-left">
+        <div class="section-tag gold">Mobile App</div>
+        <h2>Finance in Your <span class="gradient-text">Pocket — Always</span></h2>
+        <p style="margin-bottom:36px;">The Stackly app puts the full power of our financial platform in your hands. Biometric auth, real-time notifications, offline access, and AI insights — wherever you are.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;">
+          <div style="padding:16px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--r-md);">
+            <div style="font-size:1.2rem;margin-bottom:6px;">📊</div>
+            <div style="font-weight:600;font-size:0.88rem;">Real-Time Portfolio</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:3px;">Live P&L tracking across all assets</div>
+          </div>
+          <div style="padding:16px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--r-md);">
+            <div style="font-size:1.2rem;margin-bottom:6px;">💬</div>
+            <div style="font-weight:600;font-size:0.88rem;">AI Chat Assistant</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:3px;">Ask anything about your finances</div>
+          </div>
+          <div style="padding:16px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--r-md);">
+            <div style="font-size:1.2rem;margin-bottom:6px;">🔔</div>
+            <div style="font-weight:600;font-size:0.88rem;">Smart Alerts</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:3px;">Instant fraud & spend alerts</div>
+          </div>
+          <div style="padding:16px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--r-md);">
+            <div style="font-size:1.2rem;margin-bottom:6px;">🌐</div>
+            <div style="font-weight:600;font-size:0.88rem;">Offline Mode</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:3px;">Access key data without internet</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="error.html" class="app-badge">
+            <span style="font-size:1.5rem;">🍎</span>
+            <div><div style="font-size:0.68rem;color:var(--text-muted);">Download on the</div><div style="font-weight:700;font-size:0.9rem;">App Store</div></div>
+          </a>
+          <a href="error.html" class="app-badge">
+            <span style="font-size:1.5rem;">🤖</span>
+            <div><div style="font-size:0.68rem;color:var(--text-muted);">Get it on</div><div style="font-weight:700;font-size:0.9rem;">Google Play</div></div>
+          </a>
+        </div>
+        <div class="app-stat-row" style="margin-top:28px;">
+          <div class="app-stat"><div style="font-family:var(--font-heading);font-size:1.3rem;font-weight:800;color:var(--primary-light);">1.8M+</div><div style="font-size:0.75rem;color:var(--text-muted);">App Downloads</div></div>
+          <div class="app-stat"><div style="font-family:var(--font-heading);font-size:1.3rem;font-weight:800;color:var(--gold);">4.9 ★</div><div style="font-size:0.75rem;color:var(--text-muted);">App Rating</div></div>
+          <div class="app-stat"><div style="font-family:var(--font-heading);font-size:1.3rem;font-weight:800;color:var(--accent);">2s</div><div style="font-size:0.75rem;color:var(--text-muted);">Avg. Load Time</div></div>
+        </div>
+      </div>
+      <div class="reveal-right" style="display:flex;justify-content:center;align-items:center;">
+        <img src="assets/images/fintech_hero.webp" alt="Stackly Mobile App" class="app-mockup" style="border-radius:var(--r-2xl);" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 10: SECURITY & COMPLIANCE
+══════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Security First</div>
+      <h2>Built on a Foundation of <span class="gradient-text">Uncompromising Security</span></h2>
+      <p>Every layer of Stackly is engineered with bank-grade security. Your money and data are protected by the most rigorous standards in the industry.</p>
+    </div>
+    <div class="security-grid">
+      <div class="security-card reveal">
+        <div class="security-icon">🔐</div>
+        <h4>AES-256 Encryption</h4>
+        <p style="font-size:0.84rem;margin-top:8px;">Military-grade encryption for all data at rest and in transit with TLS 1.3</p>
+      </div>
+      <div class="security-card reveal delay-1">
+        <div class="security-icon">🛡️</div>
+        <h4>SOC 2 Type II</h4>
+        <p style="font-size:0.84rem;margin-top:8px;">Independently audited security controls, annually certified by Big-4 auditors</p>
+      </div>
+      <div class="security-card reveal delay-2">
+        <div class="security-icon">💳</div>
+        <h4>PCI-DSS Level 1</h4>
+        <p style="font-size:0.84rem;margin-top:8px;">The highest level of payment card industry compliance — mandatory for Visa & Mastercard</p>
+      </div>
+      <div class="security-card reveal delay-3">
+        <div class="security-icon">🌍</div>
+        <h4>GDPR Compliant</h4>
+        <p style="font-size:0.84rem;margin-top:8px;">Full GDPR, DPDPA, and regional data protection compliance across all markets</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:36px;" class="reveal">
+      <span class="badge badge-primary" style="font-size:0.82rem;padding:8px 16px;">✓ ISO 27001</span>
+      <span class="badge badge-accent" style="font-size:0.82rem;padding:8px 16px;">✓ RBI Licensed</span>
+      <span class="badge badge-gold" style="font-size:0.82rem;padding:8px 16px;">✓ MAS Regulated</span>
+      <span class="badge badge-success" style="font-size:0.82rem;padding:8px 16px;">✓ FCA Registered</span>
+      <span class="badge badge-info" style="font-size:0.82rem;padding:8px 16px;">✓ SEBI Compliant</span>
+      <span class="badge badge-primary" style="font-size:0.82rem;padding:8px 16px;">✓ B-Corp Certified</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 11: PARTNERS
+══════════════════════════════════════ -->
+<section class="section-sm" style="background:var(--bg-surface);border-top:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Ecosystem</div>
+      <h2>Integrated with the <span class="gradient-text">World's Best</span></h2>
+      <p>Stackly seamlessly connects with leading banks, payment processors, exchanges, and financial institutions globally.</p>
+    </div>
+    <div class="partners-row">
+      <div class="partner-chip reveal">🏦 HDFC Bank</div>
+      <div class="partner-chip reveal delay-1">💳 Visa Direct</div>
+      <div class="partner-chip reveal delay-2">🔄 Mastercard</div>
+      <div class="partner-chip reveal delay-3">📡 Stripe</div>
+      <div class="partner-chip reveal delay-4">🌍 PayPal</div>
+      <div class="partner-chip reveal delay-1">🏛️ RBI</div>
+      <div class="partner-chip reveal delay-2">⚡ Razorpay</div>
+      <div class="partner-chip reveal delay-3">🔗 Coinbase</div>
+      <div class="partner-chip reveal delay-4">🇸🇬 DBS Bank</div>
+      <div class="partner-chip reveal delay-1">🏢 ICICI</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 12: CTA
+══════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="cta-section reveal">
+      <div style="position:relative;z-index:1;">
+        <div class="section-tag" style="margin:0 auto 24px;width:fit-content;">Start Today</div>
+        <h2 style="margin-bottom:20px;">Start Your <span class="gradient-text">Financial Journey</span> Now</h2>
+        <p style="max-width:560px;margin:0 auto 40px;font-size:1.05rem;">Join 2 million+ users who trust Stackly to manage, grow, and protect their money. Free plan available — no credit card required.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;">
+          <a href="register.html" class="btn btn-primary btn-xl animate-pulse-glow">Create Free Account →</a>
+          <a href="contact.html" class="btn btn-outline btn-xl">Talk to Sales</a>
+        </div>
+        <div style="display:flex;justify-content:center;gap:28px;flex-wrap:wrap;">
+          <span style="font-size:0.84rem;color:var(--text-muted);">✓ Free forever plan</span>
+          <span style="font-size:0.84rem;color:var(--text-muted);">✓ No credit card needed</span>
+          <span style="font-size:0.84rem;color:var(--text-muted);">✓ Live in 5 minutes</span>
+          <span style="font-size:0.84rem;color:var(--text-muted);">✓ Cancel anytime</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="font-size:1.3rem;"><div class="logo-icon" style="width:34px;height:34px;font-size:0.95rem;">💹</div><span class="logo-text">Stackly</span></a>
+        <p>The next-generation FinTech platform empowering businesses and individuals with world-class financial infrastructure. Regulated, secure, and global.</p>
+        <div class="social-links" style="margin-top:24px;">
+          <a href="error.html" class="social-link" title="Twitter/X">𝕏</a>
+          <a href="error.html" class="social-link" title="LinkedIn">in</a>
+          <a href="error.html" class="social-link" title="Facebook">f</a>
+          <a href="error.html" class="social-link" title="Instagram">📷</a>
+          <a href="error.html" class="social-link" title="YouTube">▶</a>
+          <a href="error.html" class="social-link" title="GitHub">⚙</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="error.html">Careers</a></li>
+          <li><a href="error.html">Press Room</a></li>
+          <li><a href="error.html">Investors</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="error.html">Partner Program</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="services.html">Payments</a></li>
+          <li><a href="services.html">Investments</a></li>
+          <li><a href="services.html">Lending</a></li>
+          <li><a href="services.html">Analytics</a></li>
+          <li><a href="error.html">API Docs</a></li>
+          <li><a href="error.html">Status Page</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="error.html">Privacy Policy</a></li>
+          <li><a href="error.html">Terms of Service</a></li>
+          <li><a href="error.html">Cookie Policy</a></li>
+          <li><a href="error.html">Compliance</a></li>
+          <li><a href="error.html">Security</a></li>
+          <li><a href="error.html">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2025 Stackly FinTech Pvt. Ltd. All rights reserved.</span>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;">
+        <a href="https://lingalamanasa.github.io/Fintech/" target="_blank" rel="noopener" class="github-link">🌐 Live on GitHub Pages</a>
+        <span style="color:var(--border-glass);">|</span>
+        <span>🇮🇳 RBI Licensed PA</span>
+        <span>•</span>
+        <span>🔐 PCI-DSS L1</span>
+        <span>•</span>
+        <span>ISO 27001 Certified</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll progress
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  progressBar.style.width = pct + '%';
+});
+
+// Navbar
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 30));
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('open');
+});
+document.querySelectorAll('.mobile-menu .nav-link').forEach(l => l.addEventListener('click', () => {
+  hamburger.classList.remove('active');
+  mobileMenu.classList.remove('open');
+}));
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+const revealObs = new IntersectionObserver(entries => entries.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+}), { threshold: 0.1 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// Counter animation
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const duration = 2000;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * target).toLocaleString();
+    if(progress < 1) requestAnimationFrame(update);
+    else el.textContent = target.toLocaleString();
+  }
+  requestAnimationFrame(update);
+}
+const counterObs = new IntersectionObserver(entries => entries.forEach(e => {
+  if(e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); }
+}), { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+
+// Particles
+const pContainer = document.getElementById('particles');
+const colors = ['rgba(99,102,241,0.7)','rgba(6,182,212,0.7)','rgba(245,158,11,0.6)'];
+for(let i=0;i<22;i++){
+  const p = document.createElement('div');
+  p.className='particle';
+  const sz = Math.random()*4+2;
+  p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*18+10}s;animation-delay:${Math.random()*12}s;`;
+  pContainer.appendChild(p);
+}
+</script>
+</body>
+</html>

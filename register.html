@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register || Stackly FinTech</title>
+  <meta name="description" content="Create your Stackly FinTech account. Join 2 million+ users managing their finances smarter." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { min-height: 100vh; display:flex; align-items:center; background:var(--bg-base); }
+    .auth-wrapper { display:grid; grid-template-columns:1.4fr 1fr; min-height:100vh; width:100%; }
+    .auth-right { background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(6,182,212,0.08)); border-left:1px solid var(--border-glass); display:flex; flex-direction:column; justify-content:center; padding:48px; position:relative; overflow:hidden; }
+    .auth-right::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 70% 50%, rgba(6,182,212,0.12) 0%, transparent 70%); }
+    .auth-right-content { position:relative; z-index:2; }
+    .auth-left { display:flex; align-items:center; justify-content:center; padding:48px; }
+    .auth-box { width:100%; max-width:520px; }
+    .step-indicator { display:flex; gap:8px; margin-bottom:32px; }
+    .step-dot { width:8px; height:8px; border-radius:50%; background:var(--border-glass); transition:var(--transition); }
+    .step-dot.active { width:24px; border-radius:4px; background:var(--primary); }
+    .step-dot.done { background:var(--accent); }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .role-select-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px; }
+    .role-option { padding:16px; text-align:center; border-radius:var(--r-md); background:var(--bg-glass); border:2px solid var(--border-glass); cursor:pointer; transition:var(--transition); }
+    .role-option:hover { border-color:var(--border-primary); }
+    .role-option.selected { border-color:var(--primary); background:rgba(99,102,241,0.1); }
+    .role-option .ro-icon { font-size:1.8rem; margin-bottom:6px; }
+    .role-option .ro-label { font-size:0.82rem; font-weight:700; }
+    .feature-check { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+    .feature-check .chk { width:24px; height:24px; border-radius:50%; background:rgba(6,182,212,0.15); border:1px solid var(--border-accent); display:flex; align-items:center; justify-content:center; font-size:0.7rem; color:var(--accent); flex-shrink:0; }
+    @media(max-width:768px){ .auth-wrapper{grid-template-columns:1fr;} .auth-right{display:none;} .form-row{grid-template-columns:1fr;} body{display:block;} .auth-left{min-height:100vh;} }
+  </style>
+</head>
+<body>
+<div class="auth-wrapper">
+  <!-- Left: Form -->
+  <div class="auth-left">
+    <div class="auth-box">
+      <a href="index.html" class="nav-logo" style="margin-bottom:32px; display:inline-flex;"><div class="logo-icon">💹</div><span>Stackly</span></a>
+      <div class="step-indicator">
+        <div class="step-dot active" id="step1dot"></div>
+        <div class="step-dot" id="step2dot"></div>
+        <div class="step-dot" id="step3dot"></div>
+      </div>
+
+      <!-- Step 1 -->
+      <div id="step1">
+        <h1 style="font-size:1.8rem; margin-bottom:8px;">Create Your <span class="gradient-text">Account</span></h1>
+        <p style="margin-bottom:28px;">Get started for free — no credit card required.</p>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">First Name *</label><input class="form-control" id="reg_fname" type="text" placeholder="Aarav" /></div>
+          <div class="form-group"><label class="form-label">Last Name *</label><input class="form-control" id="reg_lname" type="text" placeholder="Singh" /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Work Email *</label><input class="form-control" id="reg_email" type="email" placeholder="you@company.com" /></div>
+        <div class="form-group"><label class="form-label">Phone Number *</label><input class="form-control" id="reg_phone" type="tel" placeholder="+91 98765 43210" /></div>
+        <div class="form-group">
+          <label class="form-label">Password *</label>
+          <input class="form-control" id="reg_pwd" type="password" placeholder="Min. 8 characters" />
+          <div style="display:flex; gap:6px; margin-top:8px;" id="pwdStrength">
+            <div style="height:3px; flex:1; border-radius:2px; background:var(--border-glass);"></div>
+            <div style="height:3px; flex:1; border-radius:2px; background:var(--border-glass);"></div>
+            <div style="height:3px; flex:1; border-radius:2px; background:var(--border-glass);"></div>
+            <div style="height:3px; flex:1; border-radius:2px; background:var(--border-glass);"></div>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-lg" style="width:100%; justify-content:center;" onclick="goStep(2)">Continue →</button>
+        <div style="text-align:center; margin-top:20px; font-size:0.85rem;">Already have an account? <a href="login.html" style="color:var(--primary-light); font-weight:600;">Sign in →</a></div>
+      </div>
+
+      <!-- Step 2 -->
+      <div id="step2" style="display:none;">
+        <h1 style="font-size:1.8rem; margin-bottom:8px;">What's Your <span class="gradient-text">Role?</span></h1>
+        <p style="margin-bottom:28px;">We'll personalise your dashboard based on your role.</p>
+        <div class="role-select-grid">
+          <div class="role-option selected" onclick="selectRegRole(this,'admin')">
+            <div class="ro-icon">🛡️</div>
+            <div class="ro-label">Admin</div>
+            <p style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">Full platform control</p>
+          </div>
+          <div class="role-option" onclick="selectRegRole(this,'analyst')">
+            <div class="ro-icon">📊</div>
+            <div class="ro-label">Analyst</div>
+            <p style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">Market intelligence</p>
+          </div>
+          <div class="role-option" onclick="selectRegRole(this,'client')">
+            <div class="ro-icon">💼</div>
+            <div class="ro-label">Client</div>
+            <p style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">Personal portfolio</p>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Company / Organisation</label><input class="form-control" type="text" placeholder="Your company name" /></div>
+        <div class="form-group">
+          <label class="form-label">Business Type</label>
+          <select class="form-control">
+            <option disabled selected>Select business type</option>
+            <option>Individual / Freelancer</option>
+            <option>Startup (1–50 employees)</option>
+            <option>SME (51–500 employees)</option>
+            <option>Enterprise (500+ employees)</option>
+            <option>Financial Institution</option>
+          </select>
+        </div>
+        <div style="display:flex; gap:12px;">
+          <button class="btn btn-outline" onclick="goStep(1)" style="flex:1; justify-content:center;">← Back</button>
+          <button class="btn btn-primary" onclick="goStep(3)" style="flex:2; justify-content:center;">Continue →</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div id="step3" style="display:none;">
+        <h1 style="font-size:1.8rem; margin-bottom:8px;">Almost <span class="gradient-text">There!</span></h1>
+        <p style="margin-bottom:28px;">Review your details and complete registration.</p>
+        <div style="background:var(--bg-glass); border:1px solid var(--border-glass); border-radius:var(--r-md); padding:20px; margin-bottom:24px;">
+          <div style="display:flex; flex-direction:column; gap:10px; font-size:0.88rem;">
+            <div style="display:flex; justify-content:space-between;"><span style="color:var(--text-muted);">Name:</span><span id="summaryName" style="font-weight:600;">Aarav Singh</span></div>
+            <div style="display:flex; justify-content:space-between;"><span style="color:var(--text-muted);">Email:</span><span id="summaryEmail" style="font-weight:600;">you@company.com</span></div>
+            <div style="display:flex; justify-content:space-between;"><span style="color:var(--text-muted);">Role:</span><span id="summaryRole" style="font-weight:600; color:var(--primary-light);">Admin</span></div>
+          </div>
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="display:flex; gap:10px; cursor:pointer; font-size:0.85rem; margin-bottom:12px;">
+            <input type="checkbox" style="accent-color:var(--primary); margin-top:2px;" /> I agree to Stackly's <a href="error.html" style="color:var(--primary-light);">Terms of Service</a> and <a href="error.html" style="color:var(--primary-light);">Privacy Policy</a>
+          </label>
+          <label style="display:flex; gap:10px; cursor:pointer; font-size:0.85rem;">
+            <input type="checkbox" style="accent-color:var(--primary); margin-top:2px;" /> I'd like to receive product updates and financial insights from Stackly
+          </label>
+        </div>
+        <button class="btn btn-primary btn-lg" style="width:100%; justify-content:center;" onclick="completeReg()" id="regBtn">Create My Account →</button>
+        <button class="btn btn-ghost btn-sm" onclick="goStep(2)" style="width:100%; justify-content:center; margin-top:12px;">← Go Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Benefits -->
+  <div class="auth-right">
+    <div class="auth-right-content">
+      <div class="section-tag" style="margin-bottom:24px;">Why Stackly?</div>
+      <h2 style="font-size:1.8rem; margin-bottom:16px;">Everything You Need to <span class="gradient-text">Manage Money</span></h2>
+      <p style="margin-bottom:36px;">Join 2M+ professionals and businesses who run their entire financial life on Stackly.</p>
+      <div>
+        <div class="feature-check"><div class="chk">✓</div><div><strong>Instant KYC</strong> — Verified in under 60 seconds, fully digital</div></div>
+        <div class="feature-check"><div class="chk">✓</div><div><strong>Global Payments</strong> — Send money to 150+ countries instantly</div></div>
+        <div class="feature-check"><div class="chk">✓</div><div><strong>AI Analytics</strong> — Smart insights that grow with your portfolio</div></div>
+        <div class="feature-check"><div class="chk">✓</div><div><strong>Bank-Grade Security</strong> — 256-bit encryption + biometrics</div></div>
+        <div class="feature-check"><div class="chk">✓</div><div><strong>Free Forever Plan</strong> — No credit card, no hidden fees</div></div>
+        <div class="feature-check"><div class="chk">✓</div><div><strong>24/7 Expert Support</strong> — Real humans, always available</div></div>
+      </div>
+      <div style="margin-top:40px; padding:20px; background:var(--bg-glass); border-radius:var(--r-md); border:1px solid var(--border-glass);">
+        <div class="stars" style="margin-bottom:10px;">★★★★★</div>
+        <p style="font-size:0.88rem; font-style:italic; margin-bottom:12px;">"Stackly is the only financial platform I've used that feels like it was built for my business. It's fast, intelligent, and genuinely saves us hours every week."</p>
+        <div style="font-weight:600; font-size:0.85rem;">— Divya Menon, Founder at PayEase</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let regRole = 'admin';
+  let currentStep = 1;
+
+  function goStep(n) {
+    document.getElementById('step'+currentStep).style.display = 'none';
+    document.getElementById('step1dot').className = 'step-dot' + (n > 1 ? ' done' : ' active');
+    document.getElementById('step2dot').className = 'step-dot' + (n === 2 ? ' active' : n > 2 ? ' done' : '');
+    document.getElementById('step3dot').className = 'step-dot' + (n === 3 ? ' active' : '');
+    if(n === 3) updateSummary();
+    currentStep = n;
+    document.getElementById('step'+currentStep).style.display = 'block';
+  }
+
+  function selectRegRole(el, role) {
+    document.querySelectorAll('.role-option').forEach(r => r.classList.remove('selected'));
+    el.classList.add('selected');
+    regRole = role;
+  }
+
+  function updateSummary() {
+    const fn = document.getElementById('reg_fname').value || 'User';
+    const ln = document.getElementById('reg_lname').value || '';
+    const em = document.getElementById('reg_email').value || 'your@email.com';
+    document.getElementById('summaryName').textContent = fn + ' ' + ln;
+    document.getElementById('summaryEmail').textContent = em;
+    document.getElementById('summaryRole').textContent = regRole.charAt(0).toUpperCase() + regRole.slice(1);
+  }
+
+  function completeReg() {
+    const btn = document.getElementById('regBtn');
+    btn.textContent = 'Creating account...';
+    btn.disabled = true;
+    setTimeout(() => {
+      const dashboards = { admin: 'admin-dashboard.html', analyst: 'analyst-dashboard.html', client: 'client-dashboard.html' };
+      window.location.href = dashboards[regRole];
+    }, 1500);
+  }
+
+  // Password strength
+  document.getElementById('reg_pwd').addEventListener('input', function() {
+    const pwd = this.value;
+    const strength = [pwd.length > 5, /[A-Z]/.test(pwd), /[0-9]/.test(pwd), /[^A-Za-z0-9]/.test(pwd)].filter(Boolean).length;
+    const colors = ['var(--danger)','var(--gold)','var(--accent)','var(--success)'];
+    const bars = document.querySelectorAll('#pwdStrength div');
+    bars.forEach((b, i) => { b.style.background = i < strength ? colors[strength-1] : 'var(--border-glass)'; });
+  });
+</script>
+</body>
+</html>

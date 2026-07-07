@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analyst Dashboard || Stackly FinTech</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .market-ticker { display:flex; gap:0; overflow:hidden; border-radius:var(--r-md); border:1px solid var(--border-glass); margin-bottom:24px; }
+    .ticker-item { flex:1; padding:14px 20px; border-right:1px solid var(--border-glass); background:var(--bg-glass); }
+    .ticker-item:last-child { border-right:none; }
+    .ticker-sym { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); }
+    .ticker-price { font-family:var(--font-heading); font-size:1.1rem; font-weight:700; margin:3px 0; }
+    .ticker-change { font-size:0.78rem; font-weight:600; }
+    .line-chart-svg { width:100%; height:100%; }
+    .signal-item { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--border-glass); }
+    .signal-item:last-child { border-bottom:none; }
+    .signal-strength { width:8px; height:32px; border-radius:4px; }
+    .heatmap-row { display:flex; gap:4px; margin-bottom:4px; }
+    .heatmap-cell { flex:1; height:28px; border-radius:3px; position:relative; }
+    .heatmap-cell:hover .tooltip { display:block; }
+    .tooltip { display:none; position:absolute; bottom:100%; left:50%; transform:translateX(-50%); background:var(--bg-elevated); border:1px solid var(--border-glass); border-radius:var(--r-sm); padding:4px 8px; font-size:0.7rem; white-space:nowrap; z-index:10; margin-bottom:4px; }
+    .portfolio-bar { display:flex; height:12px; border-radius:6px; overflow:hidden; }
+    .portfolio-bar div { transition:var(--transition); }
+    @media(max-width:768px){ .market-ticker{flex-wrap:wrap;} .ticker-item{min-width:50%;} }
+  </style>
+</head>
+<body>
+<div class="dashboard-wrapper">
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="nav-logo" style="font-size:1.2rem;"><div class="logo-icon" style="width:32px;height:32px;font-size:0.9rem;">💹</div><span>Stackly</span></a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Analytics</div>
+      <a href="analyst-dashboard.html" class="sidebar-link active"><span class="icon">📊</span> Dashboard</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">📈</span> Market Data</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">🔍</span> Deep Analysis</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">📋</span> Reports</a>
+      <a href="error.html" class="sidebar-link notif-dot"><span class="icon">🚨</span> Signals <span class="badge badge-accent" style="margin-left:auto; font-size:0.65rem;">5</span></a>
+      <div class="sidebar-section-label">Markets</div>
+      <a href="error.html" class="sidebar-link"><span class="icon">💱</span> Forex</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">🔗</span> Crypto</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">📦</span> Commodities</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">🏢</span> Equities</a>
+      <div class="sidebar-section-label">Tools</div>
+      <a href="error.html" class="sidebar-link"><span class="icon">⚡</span> Screener</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">📅</span> Calendar</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <div class="user-avatar" style="background:linear-gradient(135deg,#00D4AA,#0099FF);">SR</div>
+        <div class="user-info"><div class="name">Sofia Rivera</div><div class="role-tag">📊 Analyst</div></div>
+      </div>
+      <a href="login.html" class="sidebar-logout-btn">🚪 Logout</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="btn btn-ghost btn-icon" id="sidebarToggleBtn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">☰</button>
+        <div>
+          <h3 style="font-size:1rem;">Market Intelligence Dashboard</h3>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Live market data • Updated 2 min ago</p>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span class="badge badge-accent" style="animation:pulse-glow 2s infinite;">● Live</span>
+        <button class="btn btn-primary btn-sm" onclick="alert('Report generated!')">Export Report</button>
+        <a href="login.html" class="logout-btn">🚪 Logout</a>
+        <div class="user-avatar" style="background:linear-gradient(135deg,#00D4AA,#0099FF); cursor:pointer;">SR</div>
+      </div>
+    </div>
+
+    <div class="dashboard-content">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span>Analyst Dashboard</span></div>
+
+      <!-- Market Ticker -->
+      <div class="market-ticker">
+        <div class="ticker-item"><div class="ticker-sym">USD/INR</div><div class="ticker-price">83.47</div><div class="ticker-change" style="color:var(--danger);">▼ -0.12%</div></div>
+        <div class="ticker-item"><div class="ticker-sym">BTC/USD</div><div class="ticker-price">$67,421</div><div class="ticker-change" style="color:var(--success);">▲ +2.84%</div></div>
+        <div class="ticker-item"><div class="ticker-sym">SENSEX</div><div class="ticker-price">78,542</div><div class="ticker-change" style="color:var(--success);">▲ +1.14%</div></div>
+        <div class="ticker-item"><div class="ticker-sym">GOLD</div><div class="ticker-price">$2,381</div><div class="ticker-change" style="color:var(--success);">▲ +0.67%</div></div>
+        <div class="ticker-item"><div class="ticker-sym">ETH/USD</div><div class="ticker-price">$3,512</div><div class="ticker-change" style="color:var(--danger);">▼ -0.91%</div></div>
+      </div>
+
+      <!-- KPI Metrics -->
+      <div class="metric-grid">
+        <div class="metric-card primary">
+          <div class="metric-label">Signals Tracked</div>
+          <div class="metric-value gradient-text">48</div>
+          <div class="metric-change up">↑ 5 new today</div>
+        </div>
+        <div class="metric-card accent">
+          <div class="metric-label">Accuracy Rate (AI)</div>
+          <div class="metric-value" style="color:var(--accent);">94.7%</div>
+          <div class="metric-change up">↑ +1.2% this week</div>
+        </div>
+        <div class="metric-card gold">
+          <div class="metric-label">Reports Generated</div>
+          <div class="metric-value" style="color:var(--gold);">17</div>
+          <div class="metric-change up">↑ 3 pending review</div>
+        </div>
+        <div class="metric-card success">
+          <div class="metric-label">Anomalies Detected</div>
+          <div class="metric-value" style="color:var(--success);">6</div>
+          <div class="metric-change down">↓ 2 resolved</div>
+        </div>
+      </div>
+
+      <!-- Main Charts -->
+      <div class="grid-2" style="margin-bottom:24px;">
+        <!-- Line Chart (SVG) -->
+        <div class="chart-box">
+          <div class="chart-title"><span>Transaction Volume Trend (Last 30 Days)</span><span class="badge badge-success">● Live</span></div>
+          <div style="height:180px; position:relative; overflow:hidden;">
+            <svg viewBox="0 0 400 150" style="width:100%; height:100%;" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#6C63FF" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#6C63FF" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,120 L14,110 L28,105 L42,95 L56,100 L70,88 L84,80 L98,72 L112,78 L126,65 L140,58 L154,62 L168,50 L182,42 L196,48 L210,36 L224,30 L238,38 L252,25 L266,18 L280,22 L294,12 L308,8 L322,15 L336,6 L350,10 L364,3 L378,8 L400,0" fill="url(#lineGrad)" stroke="none"/>
+              <path d="M0,120 L14,110 L28,105 L42,95 L56,100 L70,88 L84,80 L98,72 L112,78 L126,65 L140,58 L154,62 L168,50 L182,42 L196,48 L210,36 L224,30 L238,38 L252,25 L266,18 L280,22 L294,12 L308,8 L322,15 L336,6 L350,10 L364,3 L378,8 L400,0" fill="none" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
+              <!-- Accent line overlay -->
+              <path d="M0,130 L14,125 L28,120 L42,118 L56,122 L70,115 L84,108 L98,100 L112,105 L126,95 L140,88 L154,90 L168,80 L182,72 L196,76 L210,64 L224,58 L238,66 L252,52 L266,45 L280,50 L294,38 L308,32 L322,42 L336,30 L350,35 L364,28 L378,33 L400,24" fill="none" stroke="#00D4AA" stroke-width="1.5" stroke-dasharray="4 2" stroke-linecap="round"/>
+            </svg>
+            <div style="position:absolute; bottom:0; left:0; right:0; display:flex; justify-content:space-between; font-size:0.65rem; color:var(--text-muted); padding:0 4px;">
+              <span>Jun 7</span><span>Jun 14</span><span>Jun 21</span><span>Jun 28</span><span>Jul 6</span>
+            </div>
+          </div>
+          <div style="display:flex; gap:20px; margin-top:12px; font-size:0.78rem;">
+            <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px; height:2px; background:var(--primary); display:inline-block; border-radius:1px;"></span> Volume</span>
+            <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px; height:0; border-top:2px dashed var(--accent); display:inline-block;"></span> Forecast</span>
+          </div>
+        </div>
+
+        <!-- Sector Heatmap -->
+        <div class="chart-box">
+          <div class="chart-title">Sector Performance Heatmap</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px;">Color intensity = relative performance (green=+, red=-)</div>
+          <div class="heatmap-row">
+            <div class="heatmap-cell" style="background:rgba(16,185,129,0.7); border-radius:4px;" title="Banking +4.2%"><div class="tooltip">Banking +4.2%</div></div>
+            <div class="heatmap-cell" style="background:rgba(16,185,129,0.4);" title="Insurance +2.1%"><div class="tooltip">Insurance +2.1%</div></div>
+            <div class="heatmap-cell" style="background:rgba(239,68,68,0.5);" title="Fintech -2.8%"><div class="tooltip">Fintech -2.8%</div></div>
+            <div class="heatmap-cell" style="background:rgba(16,185,129,0.6);" title="Payments +3.5%"><div class="tooltip">Payments +3.5%</div></div>
+          </div>
+          <div class="heatmap-row">
+            <div class="heatmap-cell" style="background:rgba(239,68,68,0.3);" title="Crypto -1.5%"><div class="tooltip">Crypto -1.5%</div></div>
+            <div class="heatmap-cell" style="background:rgba(16,185,129,0.9);" title="AI Finance +8.1%"><div class="tooltip">AI Finance +8.1%</div></div>
+            <div class="heatmap-cell" style="background:rgba(245,158,11,0.5);" title="WealthTech 0.3%"><div class="tooltip">WealthTech +0.3%</div></div>
+            <div class="heatmap-cell" style="background:rgba(239,68,68,0.7);" title="P2P Lending -3.9%"><div class="tooltip">P2P Lending -3.9%</div></div>
+          </div>
+          <div class="heatmap-row">
+            <div class="heatmap-cell" style="background:rgba(16,185,129,0.5);" title="RegTech +2.8%"><div class="tooltip">RegTech +2.8%</div></div>
+            <div class="heatmap-cell" style="background:rgba(239,68,68,0.4);" title="BNPL -2.1%"><div class="tooltip">BNPL -2.1%</div></div>
+            <div class="heatmap-cell" style="background:rgba(16,185,129,0.8);" title="Embedded +6.2%"><div class="tooltip">Embedded +6.2%</div></div>
+            <div class="heatmap-cell" style="background:rgba(16,185,129,0.3);" title="FX +1.1%"><div class="tooltip">FX +1.1%</div></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:12px; font-size:0.72rem; color:var(--text-muted);">
+            <span style="color:var(--danger);">▼ Underperforming</span>
+            <span style="color:var(--success);">▲ Outperforming</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signals + Asset Allocation -->
+      <div class="grid-2" style="margin-bottom:24px;">
+        <!-- AI Signals -->
+        <div class="chart-box">
+          <div class="chart-title"><span>AI Trading Signals</span><span class="badge badge-accent">5 Active</span></div>
+          <div>
+            <div class="signal-item">
+              <div class="signal-strength" style="background:var(--success);"></div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.88rem;">HDFC Bank — BUY</div><div style="font-size:0.76rem; color:var(--text-muted);">Breakout above 52W high. RSI: 68, MACD bullish cross</div></div>
+              <div style="text-align:right;"><div style="font-size:0.8rem; font-weight:700; color:var(--success);">+8.4%</div><div style="font-size:0.7rem; color:var(--text-muted);">Target</div></div>
+            </div>
+            <div class="signal-item">
+              <div class="signal-strength" style="background:var(--danger);"></div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.88rem;">USDT/INR — SHORT</div><div style="font-size:0.76rem; color:var(--text-muted);">RBI intervention risk. Overbought, Bollinger squeeze</div></div>
+              <div style="text-align:right;"><div style="font-size:0.8rem; font-weight:700; color:var(--danger);">-3.2%</div><div style="font-size:0.7rem; color:var(--text-muted);">Downside</div></div>
+            </div>
+            <div class="signal-item">
+              <div class="signal-strength" style="background:var(--gold);"></div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.88rem;">Gold Futures — HOLD</div><div style="font-size:0.76rem; color:var(--text-muted);">Consolidation phase. Watch Fed meeting July 15th</div></div>
+              <div style="text-align:right;"><div style="font-size:0.8rem; font-weight:700; color:var(--gold);">Neutral</div><div style="font-size:0.7rem; color:var(--text-muted);">Stance</div></div>
+            </div>
+            <div class="signal-item">
+              <div class="signal-strength" style="background:var(--success);"></div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.88rem;">BTC/USD — BUY</div><div style="font-size:0.76rem; color:var(--text-muted);">ETF inflows accelerating. Support at $65K holds strong</div></div>
+              <div style="text-align:right;"><div style="font-size:0.8rem; font-weight:700; color:var(--success);">+12.1%</div><div style="font-size:0.7rem; color:var(--text-muted);">Target</div></div>
+            </div>
+          </div>
+          <a href="error.html" class="btn btn-ghost btn-sm" style="width:100%; justify-content:center; margin-top:12px;">View All 48 Signals →</a>
+        </div>
+
+        <!-- Asset Allocation -->
+        <div class="chart-box">
+          <div class="chart-title">Portfolio Allocation Monitor</div>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.85rem;"><span>Equities</span><span style="font-weight:700;">42%</span></div>
+              <div class="progress"><div class="progress-fill" style="width:42%;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.85rem;"><span>Fixed Income</span><span style="font-weight:700;">28%</span></div>
+              <div class="progress"><div class="progress-fill" style="width:28%; background:linear-gradient(90deg,var(--accent),var(--accent-dark));"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.85rem;"><span>Crypto Assets</span><span style="font-weight:700;">15%</span></div>
+              <div class="progress"><div class="progress-fill" style="width:15%; background:linear-gradient(90deg,var(--gold),#F59E0B80);"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.85rem;"><span>Commodities</span><span style="font-weight:700;">10%</span></div>
+              <div class="progress"><div class="progress-fill" style="width:10%; background:linear-gradient(90deg,#8B5CF6,#6D28D9);"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.85rem;"><span>Cash & Equivalents</span><span style="font-weight:700;">5%</span></div>
+              <div class="progress"><div class="progress-fill" style="width:5%; background:linear-gradient(90deg,var(--text-muted),var(--border-glass));"></div></div>
+            </div>
+          </div>
+          <div style="margin-top:20px; padding:14px; background:rgba(6,182,212,0.06); border:1px solid var(--border-accent); border-radius:var(--r-md);">
+            <div style="font-size:0.82rem; font-weight:600; color:var(--accent); margin-bottom:6px;">📡 AI Recommendation</div>
+            <p style="font-size:0.82rem; margin:0;">Rebalance: Reduce equities by 5%, increase fixed income. Rising rate environment favours bonds over growth stocks for Q3 2025.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Watchlist -->
+      <div class="chart-box">
+        <div class="chart-title"><span>Watchlist</span><a href="error.html" class="btn btn-ghost btn-sm">+ Add Asset</a></div>
+        <div class="table-container">
+          <table>
+            <thead><tr><th>Asset</th><th>Price</th><th>24h Change</th><th>Volume</th><th>Market Cap</th><th>AI Score</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:600;">₿ Bitcoin</td><td style="font-family:var(--font-heading);">$67,421</td><td style="color:var(--success); font-weight:600;">▲ +2.84%</td><td>$42.1B</td><td>$1.3T</td><td><span class="badge badge-success">BUY 8.7</span></td></tr>
+              <tr><td style="font-weight:600;">⟠ Ethereum</td><td style="font-family:var(--font-heading);">$3,512</td><td style="color:var(--danger); font-weight:600;">▼ -0.91%</td><td>$18.3B</td><td>$422B</td><td><span class="badge badge-gold">HOLD 6.2</span></td></tr>
+              <tr><td style="font-weight:600;">🏦 HDFC Bank</td><td style="font-family:var(--font-heading);">₹1,821</td><td style="color:var(--success); font-weight:600;">▲ +1.44%</td><td>₹4,200Cr</td><td>₹13.8L Cr</td><td><span class="badge badge-success">BUY 9.1</span></td></tr>
+              <tr><td style="font-weight:600;">📊 NIFTY 50</td><td style="font-family:var(--font-heading);">24,204</td><td style="color:var(--success); font-weight:600;">▲ +0.86%</td><td>—</td><td>—</td><td><span class="badge badge-success">BUY 7.8</span></td></tr>
+              <tr><td style="font-weight:600;">🥇 Gold (MCX)</td><td style="font-family:var(--font-heading);">₹72,840</td><td style="color:var(--success); font-weight:600;">▲ +0.31%</td><td>₹8,200Cr</td><td>—</td><td><span class="badge badge-gold">HOLD 5.9</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('active');
+  }
+  function checkMobile() {
+    const btn = document.getElementById('sidebarToggleBtn');
+    btn.style.display = (window.innerWidth <= 900) ? 'flex' : 'none';
+  }
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+</script>
+</body>
+</html>

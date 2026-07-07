@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Management || Stackly Admin</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .search-bar { display:flex; gap:12px; margin-bottom:24px; }
+    .search-bar .form-control { max-width:320px; }
+    .status-dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px; }
+    tr:hover td { background:var(--bg-glass); }
+  </style>
+</head>
+<body>
+<div class="dashboard-wrapper">
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="nav-logo" style="font-size:1.2rem;"><div class="logo-icon" style="width:32px;height:32px;font-size:0.9rem;">💹</div><span>Stackly</span></a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Main</div>
+      <a href="admin-dashboard.html" class="sidebar-link"><span class="icon">🏠</span> Dashboard</a>
+      <a href="admin-users.html" class="sidebar-link active"><span class="icon">👥</span> User Management</a>
+      <a href="admin-reports.html" class="sidebar-link"><span class="icon">📋</span> Reports</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">💳</span> Transactions</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">🔔</span> Alerts</a>
+      <div class="sidebar-section-label">Finance</div>
+      <a href="error.html" class="sidebar-link"><span class="icon">💰</span> Revenue</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">📈</span> Analytics</a>
+      <div class="sidebar-section-label">System</div>
+      <a href="error.html" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">🔒</span> Security</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <div class="user-avatar">AK</div>
+        <div class="user-info"><div class="name">Arjun Kapoor</div><div class="role-tag">🛡️ Admin</div></div>
+      </div>
+      <a href="login.html" class="sidebar-logout-btn">🚪 Logout</a>
+    </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="btn btn-ghost btn-icon" id="sidebarToggleBtn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">☰</button>
+        <div><h3 style="font-size:1rem;">User Management</h3><p style="font-size:0.75rem; color:var(--text-muted);">Manage all platform users, roles, and permissions</p></div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a href="error.html" class="btn btn-ghost btn-sm">Export CSV</a>
+        <a href="error.html" class="btn btn-primary btn-sm">+ Add User</a>
+        <a href="login.html" class="logout-btn">🚪 Logout</a>
+      </div>
+    </div>
+
+    <div class="dashboard-content">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><a href="admin-dashboard.html">Dashboard</a><span class="sep">›</span><span>Users</span></div>
+
+      <!-- Metric Row -->
+      <div class="metric-grid" style="margin-bottom:24px;">
+        <div class="metric-card primary"><div class="metric-label">Total Users</div><div class="metric-value gradient-text">24,819</div><div class="metric-change up">↑ +1,240 this week</div></div>
+        <div class="metric-card accent"><div class="metric-label">Active (30d)</div><div class="metric-value" style="color:var(--accent);">19,204</div><div class="metric-change up">77.4% DAU rate</div></div>
+        <div class="metric-card gold"><div class="metric-label">Pending KYC</div><div class="metric-value" style="color:var(--gold);">342</div><div class="metric-change">Awaiting verification</div></div>
+        <div class="metric-card"><div class="metric-label">Suspended</div><div class="metric-value" style="color:var(--danger);">128</div><div class="metric-change down">↑ 8 new flags today</div></div>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="chart-box" style="margin-bottom:24px;">
+        <div class="search-bar" style="flex-wrap:wrap;">
+          <input class="form-control" type="search" placeholder="🔍 Search by name, email, or ID..." id="userSearch" oninput="filterUsers()" />
+          <select class="form-control" style="max-width:160px;" id="roleFilter" onchange="filterUsers()">
+            <option value="all">All Roles</option>
+            <option value="Admin">Admin</option>
+            <option value="Analyst">Analyst</option>
+            <option value="Client">Client</option>
+          </select>
+          <select class="form-control" style="max-width:160px;" id="statusFilter" onchange="filterUsers()">
+            <option value="all">All Status</option>
+            <option value="Active">Active</option>
+            <option value="Pending">Pending</option>
+            <option value="Suspended">Suspended</option>
+          </select>
+          <button class="btn btn-ghost btn-sm" onclick="resetFilters()">Reset</button>
+        </div>
+
+        <!-- Users Table -->
+        <div class="table-container">
+          <table id="usersTable">
+            <thead>
+              <tr>
+                <th><input type="checkbox" style="accent-color:var(--primary);" /></th>
+                <th>User</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>KYC</th>
+                <th>Joined</th>
+                <th>Transactions</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="userTableBody">
+              <!-- JS populated -->
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; font-size:0.85rem; color:var(--text-muted);">
+          <span id="userCount">Showing 10 of 24,819 users</span>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-ghost btn-sm">← Prev</button>
+            <span style="padding:8px 16px; background:rgba(99,102,241,0.15); border-radius:var(--r-sm); color:var(--primary-light); font-weight:600;">1</span>
+            <button class="btn btn-ghost btn-sm">2</button>
+            <button class="btn btn-ghost btn-sm">3</button>
+            <button class="btn btn-ghost btn-sm">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<script>
+  const users = [
+    { id:'STK-001', name:'Arjun Kapoor', email:'arjun@techventure.in', role:'Admin', status:'Active', kyc:'Verified', joined:'Jan 2024', txns:142 },
+    { id:'STK-002', name:'Sofia Rivera', email:'sofia@consultco.com', role:'Analyst', status:'Active', kyc:'Verified', joined:'Mar 2024', txns:98 },
+    { id:'STK-003', name:'Priya Lakshmanan', email:'priya@gmail.com', role:'Client', status:'Active', kyc:'Verified', joined:'Feb 2024', txns:214 },
+    { id:'STK-004', name:'Maria Johnson', email:'maria@novapay.com', role:'Analyst', status:'Suspended', kyc:'Verified', joined:'Apr 2024', txns:37 },
+    { id:'STK-005', name:'Rohit Menon', email:'rohit@startupx.io', role:'Client', status:'Active', kyc:'Verified', joined:'May 2024', txns:88 },
+    { id:'STK-006', name:'Divya Sharma', email:'divya@payease.in', role:'Client', status:'Pending', kyc:'Pending', joined:'Jun 2024', txns:0 },
+    { id:'STK-007', name:'Vikram Nair', email:'vikram@finance.co', role:'Client', status:'Active', kyc:'Verified', joined:'Jan 2024', txns:320 },
+    { id:'STK-008', name:'Aarav Singh', email:'aarav@payments.in', role:'Admin', status:'Active', kyc:'Verified', joined:'Jan 2024', txns:56 },
+    { id:'STK-009', name:'Meera Krishnan', email:'meera@stackly.in', role:'Admin', status:'Active', kyc:'Verified', joined:'Jan 2024', txns:19 },
+    { id:'STK-010', name:'Kiran Reddy', email:'kiran@personal.com', role:'Client', status:'Suspended', kyc:'Rejected', joined:'Jul 2024', txns:4 },
+  ];
+
+  const roleBadges = { Admin:'badge-primary', Analyst:'badge-accent', Client:'badge-gold' };
+  const statusBadges = { Active:'badge-success', Pending:'badge-gold', Suspended:'badge-danger' };
+  const kycBadges = { Verified:'badge-success', Pending:'badge-gold', Rejected:'badge-danger' };
+
+  function renderUsers(list) {
+    const tbody = document.getElementById('userTableBody');
+    tbody.innerHTML = list.map(u => `
+      <tr>
+        <td><input type="checkbox" style="accent-color:var(--primary);"/></td>
+        <td>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--accent)); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.72rem; flex-shrink:0;">${u.name.split(' ').map(n=>n[0]).join('')}</div>
+            <div><div style="font-weight:600; font-size:0.88rem;">${u.name}</div><div style="font-size:0.75rem; color:var(--text-muted);">${u.email}</div></div>
+          </div>
+        </td>
+        <td><span class="badge ${roleBadges[u.role]}">${u.role}</span></td>
+        <td><span class="badge ${statusBadges[u.status]}">${u.status}</span></td>
+        <td><span class="badge ${kycBadges[u.kyc]}">${u.kyc}</span></td>
+        <td style="color:var(--text-muted); font-size:0.85rem;">${u.joined}</td>
+        <td style="font-weight:600;">${u.txns}</td>
+        <td>
+          <div style="display:flex; gap:6px;">
+            <a href="error.html" class="btn btn-ghost btn-sm" style="padding:6px 10px; font-size:0.75rem;">Edit</a>
+            ${u.status === 'Active' 
+              ? `<a href="error.html" class="btn btn-sm" style="padding:6px 10px; font-size:0.75rem; background:rgba(239,68,68,0.1); color:var(--danger); border-radius:var(--r-sm);">Suspend</a>`
+              : `<a href="error.html" class="btn btn-sm" style="padding:6px 10px; font-size:0.75rem; background:rgba(16,185,129,0.1); color:var(--success); border-radius:var(--r-sm);">Activate</a>`
+            }
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function filterUsers() {
+    const q = document.getElementById('userSearch').value.toLowerCase();
+    const role = document.getElementById('roleFilter').value;
+    const status = document.getElementById('statusFilter').value;
+    const filtered = users.filter(u =>
+      (u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q) || u.id.toLowerCase().includes(q)) &&
+      (role === 'all' || u.role === role) &&
+      (status === 'all' || u.status === status)
+    );
+    renderUsers(filtered);
+    document.getElementById('userCount').textContent = `Showing ${filtered.length} of 24,819 users`;
+  }
+
+  function resetFilters() {
+    document.getElementById('userSearch').value = '';
+    document.getElementById('roleFilter').value = 'all';
+    document.getElementById('statusFilter').value = 'all';
+    filterUsers();
+  }
+
+  renderUsers(users);
+
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('active');
+  }
+  function checkMobile() {
+    const btn = document.getElementById('sidebarToggleBtn');
+    btn.style.display = (window.innerWidth <= 900) ? 'flex' : 'none';
+  }
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+</script>
+</body>
+</html>

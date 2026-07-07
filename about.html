@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us || Stackly FinTech</title>
+  <meta name="description" content="Learn about Stackly's mission to democratize financial infrastructure. Meet our leadership team and discover our core values." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Timeline ── */
+    .timeline{position:relative;max-width:800px;margin:0 auto;}
+    .timeline::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--border-primary);transform:translateX(-50%);}
+    .timeline-item{position:relative;margin-bottom:60px;width:100%;display:flex;justify-content:flex-end;}
+    .timeline-item:nth-child(even){justify-content:flex-start;}
+    .timeline-content{width:calc(50% - 40px);background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--r-lg);padding:32px;position:relative;}
+    .timeline-item:nth-child(even) .timeline-content{text-align:right;}
+    .timeline-dot{position:absolute;top:32px;left:50%;width:20px;height:20px;border-radius:50%;background:var(--bg-base);border:4px solid var(--primary);transform:translateX(-50%);z-index:2;box-shadow:0 0 0 6px rgba(99,102,241,0.15);}
+    .timeline-year{font-family:var(--font-heading);font-size:1.8rem;font-weight:800;color:var(--accent);margin-bottom:12px;line-height:1;}
+    .timeline-title{font-size:1.1rem;font-weight:600;margin-bottom:12px;}
+
+    /* ── Team ── */
+    .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+    .team-card{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--r-xl);padding:28px;text-align:center;transition:var(--transition);}
+    .team-card:hover{transform:translateY(-8px);border-color:var(--border-primary);}
+    .team-av{width:120px;height:120px;border-radius:50%;margin:0 auto 20px;background:linear-gradient(135deg,var(--primary-light),var(--accent));display:flex;align-items:center;justify-content:center;font-size:2.5rem;font-weight:800;}
+    .team-name{font-size:1.1rem;font-weight:700;}
+    .team-role{font-size:0.85rem;color:var(--accent);margin-top:4px;}
+    .team-social{display:flex;justify-content:center;gap:12px;margin-top:20px;}
+    .team-social a{color:var(--text-muted);transition:var(--transition);}
+    .team-social a:hover{color:var(--text-primary);}
+
+    /* ── Values ── */
+    .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+    .value-card{padding:40px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--r-xl);text-align:center;transition:var(--transition);}
+    .value-card:hover{background:var(--bg-glass-hover);border-color:var(--border-accent);transform:translateY(-5px);}
+    .value-icon{font-size:2.5rem;margin-bottom:24px;}
+    .value-title{font-size:1.2rem;font-weight:700;margin-bottom:16px;}
+
+    /* ── Global Presence ── */
+    .global-map{position:relative;background:var(--bg-elevated);border-radius:var(--r-2xl);padding:60px 40px;text-align:center;border:1px solid var(--border-glass);overflow:hidden;}
+    .global-map::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:40px 40px;opacity:0.5;}
+    .office-stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;position:relative;z-index:2;margin-top:40px;}
+    .office-stat{text-align:center;}
+    .office-val{font-family:var(--font-heading);font-size:2.5rem;font-weight:800;color:var(--primary-light);}
+    .office-label{font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:8px;}
+
+    /* ── Image Text Split ── */
+    .img-text-split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+    .img-text-split.reverse{grid-template-columns:1fr 1fr;}
+    .it-img{border-radius:var(--r-2xl);box-shadow:var(--shadow-lg);}
+
+    @media(max-width:1024px){
+      .team-grid{grid-template-columns:repeat(2,1fr);}
+      .values-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    @media(max-width:768px){
+      .timeline::before{left:20px;}
+      .timeline-item,.timeline-item:nth-child(even){justify-content:flex-end;}
+      .timeline-content{width:calc(100% - 60px);}
+      .timeline-item:nth-child(even) .timeline-content{text-align:left;}
+      .timeline-dot{left:20px;}
+      .img-text-split{grid-template-columns:1fr;}
+      .img-text-split.reverse .it-img-col{grid-row:2;}
+      .values-grid{grid-template-columns:1fr;}
+      .team-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><div class="logo-icon">💹</div><span class="logo-text">Stackly</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-sm">Sign In</a>
+      <a href="register.html" class="btn btn-primary btn-sm">Get Started Free →</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="about.html" class="nav-link active">About</a>
+  <a href="services.html" class="nav-link">Services</a>
+  <a href="blog.html" class="nav-link">Blog</a>
+  <a href="contact.html" class="nav-link">Contact</a>
+  <div class="nav-actions">
+    <a href="login.html" class="btn btn-ghost">Sign In</a>
+    <a href="register.html" class="btn btn-primary">Get Started Free →</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 1: PAGE HERO
+══════════════════════════════════════ -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="container text-center reveal" style="position:relative;z-index:2;">
+    <div class="breadcrumb" style="justify-content:center;">
+      <a href="index.html">Home</a><span class="sep">›</span><span>About Us</span>
+    </div>
+    <h1 style="max-width:800px;margin:0 auto 24px;">Democratizing Access to <span class="gradient-text">Global Finance</span></h1>
+    <p style="font-size:1.1rem;max-width:640px;margin:0 auto;">We're building the infrastructure that connects the world's money. Stackly empowers businesses of all sizes to move value seamlessly, instantly, and securely across borders.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 2: OUR MISSION
+══════════════════════════════════════ -->
+<section class="section" style="padding-top:40px;">
+  <div class="container">
+    <div class="img-text-split">
+      <div class="it-img-col reveal-left">
+        <img src="assets/images/fintech_about.webp" alt="Stackly HQ" class="it-img" />
+      </div>
+      <div class="reveal-right">
+        <div class="section-tag">Our Mission</div>
+        <h2 style="margin-bottom:24px;">Breaking Down Financial <span class="gradient-text">Borders</span></h2>
+        <p style="margin-bottom:20px;">Founded in 2020, Stackly was born from a simple frustration: moving money globally was slow, expensive, and opaque. We believed businesses deserved better infrastructure.</p>
+        <p style="margin-bottom:32px;">Today, our unified financial OS processes over $50B annually for 2 million users. We've replaced legacy banking rails with intelligent, API-first architecture that settles transactions in seconds instead of days.</p>
+        <div style="display:flex;gap:40px;">
+          <div><div style="font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--primary-light);">150+</div><div style="font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Countries Live</div></div>
+          <div><div style="font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--accent);">80+</div><div style="font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Currencies</div></div>
+          <div><div style="font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--gold);">Zero</div><div style="font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Downtime (2024)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 3: TIMELINE
+══════════════════════════════════════ -->
+<section class="section" style="background:var(--bg-surface);border-top:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag gold">Our Journey</div>
+      <h2>The Stackly <span class="gradient-text">Story</span></h2>
+      <p>From a small seed of an idea to a global financial platform.</p>
+    </div>
+    
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-year">2020</div>
+          <h3 class="timeline-title">The Foundation</h3>
+          <p style="font-size:0.9rem;">Stackly is founded in Singapore with a vision to rebuild cross-border payments. The first version of the platform launches, supporting USD and SGD.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="border-color:var(--accent);"></div>
+        <div class="timeline-content">
+          <div class="timeline-year" style="color:var(--accent);">2022</div>
+          <h3 class="timeline-title">Series A & Global Expansion</h3>
+          <p style="font-size:0.9rem;">Secured $45M Series A funding. Expanded operations to India, UK, and the US. Reached 100,000 active business users and launched Open Banking APIs.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="border-color:var(--gold);"></div>
+        <div class="timeline-content">
+          <div class="timeline-year" style="color:var(--gold);">2024</div>
+          <h3 class="timeline-title">Stackly AI & Institutional Grade</h3>
+          <p style="font-size:0.9rem;">Launched proprietary AI models for fraud detection and cash flow forecasting. Processed $20B in volume and obtained key regulatory licenses in EU and UAE.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="border-color:var(--success);"></div>
+        <div class="timeline-content">
+          <div class="timeline-year" style="color:var(--success);">2025</div>
+          <h3 class="timeline-title">The Unified Financial OS</h3>
+          <p style="font-size:0.9rem;">Crossed 2M users globally. Unveiled the Unified Financial OS integrating banking, lending, investments, and treasury. Achieved carbon-neutral operations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 4: CORE VALUES
+══════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag accent">Core Values</div>
+      <h2>What Drives <span class="gradient-text">Us Forward</span></h2>
+      <p>Our culture is built on transparency, innovation, and an obsessive focus on user success.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal delay-1">
+        <div class="value-icon">🛡️</div>
+        <h3 class="value-title">Security First</h3>
+        <p>In finance, trust is everything. We never compromise on security, compliance, or data privacy. Every line of code is written with defense-in-depth.</p>
+      </div>
+      <div class="value-card reveal delay-2">
+        <div class="value-icon">⚡</div>
+        <h3 class="value-title">Speed is a Feature</h3>
+        <p>Financial infrastructure shouldn't feel like the DMV. We obsess over milliseconds in our APIs and seconds in our user workflows.</p>
+      </div>
+      <div class="value-card reveal delay-3">
+        <div class="value-icon">🌍</div>
+        <h3 class="value-title">Global by Default</h3>
+        <p>Talent and opportunity are distributed globally; financial access should be too. We design for a borderless world from day one.</p>
+      </div>
+      <div class="value-card reveal delay-1">
+        <div class="value-icon">🧠</div>
+        <h3 class="value-title">Intelligence Applied</h3>
+        <p>Data without insight is noise. We leverage AI not as a buzzword, but to deliver tangible ROI through fraud prevention and forecasting.</p>
+      </div>
+      <div class="value-card reveal delay-2">
+        <div class="value-icon">🤝</div>
+        <h3 class="value-title">Customer Obsessed</h3>
+        <p>We win when our clients win. Our support is available 24/7, and our roadmap is directly driven by the pain points of the businesses we serve.</p>
+      </div>
+      <div class="value-card reveal delay-3">
+        <div class="value-icon">🌱</div>
+        <h3 class="value-title">Sustainable Growth</h3>
+        <p>We build for the decades, not just the next quarter. This applies to our codebase, our team culture, and our environmental footprint.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 5: LEADERSHIP
+══════════════════════════════════════ -->
+<section class="section" style="background:var(--bg-surface);border-top:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag primary">Our Team</div>
+      <h2>Meet the <span class="gradient-text">Leadership</span></h2>
+      <p>A diverse team of engineers, financial experts, and operators combining decades of experience from top tech and banking institutions.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal delay-1">
+        <div class="team-av">AJ</div>
+        <div class="team-name">Aryan Joshi</div>
+        <div class="team-role">CEO & Co-Founder</div>
+        <div class="team-social"><a href="error.html">in</a><a href="error.html">𝕏</a></div>
+      </div>
+      <div class="team-card reveal delay-2">
+        <div class="team-av" style="background:linear-gradient(135deg,#00D4AA,#0099FF);">LN</div>
+        <div class="team-name">Li Na</div>
+        <div class="team-role">CTO & Co-Founder</div>
+        <div class="team-social"><a href="error.html">in</a><a href="error.html">GH</a></div>
+      </div>
+      <div class="team-card reveal delay-3">
+        <div class="team-av" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">MM</div>
+        <div class="team-name">Maya Menon</div>
+        <div class="team-role">Chief Product Officer</div>
+        <div class="team-social"><a href="error.html">in</a><a href="error.html">𝕏</a></div>
+      </div>
+      <div class="team-card reveal delay-4">
+        <div class="team-av" style="background:linear-gradient(135deg,#8B5CF6,#EC4899);">DB</div>
+        <div class="team-name">David Brooks</div>
+        <div class="team-role">Chief Risk Officer</div>
+        <div class="team-social"><a href="error.html">in</a></div>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:48px;">
+      <a href="error.html" class="btn btn-outline">Join Our Team — We're Hiring!</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 6: GLOBAL PRESENCE
+══════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="global-map reveal">
+      <h2 style="position:relative;z-index:2;margin-bottom:16px;">Global Infrastructure, <span class="gradient-text">Local Expertise</span></h2>
+      <p style="position:relative;z-index:2;max-width:600px;margin:0 auto;color:var(--text-secondary);">We operate 6 major hubs worldwide, ensuring regulatory compliance and providing localized support in 12 languages, 24/7.</p>
+      
+      <div class="office-stats">
+        <div class="office-stat">
+          <div class="office-val">6</div>
+          <div class="office-label">Global Hubs</div>
+        </div>
+        <div class="office-stat">
+          <div class="office-val">450+</div>
+          <div class="office-label">Team Members</div>
+        </div>
+        <div class="office-stat">
+          <div class="office-val">12</div>
+          <div class="office-label">Regulator Licenses</div>
+        </div>
+        <div class="office-stat">
+          <div class="office-val">24/7</div>
+          <div class="office-label">Support Ops</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 7: CTA
+══════════════════════════════════════ -->
+<section class="section-sm">
+  <div class="container">
+    <div class="cta-section reveal">
+      <div style="position:relative;z-index:1;">
+        <h2 style="margin-bottom:20px;">Ready to Build the <span class="gradient-text">Future?</span></h2>
+        <p style="max-width:560px;margin:0 auto 40px;font-size:1.05rem;">Whether you're looking to upgrade your financial stack or join our mission as an employee, we want to hear from you.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+          <a href="register.html" class="btn btn-primary btn-xl animate-pulse-glow">Get Started Free →</a>
+          <a href="contact.html" class="btn btn-outline btn-xl">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="font-size:1.3rem;"><div class="logo-icon" style="width:34px;height:34px;font-size:0.95rem;">💹</div><span class="logo-text">Stackly</span></a>
+        <p>The next-generation FinTech platform empowering businesses and individuals with world-class financial infrastructure.</p>
+        <div class="social-links" style="margin-top:24px;">
+          <a href="error.html" class="social-link">𝕏</a>
+          <a href="error.html" class="social-link">in</a>
+          <a href="error.html" class="social-link">f</a>
+          <a href="error.html" class="social-link">📷</a>
+          <a href="error.html" class="social-link">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="error.html">Careers</a></li>
+          <li><a href="error.html">Press Room</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="services.html">Payments</a></li>
+          <li><a href="services.html">Investments</a></li>
+          <li><a href="services.html">Lending</a></li>
+          <li><a href="error.html">API Docs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="error.html">Privacy Policy</a></li>
+          <li><a href="error.html">Terms of Service</a></li>
+          <li><a href="error.html">Security</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2025 Stackly FinTech Pvt. Ltd. All rights reserved.</span>
+      <div style="display:flex;align-items:center;gap:16px;"><span>🔐 PCI-DSS L1</span><span>•</span><span>ISO 27001</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll progress
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  progressBar.style.width = pct + '%';
+});
+// Navbar
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 30));
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('open');
+});
+// Reveal
+const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+const revealObs = new IntersectionObserver(entries => entries.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+}), { threshold: 0.1 });
+revealEls.forEach(el => revealObs.observe(el));
+</script>
+</body>
+</html>

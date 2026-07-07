@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard || Stackly FinTech</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .portfolio-card { background:linear-gradient(135deg, rgba(99,102,241,0.2), rgba(6,182,212,0.12)); border:1px solid var(--border-primary); border-radius:var(--r-xl); padding:36px; position:relative; overflow:hidden; }
+    .portfolio-card::before { content:''; position:absolute; top:-60px; right:-60px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%); }
+    .txn-item { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--border-glass); }
+    .txn-item:last-child { border-bottom:none; }
+    .txn-icon { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .txn-amount { font-family:var(--font-heading); font-weight:700; }
+    .asset-row { display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid var(--border-glass); }
+    .asset-row:last-child { border-bottom:none; }
+    .asset-icon { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .quick-card { text-align:center; padding:20px; background:var(--bg-glass); border:1px solid var(--border-glass); border-radius:var(--r-md); cursor:pointer; transition:var(--transition); }
+    .quick-card:hover { border-color:var(--border-primary); transform:translateY(-3px); }
+    .sparkline { display:flex; align-items:flex-end; gap:3px; height:40px; }
+    .spark-bar { width:5px; border-radius:2px 2px 0 0; }
+  </style>
+</head>
+<body>
+<div class="dashboard-wrapper">
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="nav-logo" style="font-size:1.2rem;"><div class="logo-icon" style="width:32px;height:32px;font-size:0.9rem;">💹</div><span>Stackly</span></a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">My Account</div>
+      <a href="client-dashboard.html" class="sidebar-link active"><span class="icon">🏠</span> Dashboard</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">💼</span> Portfolio</a>
+      <a href="error.html" class="sidebar-link notif-dot"><span class="icon">💳</span> Payments <span class="badge badge-accent" style="margin-left:auto; font-size:0.65rem;">2</span></a>
+      <a href="error.html" class="sidebar-link"><span class="icon">📊</span> Analytics</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">🔄</span> Transactions</a>
+      <div class="sidebar-section-label">Invest</div>
+      <a href="error.html" class="sidebar-link"><span class="icon">📈</span> Stocks & ETFs</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">🔗</span> Crypto</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">🏦</span> Fixed Deposits</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">🌱</span> Mutual Funds</a>
+      <div class="sidebar-section-label">More</div>
+      <a href="error.html" class="sidebar-link"><span class="icon">🆔</span> KYC Status</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">🔒</span> Security</a>
+      <a href="contact.html" class="sidebar-link"><span class="icon">📞</span> Support</a>
+      <a href="error.html" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <div class="user-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">PL</div>
+        <div class="user-info"><div class="name">Priya Lakshmanan</div><div class="role-tag">💼 Client</div></div>
+      </div>
+      <a href="login.html" class="sidebar-logout-btn">🚪 Logout</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="btn btn-ghost btn-icon" id="sidebarToggleBtn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">☰</button>
+        <div>
+          <h3 style="font-size:1rem;">Good morning, Priya! 👋</h3>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Your portfolio is performing well today</p>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <a href="error.html" class="btn btn-primary btn-sm">+ Add Money</a>
+        <button class="btn btn-ghost btn-icon notif-dot" aria-label="Notifications">🔔</button>
+        <a href="login.html" class="logout-btn">🚪 Logout</a>
+        <div class="user-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444); cursor:pointer;">PL</div>
+      </div>
+    </div>
+
+    <div class="dashboard-content">
+      <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span>My Dashboard</span></div>
+
+      <!-- Portfolio Hero -->
+      <div class="portfolio-card" style="margin-bottom:24px;">
+        <div style="display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center; position:relative; z-index:1;">
+          <div>
+            <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:8px;">Total Portfolio Value</div>
+            <div style="font-family:var(--font-heading); font-size:clamp(2rem, 5vw, 3rem); font-weight:800; background:linear-gradient(135deg,var(--primary),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1.2; margin-bottom:8px;">₹24,82,540</div>
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <span style="font-size:0.9rem; color:var(--success); font-weight:700;">▲ +₹1,82,340</span>
+              <span style="font-size:0.85rem; color:var(--success);">(+7.93% this month)</span>
+              <span class="badge badge-success">All-Time High 🎉</span>
+            </div>
+            <div style="display:flex; gap:24px; margin-top:20px; flex-wrap:wrap;">
+              <div><div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:4px;">Invested</div><div style="font-weight:700;">₹22,00,200</div></div>
+              <div><div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:4px;">Returns</div><div style="font-weight:700; color:var(--success);">+₹2,82,340</div></div>
+              <div><div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:4px;">XIRR</div><div style="font-weight:700; color:var(--accent);">14.2%</div></div>
+              <div><div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:4px;">Risk Level</div><div style="font-weight:700; color:var(--gold);">Moderate</div></div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:3rem; margin-bottom:8px;">📈</div>
+            <div class="sparkline" style="justify-content:flex-end;">
+              <div class="spark-bar" style="height:40%; background:var(--primary); opacity:0.5;"></div>
+              <div class="spark-bar" style="height:55%; background:var(--primary); opacity:0.6;"></div>
+              <div class="spark-bar" style="height:45%; background:var(--primary); opacity:0.5;"></div>
+              <div class="spark-bar" style="height:70%; background:var(--primary); opacity:0.7;"></div>
+              <div class="spark-bar" style="height:60%; background:var(--primary); opacity:0.6;"></div>
+              <div class="spark-bar" style="height:80%; background:var(--accent); opacity:0.8;"></div>
+              <div class="spark-bar" style="height:90%; background:var(--accent);"></div>
+              <div class="spark-bar" style="height:100%; background:var(--accent); box-shadow:0 0 8px var(--accent);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Metrics -->
+      <div class="metric-grid" style="margin-bottom:24px;">
+        <div class="metric-card primary">
+          <div class="metric-label">Available Balance</div>
+          <div class="metric-value gradient-text">₹1,24,500</div>
+          <div class="metric-change up">Ready to invest</div>
+        </div>
+        <div class="metric-card accent">
+          <div class="metric-label">This Month's Spend</div>
+          <div class="metric-value" style="color:var(--accent);">₹38,200</div>
+          <div class="metric-change down">↑ +12% vs last month</div>
+        </div>
+        <div class="metric-card gold">
+          <div class="metric-label">Pending Payments</div>
+          <div class="metric-value" style="color:var(--gold);">₹8,400</div>
+          <div class="metric-change">2 scheduled</div>
+        </div>
+        <div class="metric-card success">
+          <div class="metric-label">Cashback Earned</div>
+          <div class="metric-value" style="color:var(--success);">₹2,840</div>
+          <div class="metric-change up">↑ +18% this quarter</div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="chart-box" style="margin-bottom:24px;">
+        <div class="chart-title">Quick Actions</div>
+        <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:12px;">
+          <a href="error.html" class="quick-card"><div style="font-size:1.5rem; margin-bottom:8px;">💸</div><div style="font-size:0.75rem; font-weight:600;">Send Money</div></a>
+          <a href="error.html" class="quick-card"><div style="font-size:1.5rem; margin-bottom:8px;">📥</div><div style="font-size:0.75rem; font-weight:600;">Receive</div></a>
+          <a href="error.html" class="quick-card"><div style="font-size:1.5rem; margin-bottom:8px;">💳</div><div style="font-size:0.75rem; font-weight:600;">Pay Bills</div></a>
+          <a href="error.html" class="quick-card"><div style="font-size:1.5rem; margin-bottom:8px;">📈</div><div style="font-size:0.75rem; font-weight:600;">Invest</div></a>
+          <a href="error.html" class="quick-card"><div style="font-size:1.5rem; margin-bottom:8px;">🏦</div><div style="font-size:0.75rem; font-weight:600;">FD / RD</div></a>
+          <a href="error.html" class="quick-card"><div style="font-size:1.5rem; margin-bottom:8px;">📊</div><div style="font-size:0.75rem; font-weight:600;">Analytics</div></a>
+        </div>
+      </div>
+
+      <!-- Holdings + Recent Transactions -->
+      <div class="grid-2" style="margin-bottom:24px;">
+        <!-- Holdings -->
+        <div class="chart-box">
+          <div class="chart-title"><span>My Holdings</span><a href="error.html" class="btn btn-ghost btn-sm">View All →</a></div>
+          <div>
+            <div class="asset-row">
+              <div class="asset-icon" style="background:rgba(245,158,11,0.15);">🟡</div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.9rem;">HDFC Bank</div><div style="font-size:0.75rem; color:var(--text-muted);">42 shares @ ₹1,821</div></div>
+              <div style="text-align:right;"><div style="font-weight:700; font-size:0.9rem;">₹76,482</div><div style="font-size:0.78rem; color:var(--success);">▲ +8.4%</div></div>
+            </div>
+            <div class="asset-row">
+              <div class="asset-icon" style="background:rgba(245,158,11,0.15);">🟠</div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.9rem;">Bitcoin (BTC)</div><div style="font-size:0.75rem; color:var(--text-muted);">0.12 BTC</div></div>
+              <div style="text-align:right;"><div style="font-weight:700; font-size:0.9rem;">₹6,74,820</div><div style="font-size:0.78rem; color:var(--success);">▲ +24.2%</div></div>
+            </div>
+            <div class="asset-row">
+              <div class="asset-icon" style="background:rgba(99,102,241,0.15);">🔵</div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.9rem;">Axis Bluechip MF</div><div style="font-size:0.75rem; color:var(--text-muted);">SIP ₹10,000/mo • 24 months</div></div>
+              <div style="text-align:right;"><div style="font-weight:700; font-size:0.9rem;">₹2,64,200</div><div style="font-size:0.78rem; color:var(--success);">▲ +10.1%</div></div>
+            </div>
+            <div class="asset-row">
+              <div class="asset-icon" style="background:rgba(16,185,129,0.15);">🟢</div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.9rem;">HDFC FD — 7.5%</div><div style="font-size:0.75rem; color:var(--text-muted);">1 year • Matures Aug 2025</div></div>
+              <div style="text-align:right;"><div style="font-weight:700; font-size:0.9rem;">₹5,00,000</div><div style="font-size:0.78rem; color:var(--success);">▲ +7.5%</div></div>
+            </div>
+            <div class="asset-row">
+              <div class="asset-icon" style="background:rgba(239,68,68,0.15);">🔴</div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.9rem;">Infosys Ltd.</div><div style="font-size:0.75rem; color:var(--text-muted);">18 shares @ ₹1,489</div></div>
+              <div style="text-align:right;"><div style="font-weight:700; font-size:0.9rem;">₹26,802</div><div style="font-size:0.78rem; color:var(--danger);">▼ -3.2%</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="chart-box">
+          <div class="chart-title"><span>Recent Transactions</span><a href="error.html" class="btn btn-ghost btn-sm">View All →</a></div>
+          <div>
+            <div class="txn-item">
+              <div class="txn-icon" style="background:rgba(16,185,129,0.15);">📥</div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.88rem;">Salary Credit</div><div style="font-size:0.75rem; color:var(--text-muted);">From: TechCorp Pvt. Ltd.</div><div style="font-size:0.72rem; color:var(--text-muted);">Jul 1, 2025 • 10:02 AM</div></div>
+              <div class="txn-amount" style="color:var(--success);">+₹1,20,000</div>
+            </div>
+            <div class="txn-item">
+              <div class="txn-icon" style="background:rgba(239,68,68,0.15);">💸</div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.88rem;">Rent Payment</div><div style="font-size:0.75rem; color:var(--text-muted);">To: Landlord (NEFT)</div><div style="font-size:0.72rem; color:var(--text-muted);">Jul 1, 2025 • 11:30 AM</div></div>
+              <div class="txn-amount" style="color:var(--danger);">-₹22,000</div>
+            </div>
+            <div class="txn-item">
+              <div class="txn-icon" style="background:rgba(99,102,241,0.15);">📈</div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.88rem;">SIP Investment</div><div style="font-size:0.75rem; color:var(--text-muted);">Axis Bluechip Fund</div><div style="font-size:0.72rem; color:var(--text-muted);">Jul 1, 2025 • 09:00 AM</div></div>
+              <div class="txn-amount" style="color:var(--primary);">-₹10,000</div>
+            </div>
+            <div class="txn-item">
+              <div class="txn-icon" style="background:rgba(245,158,11,0.15);">🔗</div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.88rem;">Crypto Buy — BTC</div><div style="font-size:0.75rem; color:var(--text-muted);">0.002 BTC @ $67,200</div><div style="font-size:0.72rem; color:var(--text-muted);">Jun 30, 2025 • 02:45 PM</div></div>
+              <div class="txn-amount" style="color:var(--danger);">-₹11,281</div>
+            </div>
+            <div class="txn-item">
+              <div class="txn-icon" style="background:rgba(16,185,129,0.15);">💰</div>
+              <div style="flex:1;"><div style="font-weight:600; font-size:0.88rem;">Cashback Received</div><div style="font-size:0.75rem; color:var(--text-muted);">Stackly Rewards Program</div><div style="font-size:0.72rem; color:var(--text-muted);">Jun 30, 2025 • 12:00 PM</div></div>
+              <div class="txn-amount" style="color:var(--success);">+₹840</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spending Analysis -->
+      <div class="chart-box">
+        <div class="chart-title"><span>Spending Analysis — July 2025</span></div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px;">
+          <div>
+            <div style="margin-bottom:16px;">
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:6px;"><span>🏠 Housing & Rent</span><span style="font-weight:700;">₹22,000 <span style="color:var(--text-muted); font-weight:400;">(57.6%)</span></span></div>
+              <div class="progress"><div class="progress-fill" style="width:58%;"></div></div>
+            </div>
+            <div style="margin-bottom:16px;">
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:6px;"><span>🍽️ Food & Dining</span><span style="font-weight:700;">₹8,200 <span style="color:var(--text-muted); font-weight:400;">(21.5%)</span></span></div>
+              <div class="progress"><div class="progress-fill" style="width:22%; background:linear-gradient(90deg,var(--accent),var(--accent-dark));"></div></div>
+            </div>
+            <div style="margin-bottom:16px;">
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:6px;"><span>🚗 Transport</span><span style="font-weight:700;">₹3,400 <span style="color:var(--text-muted); font-weight:400;">(8.9%)</span></span></div>
+              <div class="progress"><div class="progress-fill" style="width:9%; background:linear-gradient(90deg,var(--gold),#F59E0B80);"></div></div>
+            </div>
+            <div style="margin-bottom:16px;">
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:6px;"><span>🛒 Shopping</span><span style="font-weight:700;">₹2,800 <span style="color:var(--text-muted); font-weight:400;">(7.3%)</span></span></div>
+              <div class="progress"><div class="progress-fill" style="width:7%; background:linear-gradient(90deg,#8B5CF6,#6D28D9);"></div></div>
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:6px;"><span>📦 Other</span><span style="font-weight:700;">₹1,800 <span style="color:var(--text-muted); font-weight:400;">(4.7%)</span></span></div>
+              <div class="progress"><div class="progress-fill" style="width:5%; background:linear-gradient(90deg,var(--danger),#EF444480);"></div></div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; justify-content:center; gap:12px;">
+            <div style="padding:16px; background:rgba(6,182,212,0.06); border:1px solid var(--border-accent); border-radius:var(--r-md);">
+              <div style="font-size:0.82rem; font-weight:600; color:var(--accent); margin-bottom:6px;">💡 AI Insight</div>
+              <p style="font-size:0.82rem; margin:0;">Your food spending is 18% above your 3-month average. Consider meal prepping to save ₹1,500/month.</p>
+            </div>
+            <div style="padding:16px; background:rgba(99,102,241,0.06); border:1px solid var(--border-primary); border-radius:var(--r-md);">
+              <div style="font-size:0.82rem; font-weight:600; color:var(--primary-light); margin-bottom:6px;">🎯 Savings Goal</div>
+              <div style="display:flex; justify-content:space-between; font-size:0.82rem; margin-bottom:6px;"><span>Home Down Payment</span><span style="font-weight:700;">₹12L / ₹25L</span></div>
+              <div class="progress"><div class="progress-fill" style="width:48%;"></div></div>
+              <p style="font-size:0.75rem; color:var(--text-muted); margin-top:6px;">At current pace, you'll reach your goal in 18 months.</p>
+            </div>
+            <a href="error.html" class="btn btn-primary" style="justify-content:center;">View Full Report →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('active');
+  }
+  function checkMobile() {
+    const btn = document.getElementById('sidebarToggleBtn');
+    // Show toggle at 900px breakpoint (matches CSS)
+    btn.style.display = (window.innerWidth <= 900) ? 'flex' : 'none';
+  }
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+</script>
+</body>
+</html>
