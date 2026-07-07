@@ -47,6 +47,18 @@
     .split-image { flex: 1; display: flex; justify-content: center; }
     .split-image img { max-width: 100%; height: auto; animation: float-slow 6s ease-in-out infinite; }
     
+    /* Hero Background Animation */
+    .hero {
+      background-image: linear-gradient(rgba(3, 7, 18, 0.75), rgba(3, 7, 18, 0.95)), url('assets/images/hero_emerald_bg.png');
+      background-size: cover;
+      background-position: center;
+      animation: heroBgPan 25s linear infinite alternate;
+    }
+    @keyframes heroBgPan {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    
     /* Custom Slider overrides for Loan Calc */
     input[type=range] {
       width: 100%; -webkit-appearance: none; background: rgba(255,255,255,0.1);
