@@ -1073,3 +1073,36 @@ tbody tr:hover td { background:var(--bg-glass); color:var(--text-primary); }
   .stat-item { border-bottom:1px solid var(--border-glass); padding-bottom:22px; }
   .stat-item:last-child { border-bottom:none; padding-bottom:0; }
 }
+/* --------------------------------------------
+   MASTER DASHBOARD MOBILE RESPONSIVE OVERRIDES
+   -------------------------------------------- */
+.quick-actions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.client-balance-grid { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; position: relative; z-index: 1; }
+.client-quick-actions-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.client-security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.contact-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+@media(max-width: 1024px) {
+  .client-quick-actions-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media(max-width: 768px) {
+  .quick-actions-grid { grid-template-columns: repeat(2, 1fr); }
+  .client-balance-grid { grid-template-columns: 1fr; gap: 16px; text-align: center; }
+  .client-quick-actions-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .client-security-grid { grid-template-columns: 1fr; }
+  .contact-form-grid { grid-template-columns: 1fr; }
+  
+  /* Force tables to stack on small screens */
+  .user-table-row { grid-template-columns: 1fr !important; gap: 8px !important; padding: 12px !important; }
+  .user-table-head { display: none !important; }
+}
+
+@media(max-width: 480px) {
+  .quick-actions-grid { grid-template-columns: 1fr; }
+  .client-quick-actions-grid { grid-template-columns: repeat(2, 1fr); }
+  
+  /* Make all remaining metric grids strictly 1 column on very small phones to prevent overflow */
+  .metric-grid { grid-template-columns: 1fr !important; }
+  .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr !important; }
+}
