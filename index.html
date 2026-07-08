@@ -25,6 +25,24 @@
     .split-image { flex:1; display:flex; justify-content:center; }
     .split-image img { max-width:100%; height:auto; border-radius:var(--r-xl); }
 
+    /* Premium Enhancements */
+    .hero { position: relative; overflow: hidden; }
+    .hero-title { font-size: 4.5rem !important; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 24px; }
+    .text-gradient { background: linear-gradient(135deg, #ffffff, var(--primary-light, #a0c4ff), var(--accent, #ffb3c6)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .card-shimmer { border-radius: 24px; background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(16px); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-shimmer:hover { transform: translateY(-12px); border-color: rgba(255,255,255,0.2); box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2); }
+    .feature-icon { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 20px; font-size: 1.8rem; margin-bottom: 24px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+    .btn-glow { transition: all 0.3s ease; box-shadow: 0 0 20px rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: #fff; }
+    .btn-glow:hover { box-shadow: 0 0 40px rgba(255,255,255,0.3); transform: translateY(-3px); background: rgba(255,255,255,0.2); border-color: #fff; color: #fff; }
+    .stats-bar { background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); backdrop-filter: blur(20px); }
+    .github-link-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(255,255,255,0.05); border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; transition: all 0.3s ease; color: #fff; font-weight: 600; font-size: 0.95rem; }
+    .github-link-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .social-link { transition: transform 0.3s ease, color 0.3s ease; }
+    .social-link:hover { transform: scale(1.2) translateY(-2px); color: #fff !important; }
+    .stat-value { font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, #fff, var(--primary-light, #a0c4ff)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .testimonial-card { background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent); border: 1px solid rgba(255,255,255,0.05); padding: 40px; border-radius: 24px; transition: all 0.3s ease; backdrop-filter: blur(10px); }
+    .testimonial-card:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.15); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+
     /* Range inputs */
     input[type=range] { width:100%; -webkit-appearance:none; background:rgba(255,255,255,0.1); height:6px; border-radius:3px; outline:none; margin-top:10px; }
     input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:20px; height:20px; border-radius:50%; background:var(--accent); border:2px solid #fff; cursor:pointer; box-shadow:0 0 10px var(--accent-glow); }
@@ -92,15 +110,15 @@
     <div class="orb orb-3"></div>
     <div class="container" style="position:relative;z-index:10;text-align:center;">
       <div class="section-tag reveal" style="margin:0 auto 30px;">◆ Elite Digital Banking</div>
-      <h1 class="hero-title reveal delay-1" style="max-width:900px;margin:0 auto 24px;">
+      <h1 class="hero-title reveal delay-1" style="max-width:1000px;margin:0 auto 24px;">
         Architecting the <span class="text-gradient">Future</span> of Global Wealth.
       </h1>
-      <p class="hero-desc reveal delay-2" style="max-width:600px;margin:0 auto 40px;font-size:1.15rem;color:var(--text-secondary);">
-        Institutional-grade algorithms, precision insights, and military-grade encryption — wrapped in an exquisite interface.
+      <p class="hero-desc reveal delay-2" style="max-width:650px;margin:0 auto 40px;font-size:1.25rem;color:var(--text-secondary);line-height:1.6;">
+        Institutional-grade algorithms, precision insights, and military-grade encryption — wrapped in an exquisitely designed digital experience.
       </p>
-      <div class="flex-center reveal delay-3" style="gap:16px;justify-content:center;">
-        <a href="register.html" class="btn btn-glow btn-lg">Open Account →</a>
-        <a href="services.html" class="btn btn-ghost btn-lg">Explore Services</a>
+      <div class="flex-center reveal delay-3" style="gap:20px;justify-content:center;">
+        <a href="register.html" class="btn btn-glow btn-lg" style="padding:16px 36px;font-size:1.1rem;font-weight:700;">Open Elite Account →</a>
+        <a href="services.html" class="btn btn-ghost btn-lg" style="padding:16px 36px;font-size:1.1rem;border:1px solid rgba(255,255,255,0.1);">Explore Services</a>
       </div>
     </div>
   </section>
@@ -244,11 +262,11 @@
   <!-- Section 8: CTA -->
   <section class="section container">
     <div class="cta-section reveal">
-      <h2 style="font-size:2.6rem;margin-bottom:16px;">Ready to build <span class="text-gradient">real wealth</span>?</h2>
-      <p style="color:var(--text-secondary);max-width:500px;margin:0 auto 32px;">Join 2.4 million investors who trust Stackly to grow, protect, and manage their capital.</p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-        <a href="register.html" class="btn btn-glow btn-lg">Create Free Account →</a>
-        <a href="contact.html" class="btn btn-ghost btn-lg">Talk to Sales</a>
+      <h2 style="font-size:3.5rem;font-weight:900;letter-spacing:-1px;margin-bottom:20px;">Ready to build <span class="text-gradient">real wealth</span>?</h2>
+      <p style="color:var(--text-secondary);max-width:550px;margin:0 auto 40px;font-size:1.2rem;line-height:1.6;">Join 2.4 million elite investors who trust Stackly to grow, protect, and manage their capital globally.</p>
+      <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+        <a href="register.html" class="btn btn-glow btn-lg" style="padding:16px 36px;font-size:1.1rem;font-weight:700;">Create Free Account →</a>
+        <a href="contact.html" class="btn btn-ghost btn-lg" style="padding:16px 36px;font-size:1.1rem;border:1px solid rgba(255,255,255,0.1);">Talk to Sales</a>
       </div>
     </div>
   </section>
@@ -263,10 +281,10 @@
             <span class="logo-text">STACKLY</span>
           </a>
           <p>Building the digital infrastructure for next-generation wealth management.</p>
-          <div class="social-links" style="margin-top:20px;">
-            <a href="https://x.com/" target="_blank" rel="noopener" class="social-link">𝕏</a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="social-link">in</a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="social-link">IG</a>
+          <div class="social-links" style="margin-top:20px; display:flex; gap:16px;">
+            <a href="error.html" class="social-link" style="font-size:1.5rem; text-decoration:none; color:var(--text-secondary);">𝕏</a>
+            <a href="error.html" class="social-link" style="font-size:1.5rem; text-decoration:none; color:var(--text-secondary); font-weight:bold;">in</a>
+            <a href="error.html" class="social-link" style="font-size:1.5rem; text-decoration:none; color:var(--text-secondary); font-weight:bold;">IG</a>
           </div>
         </div>
         <div class="footer-col">
@@ -300,7 +318,10 @@
       <div class="footer-bottom">
         <div>© 2026 Stackly FinTech Pvt. Ltd. All rights reserved.</div>
         <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
-          <a href="https://github.com/lingalamanasa/Fintech.git" target="_blank" rel="noopener" class="github-link">🌐 GitHub Repository</a>
+          <a href="https://lingalamanasa.github.io/Fintech/" target="_blank" rel="noopener" class="github-link-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub Repository
+          </a>
           <span style="color:rgba(255,255,255,0.1);">|</span>
           <span>🇮🇳 RBI Licensed</span>
           <span style="color:rgba(255,255,255,0.1);">|</span>
