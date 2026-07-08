@@ -302,6 +302,8 @@ code {
 .btn-circle { padding: 11px; border-radius: 50%; }
 
 /* Glowing animated button */
+.github-link-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(255,255,255,0.05); border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; transition: all 0.3s ease; color: #fff; font-weight: 600; font-size: 0.95rem; }
+.github-link-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 .btn-glow {
   background: linear-gradient(135deg, var(--primary), var(--accent));
   color: #fff; border: none;
