@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security - Stackly Client</title>
+  <link rel="icon" href="assets/images/stackly-logo.webp" type="image/webp">
+  <link rel="stylesheet" href="style.css?v=2" />
+  <style>
+    .portfolio-card { background:linear-gradient(135deg, rgba(99,102,241,0.2), rgba(6,182,212,0.12)); border:1px solid var(--border-primary); border-radius:var(--r-xl); padding:36px; position:relative; overflow:hidden; }
+    .portfolio-card::before { content:''; position:absolute; top:-60px; right:-60px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%); }
+    .txn-item { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--border-glass); }
+    .txn-item:last-child { border-bottom:none; }
+    .txn-icon { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .txn-amount { font-family:var(--font-heading); font-weight:700; }
+    .asset-row { display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid var(--border-glass); }
+    .asset-row:last-child { border-bottom:none; }
+    .asset-icon { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .quick-card { text-align:center; padding:20px; background:var(--bg-glass); border:1px solid var(--border-glass); border-radius:var(--r-md); cursor:pointer; transition:var(--transition); }
+    .quick-card:hover { border-color:var(--border-primary); transform:translateY(-3px); }
+    .sparkline { display:flex; align-items:flex-end; gap:3px; height:40px; }
+    .spark-bar { width:5px; border-radius:2px 2px 0 0; }
+  </style>
+
+    <style>
+      @media(max-width:900px) {
+        .dashboard-mobile-logo { display:flex !important; }
+      }
+    </style>
+</head>
+<body>
+<div class="dashboard-wrapper">
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="client-dashboard.html" class="nav-logo" style="font-size:1.4rem; text-decoration:none; display:flex; align-items:center; gap:10px;"><img src="assets/images/stackly-logo.webp" alt="Stackly" style="width:32px;height:32px;border-radius:8px;"><span style="font-weight: 700; color: #fff;">Stackly</span></a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">My Account</div>
+      <a href="client-dashboard.html" class="sidebar-link active"><span class="icon">🏠</span> Dashboard</a>
+      <a href="client-portfolio.html" class="sidebar-link"><span class="icon">💼</span> Portfolio</a>
+      <a href="client-payments.html" class="sidebar-link notif-dot"><span class="icon">💳</span> Payments <span class="badge badge-accent" style="margin-left:auto; font-size:0.65rem;">2</span></a>
+      <a href="client-analytics.html" class="sidebar-link"><span class="icon">📊</span> Analytics</a>
+      <a href="client-transactions.html" class="sidebar-link"><span class="icon">🔄</span> Transactions</a>
+      <div class="sidebar-section-label">Invest</div>
+      <a href="client-stocks-etfs.html" class="sidebar-link"><span class="icon">📈</span> Stocks & ETFs</a>
+      <a href="client-crypto.html" class="sidebar-link"><span class="icon">🔗</span> Crypto</a>
+      <a href="client-fixed-deposits.html" class="sidebar-link"><span class="icon">🏦</span> Fixed Deposits</a>
+      <a href="client-mutual-funds.html" class="sidebar-link"><span class="icon">🌱</span> Mutual Funds</a>
+      <div class="sidebar-section-label">More</div>
+      <a href="client-kyc-status.html" class="sidebar-link"><span class="icon">🆔</span> KYC Status</a>
+      <a href="client-security.html" class="sidebar-link"><span class="icon">🔒</span> Security</a>
+      <a href="contact.html" class="sidebar-link"><span class="icon">📞</span> Support</a>
+      <a href="client-settings.html" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
+      <a href="https://github.com/lingalamanasa/Fintech" target="_blank" rel="noopener" class="sidebar-link"><span class="icon">🌐</span> GitHub Repository</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <div class="user-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">PL</div>
+        <div class="user-info"><div class="name">Priya Lakshmanan</div><div class="role-tag">💼 Client</div></div>
+      </div>
+      <a href="https://github.com/lingalamanasa/Fintech" target="_blank" rel="noopener" class="github-link-btn" style="width:100%; justify-content:center; margin-bottom:12px; background:rgba(99,102,241,0.1); border-color:var(--primary);"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12z"/></svg> GitHub Repository</a>
+      <a href="login.html" class="sidebar-logout-btn">🚪 Logout</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="dashboard-main" style="display:flex; align-items:center; justify-content:center; flex-direction:column;"><h2>Security</h2><p>This page is currently under construction.</p></main>
+</div>
+
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('active');
+  }
+  function checkMobile() {
+    const btn = document.getElementById('sidebarToggleBtn');
+    // Show toggle at 900px breakpoint (matches CSS)
+    btn.style.display = (window.innerWidth <= 900) ? 'flex' : 'none';
+  }
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+</script>
+</body>
+</html>
