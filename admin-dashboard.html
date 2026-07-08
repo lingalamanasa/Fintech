@@ -78,20 +78,20 @@
   <!-- ═══ MAIN ═══ -->
   <main class="dashboard-main">
     <!-- Mobile Topbar Logo (visible only on mobile when sidebar is hidden) -->
-    <div class="dashboard-mobile-logo" style="display:none;padding:12px 18px;background:var(--bg-surface);border-bottom:1px solid var(--border-glass);align-items:center;gap:10px;">
-      <img src="assets/images/stackly-logo.webp" alt="Stackly" style="width:28px;height:28px;border-radius:6px;">
-      <span style="font-family:var(--font-heading,sans-serif);font-weight:800;font-size:1.1rem;">STACKLY</span>
+    <div class="dashboard-mobile-logo" style="display:none;padding:12px 18px;background:var(--bg-surface);border-bottom:1px solid var(--border-glass);align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:60;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <img src="assets/images/stackly-logo.webp" alt="Stackly" style="width:28px;height:28px;border-radius:6px;">
+        <span style="font-family:var(--font-heading,sans-serif);font-weight:800;font-size:1.1rem;">STACKLY</span>
+      </div>
+      <button class="btn btn-ghost btn-icon" onclick="toggleSidebar()" aria-label="Toggle Sidebar" style="font-size:1.4rem; padding:4px 8px;">☰</button>
     </div>
     <!-- Topbar -->
     <div class="dashboard-topbar">
-      <div style="display:flex; align-items:center; gap:16px;">
-        <button class="btn btn-ghost btn-icon" id="sidebarToggleBtn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">☰</button>
-        <div>
-          <h3 style="font-size:1rem;">Admin Dashboard</h3>
-          <p style="font-size:0.75rem; color:var(--text-muted);">Welcome back, Arjun! Last login: Today 09:32 AM IST</p>
-        </div>
+      <div>
+        <h3 style="font-size:1.1rem; margin-bottom:4px;">Admin Dashboard</h3>
+        <p style="font-size:0.75rem; color:var(--text-muted);">Welcome back, Arjun! Last login: Today 09:32 AM IST</p>
       </div>
-      <div style="display:flex; align-items:center; gap:12px;">
+      <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
         <div style="font-size:0.82rem; color:var(--text-muted); background:var(--bg-glass); padding:6px 12px; border-radius:var(--r-sm); border:1px solid var(--border-glass);">📅 July 6, 2025</div>
         <button class="btn btn-ghost btn-icon notif-dot" aria-label="Notifications">🔔</button>
         <a href="login.html" class="logout-btn">🚪 Logout</a>

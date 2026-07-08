@@ -44,12 +44,21 @@
   </aside>
 
   <main class="dashboard-main">
-    <div class="dashboard-topbar">
-      <div style="display:flex; align-items:center; gap:16px;">
-        <button class="btn btn-ghost btn-icon" id="sidebarToggleBtn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">☰</button>
-        <div><h3 style="font-size:1rem;">User Management</h3><p style="font-size:0.75rem; color:var(--text-muted);">Manage all platform users, roles, and permissions</p></div>
+    <!-- Mobile Topbar Logo -->
+    <div class="dashboard-mobile-logo" style="display:none;padding:12px 18px;background:var(--bg-surface);border-bottom:1px solid var(--border-glass);align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:60;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <img src="assets/images/stackly-logo.webp" alt="Stackly" style="width:28px;height:28px;border-radius:6px;">
+        <span style="font-family:var(--font-heading,sans-serif);font-weight:800;font-size:1.1rem;">STACKLY</span>
       </div>
-      <div style="display:flex; gap:10px; align-items:center;">
+      <button class="btn btn-ghost btn-icon" onclick="toggleSidebar()" aria-label="Toggle Sidebar" style="font-size:1.4rem; padding:4px 8px;">☰</button>
+    </div>
+    <!-- Topbar -->
+    <div class="dashboard-topbar">
+      <div>
+        <h3 style="font-size:1.1rem; margin-bottom:4px;">User Management</h3>
+        <p style="font-size:0.75rem; color:var(--text-muted);">Manage all platform users, roles, and permissions</p>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:8px;">
         <a href="index.html" class="btn btn-ghost btn-sm">Export CSV</a>
         <a href="index.html" class="btn btn-primary btn-sm">+ Add User</a>
         <a href="login.html" class="logout-btn">🚪 Logout</a>
