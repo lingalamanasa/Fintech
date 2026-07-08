@@ -133,11 +133,13 @@
   }
   function checkMobile() {
     const btn = document.getElementById('sidebarToggleBtn');
-    btn.style.display = (window.innerWidth <= 900) ? 'flex' : 'none';
+    if(btn) btn.style.display = (window.innerWidth <= 900) ? 'flex' : 'none';
   }
   checkMobile();
   window.addEventListener('resize', checkMobile);
 </script>
+<script src="app.js"></script>
 </body>
 </html>
+
 
